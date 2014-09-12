@@ -2,10 +2,10 @@
 
 ##########Background stuff, will draw differently
 C = CLOUDS
-B = BACKGROUND
+* = BACKGROUND
 
 ##########This stuff will be the same but will be represented by different images
-T = TILES
+I = TILES
 W = WALL
 
 ##########kills u
