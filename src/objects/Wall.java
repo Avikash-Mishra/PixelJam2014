@@ -1,6 +1,5 @@
-package Objects;
+package objects;
 
-import java.awt.Graphics;
 import java.awt.Image;
 
 public class Wall extends Tile {
@@ -10,5 +9,12 @@ public class Wall extends Tile {
 		// TODO Auto-generated constructor stub
 	}
 
+	public static Wall newWall(){
+		return null;
+	}
+
+	public static Wall newFloor(){
+		return null;
+	}
 
 }

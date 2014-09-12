@@ -1,9 +1,9 @@
-package Objects;
+package objects;
 
 import java.awt.Graphics;
 import java.awt.Image;
 
-import Main.Constants;
+import main.Constants;
 
 public abstract class Tile {
 	private Image image;

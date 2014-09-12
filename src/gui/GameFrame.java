@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 
 
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import Main.Main;
+import main.Main;
 
 /**
  * Main class for game, starts the game and contains the main GUI for displaying

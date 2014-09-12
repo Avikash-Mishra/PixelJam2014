@@ -1,9 +1,9 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import Main.World;
+import main.World;
 
 
 /**
