@@ -21,6 +21,7 @@ public class GameCanvas extends Canvas {
 	private GameFrame parent;
 	private World world;
 	private Player player;
+	private long lastRedraw = 0;
 
 	/**
 	 * Constructs a new GameCanvas with the given width and height
@@ -40,8 +41,23 @@ public class GameCanvas extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g){
-		world.draw(g);
 
+		long currentDraw = System.currentTimeMillis();
+
+		updateGameState();
+
+		world.draw(g);
+		player.draw(g);
+
+		lastRedraw = currentDraw;
+
+	}
+
+	/**
+	 * Updates the game state. Moves players, checks for collision, etc.
+	 */
+	private void updateGameState(){
+		player.update();
 	}
 
 
