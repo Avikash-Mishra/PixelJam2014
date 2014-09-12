@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 
 public class Spikes implements Tile{
 

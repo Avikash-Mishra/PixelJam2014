@@ -1,10 +1,10 @@
-package Objects;
+package objects;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import Main.Constants;
+import main.Constants;
 
 public abstract class PickUpObject {
 	private Image image;

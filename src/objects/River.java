@@ -1,4 +1,5 @@
-package Objects;
+package objects;
+
 
 public class River implements Tile{
 
