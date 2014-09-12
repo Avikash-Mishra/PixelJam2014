@@ -19,13 +19,13 @@ public class Wall extends Tile {
 
 	public static Wall newWall(int x, int y){
 			Animation anim = new Animation();
-			anim.addFrame(ImageLibrary.get("test_tile.jpg"), 0);
+			anim.addFrame(ImageLibrary.get("wallSprite.png"), 0);
 			return new Wall(anim,x,y);
 	}
 
 	public static Wall newFloor(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("floorSprite.png"), 0);
 		return new Wall(anim,x,y);
 	}
 
