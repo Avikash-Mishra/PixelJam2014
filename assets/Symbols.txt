@@ -1,7 +1,13 @@
+
+Background stuff, will draw differently
 C = CLOUDS
 B = BACKGROUND
+
+This stuff will be the same but will be represented by different images
 T = TILES
-* = GROUND
 W = WALL
+
+Spikes will kill you but they might be in a different direction
 U = SPRIKE UP
+
 R = RIVER
