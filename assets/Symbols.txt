@@ -1,20 +1,23 @@
 
-##########Background stuff, will draw differently
+Background stuff, will draw differently
 C = CLOUDS
 B = BACKGROUND
 
-##########This stuff will be the same but will be represented by different images
-T = TILES (something on the ground, a certain colour)
-W = WALL (a wall, another colour)
-
-##########pick ups
-E = ENERGY
-
-##########Spikes will kill you but they might be in a different direction
-U = SPRIKE UP
+This stuff will be the same but will be represented by different images
+T = TILES
+W = WALL
+<<<<<<< HEAD
 U = SPIKE UP
-L = SPIKE LEFT
-D = SPIKE RIGHT
-
-##########other tile stuff
 R = RIVER
+L = SPIKE LEFT
+E = ENERGY
+D = SPIKE RIGHT
+=======
+
+Spikes will kill you but they might be in a different direction
+U = SPRIKE UP
+
+R = RIVER
+>>>>>>> 29c35ab2148851301879dd3c099a594995c067a7
+
+new added
