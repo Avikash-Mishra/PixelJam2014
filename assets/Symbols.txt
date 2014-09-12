@@ -4,8 +4,8 @@ C = CLOUDS
 B = BACKGROUND
 
 This stuff will be the same but will be represented by different images
-T = TILES
-W = WALL
+T = TILES (something on the ground, a certain colour)
+W = WALL (a wall, another colour)
 
 Spikes will kill you but they might be in a different direction
 U = SPRIKE UP
