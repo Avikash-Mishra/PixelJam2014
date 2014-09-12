@@ -25,7 +25,7 @@ public class Parser {
 
 	private static final char CLOUDS = 'C';
 	private static final char BACKGROUND = '*';
-	private static final char TILE = 'T';
+	private static final char TILE = 'I';
 	private static final char WALL = 'W';
 	private static final char RIVER = 'V';
 	private static final char ENERGY = 'E';
