@@ -12,11 +12,38 @@ import main.Constants;
  * Will contain things like collision detection, drawing etc.
  * @author Mary
  */
-public abstract class Entity extends Tile{
+public abstract class Entity{
 
-	public Entity(Image image, int x, int y) {
-		super(image, x, y);
-		// TODO Auto-generated constructor stub
+	private Image image;
+	private int x;
+	private int y;
+
+
+	public Entity(Image image, int x, int y){
+		this.image = image;
+		this.x = x;
+		this.y = y;
+	}
+
+
+	public void draw(Graphics g) {
+		g.drawImage(image , x, y, image.getWidth(null), image.getHeight(null), null);
+	}
+
+	public int getX(){
+		return x;
+	}
+
+	public int getY(){
+		return y;
+	}
+
+	public int getWidth(){
+		return image.getWidth(null);
+	}
+
+	public int getHeight(){
+		return image.getHeight(null);
 	}
 
 }
