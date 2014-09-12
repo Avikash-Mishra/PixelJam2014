@@ -1,11 +1,11 @@
-package Entity;
+package entity;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import Main.Constants;
+import main.Constants;
 
 /**
  * Will contain things like collision detection, drawing etc.

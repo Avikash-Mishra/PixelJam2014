@@ -1,15 +1,14 @@
-package Main;
+package main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Entity;
-import Objects.Tile;
-import Objects.Wall;
+import objects.Tile;
+import objects.Wall;
+import entity.Entity;
 
 public class Parser {
 
