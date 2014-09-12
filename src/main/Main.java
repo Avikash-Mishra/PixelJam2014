@@ -13,7 +13,7 @@ public class Main {
 			Set[] data = Parser.parse(Constants.LEVEL_FILENAME);
 			System.out.println(" entities: " + data[0].size());
 			//Create Game
-			new GameFrame(data);
+			//new GameFrame(data);
 		}
 		catch(IOException e){
 			e.printStackTrace();

@@ -62,7 +62,7 @@ public class Parser {
 		// Parsing
 		while (scan.hasNextLine()){
 
-			char[] line = scan.next().toCharArray();
+			char[] line = scan.nextLine().toCharArray();
 			for (col = 0; col < line.length; col++){
 				char c = line[col];
 				switch(c){
