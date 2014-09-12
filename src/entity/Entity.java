@@ -1,12 +1,9 @@
 package entity;
 
-import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 
-import objects.Tile;
 import main.Constants;
+import tools.Animation;
 
 /**
  * Will contain things like collision detection, drawing etc.
@@ -14,12 +11,12 @@ import main.Constants;
  */
 public abstract class Entity{
 
-	private Image image;
+	private Animation image;
 	private int x;
 	private int y;
 
 
-	public Entity(Image image, int x, int y){
+	public Entity(Animation image, int x, int y){
 		this.image = image;
 		this.x = x;
 		this.y = y;
@@ -27,7 +24,7 @@ public abstract class Entity{
 
 
 	public void draw(Graphics g) {
-		g.drawImage(image , x, y, image.getWidth(null), image.getHeight(null), null);
+		g.drawImage(image.getImage() , x, y, Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
 	}
 
 	public int getX(){
@@ -39,11 +36,11 @@ public abstract class Entity{
 	}
 
 	public int getWidth(){
-		return image.getWidth(null);
+		return Constants.TILE_WIDTH;
 	}
 
 	public int getHeight(){
-		return image.getHeight(null);
+		return Constants.TILE_HEIGHT;
 	}
 
 }

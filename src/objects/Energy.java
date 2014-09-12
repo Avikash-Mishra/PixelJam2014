@@ -1,18 +1,24 @@
 package objects;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
+import tools.Animation;
+import entity.Player;
 
 
 public class Energy extends PickUpObject {
 
-	private Energy(Image image, int x, int y, int amount) {
+	private Energy(Animation image, int x, int y, int amount) {
 		super(image, x, y, amount);
 		// TODO Auto-generated constructor stub
 	}
 
 	public static Energy newEnergy(){
 		return null;
+	}
+
+	@Override
+	public void onCollision(Player player) {
+		// TODO Auto-generated method stub
+
 	}
 
 
