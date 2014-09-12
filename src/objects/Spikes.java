@@ -13,4 +13,16 @@ public class Spikes extends Tile{
 		return null;
 	}
 
+	public static Spikes newDownSpikes(){
+		return null;
+	}
+
+	public static Spikes newRightSpikes(){
+		return null;
+	}
+
+	public static Spikes newLeftSpikes(){
+		return null;
+	}
+
 }

@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JFrame;
 
@@ -19,7 +20,7 @@ import main.World;
  * Main class for game, starts the game and contains the main GUI for displaying
  * the game
  *
- * @author Avikash Mishra
+ * @author Preet Nijjar
  *
  */
 public class GameFrame extends JFrame {
@@ -31,7 +32,7 @@ public class GameFrame extends JFrame {
 
 	public GameCanvas gameCanvas;
 
-	public GameFrame() {
+	public GameFrame(Set[] data) {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -41,11 +42,9 @@ public class GameFrame extends JFrame {
 		this.setResizable(true);
 
 		//Create World
-		HashSet<Tile> map = new HashSet<Tile>();
-		//map.add(e);
-		World world = new World();
+		World world = new World(data);
 
-		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this);
+		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this, world);
 
 		// Setup canvas defaults
 		gameCanvas.setBackground(Color.WHITE);
