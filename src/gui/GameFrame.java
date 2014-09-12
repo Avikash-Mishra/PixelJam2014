@@ -7,10 +7,13 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.HashSet;
 
 import javax.swing.JFrame;
 
+import objects.Tile;
 import main.Main;
+import main.World;
 
 /**
  * Main class for game, starts the game and contains the main GUI for displaying
@@ -36,6 +39,11 @@ public class GameFrame extends JFrame {
 		this.setTitle("Sugoi Tran");
 		this.setSize(tk.getScreenSize());
 		this.setResizable(true);
+
+		//Create World
+		HashSet<Tile> map = new HashSet<Tile>();
+		//map.add(e);
+		World world = new World();
 
 		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this);
 
