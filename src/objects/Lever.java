@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import tools.Animation;
+import tools.ImageLibrary;
 
 public class Lever extends Tile{
 
@@ -13,5 +14,10 @@ public class Lever extends Tile{
 		// TODO Auto-generated constructor stub
 	}
 
+	public static Lever newLever(int x, int y){
+		Animation anim = new Animation();
+		anim.addFrame(ImageLibrary.get("lever_red_left.png"), 0);
+		return new Lever(anim,x,y);
+	}
 
 }

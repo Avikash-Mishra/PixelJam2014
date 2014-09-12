@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.List;
 
 import objects.Energy;
+import objects.Lever;
 import objects.PickUpObject;
 import objects.River;
 import objects.Spikes;
@@ -29,10 +30,11 @@ public class Parser {
 	private static final char WALL = 'W';
 	private static final char RIVER = 'V';
 	private static final char ENERGY = 'E';
-	private static final char SPIKE_UP = 'U';
-	private static final char SPIKE_LEFT = 'L';
-	private static final char SPIKE_DOWN = 'D';
-	private static final char SPIKE_RIGHT = 'R';
+	private static final char SPIKE_UP = 'D';
+	private static final char SPIKE_LEFT = 'R';
+	private static final char SPIKE_DOWN = 'U';
+	private static final char SPIKE_RIGHT = 'L';
+	private static final char LEVER = 'H';
 
 
 	private static int col = 0;
@@ -119,6 +121,10 @@ public class Parser {
 				case ENERGY:
 					Energy energy = Energy.newEnergy(col, row, 10);
 					pickups.insert(energy);
+					break;
+				case LEVER:
+					Lever lever = Lever.newLever(col,row);
+					tiles.add(lever);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
