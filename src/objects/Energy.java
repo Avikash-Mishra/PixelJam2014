@@ -9,15 +9,8 @@ import tools.ImageLibrary;
 
 public class Energy extends PickUpObject {
 
-<<<<<<< HEAD
-	private Energy(Animation image, int x, int y, int amount) {
-		super(image, x, y, amount);
-=======
-
-
 	protected Energy(Animation animation, int x, int y, int amount) {
 		super(animation, x, y, amount);
->>>>>>> 8d9b7357f882573c72aa303b0efaedf374df95f4
 		// TODO Auto-generated constructor stub
 	}
 
