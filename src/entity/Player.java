@@ -9,6 +9,9 @@ public class Player extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void move(){
+
+	}
 
 
 }

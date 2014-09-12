@@ -97,27 +97,27 @@ public class Parser {
 					tiles.insert(wall);
 					break;
 				case SPIKE_UP:
-					Spikes upSpikes = Spikes.newUpSpikes();
+					Spikes upSpikes = Spikes.newUpSpikes(col, row);
 					tiles.insert(upSpikes);
 					break;
 				case SPIKE_DOWN:
-					Spikes downSpikes = Spikes.newDownSpikes();
+					Spikes downSpikes = Spikes.newDownSpikes(col, row);
 					tiles.insert(downSpikes);
 					break;
 				case SPIKE_RIGHT:
-					Spikes rightSpikes = Spikes.newRightSpikes();
+					Spikes rightSpikes = Spikes.newRightSpikes(col, row);
 					tiles.insert(rightSpikes);
 					break;
 				case SPIKE_LEFT:
-					Spikes leftSpikes = Spikes.newLeftSpikes();
+					Spikes leftSpikes = Spikes.newLeftSpikes(col, row);
 					tiles.insert(leftSpikes);
 					break;
 				case RIVER:
-					River river = River.newRiver();
+					River river = River.newRiver(col, row);
 					tiles.insert(river);
 					break;
 				case ENERGY:
-					Energy energy = Energy.newEnergy();
+					Energy energy = Energy.newEnergy(col, row, 10);
 					pickups.insert(energy);
 					break;
 				default:
