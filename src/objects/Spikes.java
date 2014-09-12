@@ -19,25 +19,25 @@ public class Spikes extends Tile{
 
 	public static Spikes newUpSpikes(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("spikeTopSprite.png"), 0);
 		return new Spikes(anim,x,y);
 	}
 
 	public static Spikes newDownSpikes(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("spikeBottomSprite.png"), 0);
 		return new Spikes(anim,x,y);
 	}
 
 	public static Spikes newRightSpikes(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("spikeRightSprite.png"), 0);
 		return new Spikes(anim,x,y);
 	}
 
 	public static Spikes newLeftSpikes(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("spikeLeftSprite.png"), 0);
 		return new Spikes(anim,x,y);
 	}
 
