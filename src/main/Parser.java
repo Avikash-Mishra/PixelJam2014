@@ -2,6 +2,7 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -37,6 +38,12 @@ public class Parser {
 
 	private static int col = 0;
 	private static int row = 0;
+
+	private class ParserList extends ArrayList{
+
+
+
+	}
 
 	/**
 	 * Takes a file name, reads the level described in that file, and then returns a
