@@ -8,9 +8,7 @@ public class Animation {
 
 	private List<BufferedImage> images = new ArrayList<BufferedImage>();
 	private List<Long> times = new ArrayList<Long>();
-	private long totalTime = 0;
 	private boolean running = false;
-	private Thread animThread = new Thread();
 
 	public Animation(){}
 
@@ -18,7 +16,6 @@ public class Animation {
 		if(img!=null && !running){
 			images.add(img);
 			times.add(stepTime);
-			totalTime += stepTime;
 		}else if(running){
 			System.err.println("Animations cannot be edited once started");
 		}
