@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import main.Constants;
 import tools.Animation;
+import tools.ImageLibrary;
 
 public class Spikes extends Tile{
 
@@ -17,29 +18,27 @@ public class Spikes extends Tile{
 	}
 
 	public static Spikes newUpSpikes(int x, int y){
-		BufferedImage img;
-		try {
-			img = ImageIO.read(new File(Constants.ASSETS + "test_tile.jpg"));
-			Animation anim = new Animation();
-			anim.addFrame(img, 0);
-			return new Spikes(anim,x,y);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		Animation anim = new Animation();
+		anim.addFrame(ImageLibrary.get("spikeTopSprite.png"), 0);
+		return new Spikes(anim,x,y);
 	}
 
-	public static Spikes newDownSpikes(){
-		return null;
+	public static Spikes newDownSpikes(int x, int y){
+		Animation anim = new Animation();
+		anim.addFrame(ImageLibrary.get("spikeBottomSprite.png"), 0);
+		return new Spikes(anim,x,y);
 	}
 
-	public static Spikes newRightSpikes(){
-		return null;
+	public static Spikes newRightSpikes(int x, int y){
+		Animation anim = new Animation();
+		anim.addFrame(ImageLibrary.get("spikeRightSprite.png"), 0);
+		return new Spikes(anim,x,y);
 	}
 
-	public static Spikes newLeftSpikes(){
-		return null;
+	public static Spikes newLeftSpikes(int x, int y){
+		Animation anim = new Animation();
+		anim.addFrame(ImageLibrary.get("spikeLeftSprite.png"), 0);
+		return new Spikes(anim,x,y);
 	}
 
 }

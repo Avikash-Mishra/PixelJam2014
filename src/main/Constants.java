@@ -2,6 +2,8 @@ package main;
 
 import java.io.File;
 
+import tools.Vector2D;
+
 public class Constants {
 
 	private Constants(){}
@@ -14,5 +16,6 @@ public class Constants {
 	public static final int STARTING_POINTS = 0;
 
 
+	public static final Vector2D GRAVITY_VECTOR = new Vector2D(0,-2);
 
 }

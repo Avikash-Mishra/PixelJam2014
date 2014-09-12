@@ -5,7 +5,7 @@ C = CLOUDS
 * = BACKGROUND
 
 ##########This stuff will be the same but will be represented by different images
-T = TILES
+I = TILES
 W = WALL
 
 ##########kills u
@@ -22,3 +22,13 @@ E = ENERGY
 ##########other tile stuff
 R = RIVER
 H = LEVERS
+
+##########start positioN
+P = START POSITION
+
+
+###########DOOR
+O = DOOR
+
+########WIN GAME
+G = WIN GAME
