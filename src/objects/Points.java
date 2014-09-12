@@ -15,8 +15,10 @@ public class Points extends PickUpObject {
 
 	@Override
 	public void onCollision(Player player) {
-		// TODO Auto-generated method stub
-
+		if(canPickUp()){
+			pickup();
+			player.points += amount;
+		}
 	}
 
 	public static Points newPoints(int x, int y, int amount){

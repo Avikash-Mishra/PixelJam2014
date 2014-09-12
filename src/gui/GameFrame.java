@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
 
 	public GameCanvas gameCanvas;
 
-	public GameFrame(List[] data) {
+	public GameFrame(List<Entity> entities, List<Tile> tiles, List<PickUpObject> pickups, Player player) {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -45,8 +45,8 @@ public class GameFrame extends JFrame {
 		this.setSize(tk.getScreenSize());
 		this.setResizable(true);
 
-		//Create World
-		World world = new World(data);
+		//
+		World world = new World(entities,tiles,pickups,player);
 
 		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this, world);
 
@@ -59,11 +59,6 @@ public class GameFrame extends JFrame {
 		gameCanvas.setFocusable(true);
 
 		this.setVisible(true);
-	}
-
-	public GameFrame(List<Entity> entities, List<Tile> tiles, List<PickUpObject> pickups, Player player) {
-
-		// TODO Auto-generated constructor stub
 	}
 
 }

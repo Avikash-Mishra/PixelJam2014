@@ -14,7 +14,7 @@ import tools.Animation;
  */
 public abstract class Entity{
 
-	private Animation image;
+	protected Animation image;
 	private int x;
 	private int y;
 	protected Vector2D position;

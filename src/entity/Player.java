@@ -14,6 +14,7 @@ public class Player extends Entity {
 
 	public Player(int x, int y) {
 		super(x, y);
+		//TODO: set up animation for player
 		movement = new Vector2D(0,0);
 	}
 

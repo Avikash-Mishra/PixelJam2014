@@ -1,12 +1,14 @@
 package main;
 
-import java.util.List;
-import java.io.IOException;
-import java.util.Set;
-
-import objects.Tile;
+import entity.Entity;
 import entity.Player;
 import gui.GameFrame;
+
+import java.io.IOException;
+import java.util.List;
+
+import objects.PickUpObject;
+import objects.Tile;
 
 public class Main {
 
@@ -14,7 +16,8 @@ public class Main {
 
 		try{
 			Object[] data = Parser.parse(Constants.LEVEL_FILENAME);
-			new GameFrame( (List<Entity>)data[0], (List<Tile>)data[1], (List<PickUpObject>data[2], (Player)player);
+			new GameFrame( (List<Entity>)data[0], (List<Tile>)data[1], (List<PickUpObject>)data[2], (Player)data[3]);
+
 		}
 		catch(IOException e){
 			e.printStackTrace();
