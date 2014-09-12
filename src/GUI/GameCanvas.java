@@ -21,8 +21,8 @@ public class GameCanvas extends Canvas {
 	 */
 	public GameCanvas(int width, int height, GameFrame parent) {
 		super(parent.getWidth(), parent.getHeight());
-		this.setBackground(Color.BLUE);
 		this.parent = parent;
+		parent.setBackground(Color.BLUE);
 	}
 
 	/**
@@ -30,7 +30,6 @@ public class GameCanvas extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g){
-
 	}
 
 
