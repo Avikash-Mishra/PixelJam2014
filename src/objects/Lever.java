@@ -2,14 +2,16 @@ package objects;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import tools.Animation;
 
 public class Lever extends Tile{
 
-	public Lever(Image image, int x, int y) {
-		super(image, x, y);
+	protected Lever(Animation anim, int x, int y) {
+		super(anim, x, y);
 		// TODO Auto-generated constructor stub
 	}
-
 
 
 }

@@ -3,9 +3,8 @@ package main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.List;
 
 import objects.Energy;
 import objects.PickUpObject;
@@ -16,7 +15,7 @@ import objects.Wall;
 import entity.Entity;
 
 /**
- * Parses game levels and returns sets of the things in it. Should not be instantiated. Use its public static methods.
+ * Parses game levels and returns Lists of the things in it. Should not be instantiated. Use its public static methods.
  * @author craigaaro
  */
 public class Parser {
@@ -39,22 +38,25 @@ public class Parser {
 	private static int col = 0;
 	private static int row = 0;
 
-	private class ParserList extends ArrayList{
+	public static class ParserList<E> extends ArrayList<E>{
 
-
+		public boolean insert(E item) throws IOException{
+			if (item == null) throw new IOException("Error loading - added null at " + getPosition());
+			return super.add(item);
+		}
 
 	}
 
 	/**
 	 * Takes a file name, reads the level described in that file, and then returns a
 	 * 2-element array where:
-	 *  - array[0] is a set of entities
-	 *  - array[1] is a set of tiles.
+	 *  - array[0] is a List of entities
+	 *  - array[1] is a List of tiles.
 	 * @param filename: name of file containing the level.
-	 * @return a 2-element array with a set of entities and a set of tiles.
+	 * @return a 2-element array with a List of entities and a List of tiles.
 	 * @throws IOException: if there is an error in parsing
 	 */
-	public static Set[] parse(String filename) throws IOException{
+	public static List[] parse(String filename) throws IOException{
 
 		// File loading
 		File file = new File(filename);
@@ -67,9 +69,9 @@ public class Parser {
 		}
 
 		// Initialise variables
-		Set<Entity> entities = new HashSet<>();
-		Set<Tile> tiles = new HashSet<>();
-		Set<PickUpObject> pickups = new HashSet<>();
+		ParserList<Entity> entities = new ParserList<>();
+		ParserList<Tile> tiles = new ParserList<>();
+		ParserList<PickUpObject> pickups = new ParserList<>();
 		row = 0;
 		col = 0;
 
@@ -82,42 +84,41 @@ public class Parser {
 				char c = line[col];
 				switch(c){
 				case CLOUDS:
-					System.out.println("CLOUD LOADING NOT YET IMPLEMENTED");
+					//System.out.println("CLOUD LOADING NOT YET IMPLEMENTED");
 					break;
 				case BACKGROUND:
-					System.out.println("BACKGROUND LOADING NOT YET IMPLEMENTED");
 					break;
 				case TILE:
-					Wall floor = Wall.newFloor();
-					tiles.add(floor);
+					Wall floor = Wall.newFloor(col,row);
+					tiles.insert(floor);
 					break;
 				case WALL:
-					Wall wall = Wall.newWall();
-					tiles.add(wall);
+					Wall wall = Wall.newWall(col,row);
+					tiles.insert(wall);
 					break;
 				case SPIKE_UP:
 					Spikes upSpikes = Spikes.newUpSpikes();
-					tiles.add(upSpikes);
+					tiles.insert(upSpikes);
 					break;
 				case SPIKE_DOWN:
 					Spikes downSpikes = Spikes.newDownSpikes();
-					tiles.add(downSpikes);
+					tiles.insert(downSpikes);
 					break;
 				case SPIKE_RIGHT:
 					Spikes rightSpikes = Spikes.newRightSpikes();
-					tiles.add(rightSpikes);
+					tiles.insert(rightSpikes);
 					break;
 				case SPIKE_LEFT:
 					Spikes leftSpikes = Spikes.newLeftSpikes();
-					tiles.add(leftSpikes);
+					tiles.insert(leftSpikes);
 					break;
 				case RIVER:
 					River river = River.newRiver();
-					tiles.add(river);
+					tiles.insert(river);
 					break;
 				case ENERGY:
 					Energy energy = Energy.newEnergy();
-					pickups.add(energy);
+					pickups.insert(energy);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
@@ -125,13 +126,14 @@ public class Parser {
 			}
 			row++;
 		}
+		System.out.println("done");
 		}
 		catch(ArrayIndexOutOfBoundsException e){
 			throw new ArrayIndexOutOfBoundsException("Out of bounds while parsing at " + getPosition());
 		}
 
 		//finished
-		return new Set[]{ entities, tiles, pickups };
+		return new List[]{ (List<Entity>)entities, (List<Tile>)tiles, (List<PickUpObject>)pickups };
 
 	}
 

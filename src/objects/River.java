@@ -1,13 +1,15 @@
 package objects;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import tools.Animation;
 
 
 public class River extends Tile{
 
-	public River(Image image, int x, int y) {
-		super(image, x, y);
-		// TODO Auto-generated constructor stub
+	protected River(Animation anim, int x, int y) {
+		super(anim, x, y);
 	}
 
 	public static River newRiver(){

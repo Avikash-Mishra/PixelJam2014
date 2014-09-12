@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JFrame;
@@ -32,7 +33,7 @@ public class GameFrame extends JFrame {
 
 	public GameCanvas gameCanvas;
 
-	public GameFrame(Set[] data) {
+	public GameFrame(List[] data) {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
