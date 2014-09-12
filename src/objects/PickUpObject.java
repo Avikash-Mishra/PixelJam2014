@@ -8,11 +8,12 @@ import tools.Animation;
 import entity.Player;
 
 public abstract class PickUpObject{
-	private int amount;
+	protected int amount;
 
 	private Animation animation;
 	private int x;
 	private int y;
+	private boolean canPickUp = true;
 
 
 
@@ -25,7 +26,9 @@ public abstract class PickUpObject{
 
 	public void draw(Graphics g) {
 		BufferedImage image = animation.getImage();
-		g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+		if(canPickUp){
+			g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+		}
 	}
 
 	public int getX(){
@@ -37,6 +40,14 @@ public abstract class PickUpObject{
 	}
 
 	public abstract void onCollision(Player player);
+
+	public boolean canPickUp(){
+		return canPickUp;
+	}
+
+	public void pickup(){
+		canPickUp = false;
+	}
 
 
 	/**

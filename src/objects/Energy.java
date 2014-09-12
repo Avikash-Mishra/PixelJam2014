@@ -22,8 +22,10 @@ public class Energy extends PickUpObject {
 
 	@Override
 	public void onCollision(Player player) {
-		// TODO Auto-generated method stub
-
+		if(canPickUp()){
+			pickup();
+			player.energy += amount;
+		}
 	}
 
 
