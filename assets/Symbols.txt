@@ -1,23 +1,21 @@
+@author Preet Nijjar
 
-Background stuff, will draw differently
+##########Background stuff, will draw differently
 C = CLOUDS
 B = BACKGROUND
 
-This stuff will be the same but will be represented by different images
+##########This stuff will be the same but will be represented by different images
 T = TILES
 W = WALL
-<<<<<<< HEAD
+
+##########kills u
 U = SPIKE UP
 R = RIVER
 L = SPIKE LEFT
-E = ENERGY
 D = SPIKE RIGHT
-=======
 
-Spikes will kill you but they might be in a different direction
-U = SPRIKE UP
+##########pick ups
+E = ENERGY
 
+##########other tile stuff
 R = RIVER
->>>>>>> 29c35ab2148851301879dd3c099a594995c067a7
-
-new added
