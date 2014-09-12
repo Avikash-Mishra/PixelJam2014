@@ -1,23 +1,20 @@
-package Objects;
+package objects;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
-import Main.Constants;
+import main.Constants;
 
-public abstract class PickUpObject {
+public abstract class Tile {
 	private Image image;
 	private int x;
 	private int y;
-	private int amount;
 
 
-	public PickUpObject(Image image, int x, int y, int amount){
+	public Tile(Image image, int x, int y){
 		this.image = image;
 		this.x = x;
 		this.y = y;
-		this.amount = amount;
 	}
 
 
@@ -32,9 +29,4 @@ public abstract class PickUpObject {
 	public int getY(){
 		return y;
 	}
-
-	public int getAmount(){
-		return amount;
-	}
-
 }

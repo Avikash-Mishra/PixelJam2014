@@ -1,7 +1,9 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import main.World;
 
 
 /**
@@ -13,6 +15,7 @@ public class GameCanvas extends Canvas {
 
 
 	private GameFrame parent;
+	private World world;
 
 	/**
 	 * Constructs a new GameCanvas with the given width and height
@@ -30,8 +33,8 @@ public class GameCanvas extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g){
+		world.draw(g);
+
 	}
-
-
 
 }

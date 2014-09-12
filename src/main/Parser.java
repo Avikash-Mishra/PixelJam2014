@@ -1,19 +1,22 @@
-package Main;
+package main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Entity;
-import Objects.Tile;
-import Objects.Wall;
+import objects.River;
+import objects.Spikes;
+import objects.Tile;
+import objects.Wall;
+import entity.Entity;
 
+/**
+ * Parses game levels and returns sets of the things in it. Should not be instantiated. Use its public static methods.
+ * @author craigaaro
+ */
 public class Parser {
-
-
 
 	private Parser(){}
 
@@ -79,8 +82,12 @@ public class Parser {
 					tiles.add(wall);
 					break;
 				case RIVER:
+					River river = River.newRiver();
+					tiles.add(river);
 					break;
 				case SPIKE_UP:
+					Spikes upSpikes = Spikes.newUpSpikes();
+					tiles.add(upSpikes);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
