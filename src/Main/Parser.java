@@ -8,12 +8,16 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Entity.Entity;
+import Objects.River;
+import Objects.Spikes;
 import Objects.Tile;
 import Objects.Wall;
 
+/**
+ * Parses game levels and returns sets of the things in it. Should not be instantiated. Use its public static methods.
+ * @author craigaaro
+ */
 public class Parser {
-
-
 
 	private Parser(){}
 
@@ -79,8 +83,12 @@ public class Parser {
 					tiles.add(wall);
 					break;
 				case RIVER:
+					River river = River.newRiver();
+					tiles.add(river);
 					break;
 				case SPIKE_UP:
+					Spikes upSpikes = Spikes.newUpSpikes();
+					tiles.add(upSpikes);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
