@@ -1,5 +1,5 @@
 package Objects;
 
-public class Lever {
+public class Lever implements Tile{
 
 }

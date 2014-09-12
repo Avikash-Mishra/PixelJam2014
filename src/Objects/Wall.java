@@ -1,5 +1,5 @@
 package Objects;
 
-public class Wall {
+public class Wall implements Tile {
 
 }
