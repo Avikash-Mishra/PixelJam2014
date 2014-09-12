@@ -19,8 +19,8 @@ public abstract class PickUpObject{
 
 	protected PickUpObject(Animation animation, int x, int y, int amount){
 		this.animation = animation;
-		this.x = x;
-		this.y = y;
+		this.x = x * Constants.TILE_WIDTH;
+		this.y = y * Constants.TILE_HEIGHT;
 		this.amount = amount;
 	}
 

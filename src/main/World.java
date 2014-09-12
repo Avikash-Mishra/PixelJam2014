@@ -33,6 +33,14 @@ public class World {
 		for (Entity entity: entities){
 			entity.draw(g);
 		}
+		//Draw Pick Ups
+		for (PickUpObject tokens: pickUps){
+			tokens.draw(g);
+		}
 
+		//Draw Player
+		if (player != null){
+			//player.draw(g);
+		}
 	}
 }

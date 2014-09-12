@@ -22,6 +22,8 @@ public abstract class Entity{
 	public Entity(int x, int y){
 		this.image = image;
 		position = new Vector2D(x*Constants.TILE_WIDTH,y*Constants.TILE_WIDTH);
+		this.x = x * Constants.TILE_WIDTH;
+		this.y = y * Constants.TILE_HEIGHT;
 	}
 
 
