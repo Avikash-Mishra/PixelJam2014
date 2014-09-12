@@ -19,7 +19,7 @@ public abstract class Entity{
 	private int y;
 	protected Vector2D position;
 
-	public Entity(Animation image, int x, int y){
+	public Entity(int x, int y){
 		this.image = image;
 		position = new Vector2D(x*Constants.TILE_WIDTH,y*Constants.TILE_WIDTH);
 	}

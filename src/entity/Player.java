@@ -12,8 +12,8 @@ public class Player extends Entity {
 	public int points = 0;
 	public int energy = 0;
 
-	public Player(Animation image, int x, int y) {
-		super(image, x, y);
+	public Player(int x, int y) {
+		super(x, y);
 		movement = new Vector2D(0,0);
 	}
 

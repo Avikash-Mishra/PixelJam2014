@@ -13,7 +13,10 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
+import entity.Player;
+import objects.PickUpObject;
 import objects.Tile;
+import entity.Entity;
 import main.Main;
 import main.World;
 
@@ -56,6 +59,11 @@ public class GameFrame extends JFrame {
 		gameCanvas.setFocusable(true);
 
 		this.setVisible(true);
+	}
+
+	public GameFrame(List<Entity> entities, List<Tile> tiles, List<PickUpObject> pickups, Player player) {
+
+		// TODO Auto-generated constructor stub
 	}
 
 }

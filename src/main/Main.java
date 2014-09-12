@@ -4,6 +4,8 @@ import java.util.List;
 import java.io.IOException;
 import java.util.Set;
 
+import objects.Tile;
+import entity.Player;
 import gui.GameFrame;
 
 public class Main {
@@ -11,11 +13,8 @@ public class Main {
 	public static void main(String[] args){
 
 		try{
-			List[] data = Parser.parse(Constants.LEVEL_FILENAME);
-
-			System.out.println(" entities: " + data[0].size());
-			//Create Game
-			new GameFrame(data);
+			Object[] data = Parser.parse(Constants.LEVEL_FILENAME);
+			new GameFrame( (List<Entity>)data[0], (List<Tile>)data[1], (List<PickUpObject>data[2], (Player)player);
 		}
 		catch(IOException e){
 			e.printStackTrace();
