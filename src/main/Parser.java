@@ -38,6 +38,15 @@ public class Parser {
 	private static int col = 0;
 	private static int row = 0;
 
+	public static class ParserList<E> extends ArrayList<E>{
+
+		public boolean insert(E item) throws IOException{
+			if (item == null) throw new IOException("Error loading - added null at " + getPosition());
+			return super.add(item);
+		}
+
+	}
+
 	/**
 	 * Takes a file name, reads the level described in that file, and then returns a
 	 * 2-element array where:
@@ -60,9 +69,9 @@ public class Parser {
 		}
 
 		// Initialise variables
-		List<Entity> entities = new ArrayList<>();
-		List<Tile> tiles = new ArrayList<>();
-		List<PickUpObject> pickups = new ArrayList<>();
+		ParserList<Entity> entities = new ParserList<>();
+		ParserList<Tile> tiles = new ParserList<>();
+		ParserList<PickUpObject> pickups = new ParserList<>();
 		row = 0;
 		col = 0;
 
@@ -81,35 +90,35 @@ public class Parser {
 					break;
 				case TILE:
 					Wall floor = Wall.newFloor(col,row);
-					tiles.add(floor);
+					tiles.insert(floor);
 					break;
 				case WALL:
 					Wall wall = Wall.newWall(col,row);
-					tiles.add(wall);
+					tiles.insert(wall);
 					break;
 				case SPIKE_UP:
 					Spikes upSpikes = Spikes.newUpSpikes();
-					tiles.add(upSpikes);
+					tiles.insert(upSpikes);
 					break;
 				case SPIKE_DOWN:
 					Spikes downSpikes = Spikes.newDownSpikes();
-					tiles.add(downSpikes);
+					tiles.insert(downSpikes);
 					break;
 				case SPIKE_RIGHT:
 					Spikes rightSpikes = Spikes.newRightSpikes();
-					tiles.add(rightSpikes);
+					tiles.insert(rightSpikes);
 					break;
 				case SPIKE_LEFT:
 					Spikes leftSpikes = Spikes.newLeftSpikes();
-					tiles.add(leftSpikes);
+					tiles.insert(leftSpikes);
 					break;
 				case RIVER:
 					River river = River.newRiver();
-					tiles.add(river);
+					tiles.insert(river);
 					break;
 				case ENERGY:
 					Energy energy = Energy.newEnergy();
-					pickups.add(energy);
+					pickups.insert(energy);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
@@ -124,7 +133,7 @@ public class Parser {
 		}
 
 		//finished
-		return new List[]{ entities, tiles, pickups };
+		return new List[]{ (List<Entity>)entities, (List<Tile>)tiles, (List<PickUpObject>)pickups };
 
 	}
 
