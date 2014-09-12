@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Set;
 
 import main.World;
 
@@ -22,10 +23,11 @@ public class GameCanvas extends Canvas {
 	 * @param width The Width of the canvas
 	 * @param height The Height of the canvas
 	 */
-	public GameCanvas(int width, int height, GameFrame parent) {
+	public GameCanvas(int width, int height, GameFrame parent, World world) {
 		super(parent.getWidth(), parent.getHeight());
 		this.parent = parent;
 		parent.setBackground(Color.BLUE);
+		this.world = world;
 	}
 
 	/**
