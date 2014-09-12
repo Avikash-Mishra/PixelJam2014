@@ -9,6 +9,7 @@ import java.util.List;
 import objects.Energy;
 import objects.Lever;
 import objects.PickUpObject;
+import objects.Points;
 import objects.River;
 import objects.Spikes;
 import objects.Tile;
@@ -37,6 +38,7 @@ public class Parser {
 	private static final char SPIKE_RIGHT = 'L';
 	private static final char LEVER = 'H';
 	private static final char PLAYER = 'P';
+	private static final char POINTS = 'N';
 
 
 	private static int col = 0;
@@ -125,6 +127,9 @@ public class Parser {
 					Lever lever = Lever.newLever(col,row);
 					tiles.add(lever);
 					break;
+				case POINTS:
+					Points points = Points.newPoints(col, row, 10);
+					pickups.add(points);
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
 				}

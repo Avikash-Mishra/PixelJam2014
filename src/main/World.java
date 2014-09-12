@@ -12,13 +12,13 @@ import objects.Tile;
 public class World {
 	private List<Tile> map;
 	private List<Entity> entities;
-	private List<PickUpObject> pickUps;
+	private List<PickUpObject> pickups;
 	private Player player;
 
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
 		this.map = map;
 		this.entities = entities;
-		this.pickUps = pickUps;
+		this.pickups = pickUps;
 		this.player = player;
 	}
 
@@ -33,6 +33,14 @@ public class World {
 		for (Entity entity: entities){
 			entity.draw(g);
 		}
+		//Draw Pick Ups
+		for (PickUpObject items: pickups){
+			items.draw(g);
+		}
 
+		//Draw Player
+		if (player != null){
+			//player.draw(g);
+		}
 	}
 }
