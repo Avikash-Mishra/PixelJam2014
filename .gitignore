@@ -1,3 +1,4 @@
+
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -24,3 +25,4 @@ debugLastTrace.txt
 /*.png
 
 *.trace
+/bin/
