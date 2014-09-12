@@ -1,10 +1,11 @@
 package Entity;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class CatEnemy extends Entity {
 
-	public CatEnemy(BufferedImage image, int x, int y) {
+	public CatEnemy(Image image, int x, int y) {
 		super(image, x, y);
 		// TODO Auto-generated constructor stub
 	}

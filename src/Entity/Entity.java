@@ -12,12 +12,12 @@ import Main.Constants;
  * @author Mary
  */
 public abstract class Entity {
-	private BufferedImage image;
+	private Image image;
 	private int x;
 	private int y;
 
 
-	public Entity(BufferedImage image, int x, int y){
+	public Entity(Image image, int x, int y){
 		this.image = image;
 		this.x = x;
 		this.y = y;
