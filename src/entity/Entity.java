@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import objects.Tile;
+import tools.Vector2D;
 import main.Constants;
 
 /**
@@ -15,27 +16,24 @@ import main.Constants;
 public abstract class Entity{
 
 	private Image image;
-	private int x;
-	private int y;
-
+	protected Vector2D position;
 
 	public Entity(Image image, int x, int y){
 		this.image = image;
-		this.x = x;
-		this.y = y;
+		position = new Vector2D(x*Constants.TILE_WIDTH,y*Constants.TILE_WIDTH);
 	}
 
 
 	public void draw(Graphics g) {
-		g.drawImage(image , x, y, image.getWidth(null), image.getHeight(null), null);
+		g.drawImage(image , position.x(), position.y(), image.getWidth(null), image.getHeight(null), null);
 	}
 
 	public int getX(){
-		return x;
+		return position.x();
 	}
 
 	public int getY(){
-		return y;
+		return position.y();
 	}
 
 	public int getWidth(){

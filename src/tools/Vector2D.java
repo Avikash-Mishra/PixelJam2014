@@ -14,8 +14,16 @@ public class Vector2D {
 		return new Vector2D(x+other.x,y+other.y);
 	}
 
-	public Vector2D mult(Vector2D other){
-		return new Vector2D(x*other.x,y*other.y);
+	public Vector2D sub(Vector2D other){
+		return new Vector2D(x-other.x,y-other.y);
+	}
+
+	public void setX(int x_){
+		x = x_;
+	}
+
+	public void setY(int y_){
+		y = y_;
 	}
 
 	public int x(){
