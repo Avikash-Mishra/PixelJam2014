@@ -15,7 +15,7 @@ public class River extends Tile{
 
 	public static River newRiver(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("test_tile2.jpg"), 0);
+		anim.addFrame(ImageLibrary.get("test_tile.jpg"), 0);
 		return new River(anim,x,y);
 	}
 
