@@ -29,6 +29,10 @@ public class Animation {
 		startTime = System.currentTimeMillis();
 	}
 
+	public void stop(){
+		running = false;
+	}
+
 	public BufferedImage getImage(){
 		if(!running){
 			return images.get(0);
