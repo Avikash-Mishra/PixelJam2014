@@ -5,15 +5,21 @@ import java.util.List;
 import java.util.Set;
 
 import entity.Entity;
+import entity.Player;
+import objects.PickUpObject;
 import objects.Tile;
 
 public class World {
 	private List<Tile> map;
 	private List<Entity> entities;
+	private List<PickUpObject> pickUps;
+	private Player player;
 
-	public World(List[] world){
-		map = (List<Tile>) world[1];
-		entities = (List<Entity>) world[0];
+	public World(List<Tile> map, List<Entity> entities, List<PickUpObject> pickUps, Player player){
+		this.map = map;
+		this.entities = entities;
+		this.pickUps = pickUps;
+		this.player = player;
 	}
 
 
@@ -24,8 +30,8 @@ public class World {
 			items.draw(g);
 		}
 		//Draw the characters
-		for (Entity animals: entities){
-			animals.draw(g);
+		for (Entity entity: entities){
+			entity.draw(g);
 		}
 
 	}
