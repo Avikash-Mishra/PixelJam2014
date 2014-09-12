@@ -16,4 +16,5 @@ public class Energy extends PickUpObject {
 	}
 
 
+
 }
