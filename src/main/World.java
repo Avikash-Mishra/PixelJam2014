@@ -1,19 +1,19 @@
 package main;
 
 import java.awt.Graphics;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import entity.Entity;
 import objects.Tile;
 
 public class World {
-	private HashSet<Tile> map;
-	private HashSet<Entity> entities;
+	private List<Tile> map;
+	private List<Entity> entities;
 
-	public World(Set[] world){
-		map = (HashSet<Tile>) world[1];
-		entities = (HashSet<Entity>) world[0];
+	public World(List[] world){
+		map = (List<Tile>) world[1];
+		entities = (List<Entity>) world[0];
 	}
 
 

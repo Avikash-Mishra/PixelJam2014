@@ -1,12 +1,14 @@
 package objects;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import tools.Animation;
 
 public class Spikes extends Tile{
 
-	public Spikes(Image image, int x, int y) {
-		super(image, x, y);
-		// TODO Auto-generated constructor stub
+	protected Spikes(Animation anim, int x, int y) {
+		super(anim, x, y);
 	}
 
 	public static Spikes newUpSpikes(){

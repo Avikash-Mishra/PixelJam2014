@@ -33,6 +33,12 @@ public class Animation {
 		running = false;
 	}
 
+
+	/**
+	 * If this animation has been started, return the next image in the animation.
+	 * Otherwise, return the first image.
+	 * @return: a bufferedimage
+	 */
 	public BufferedImage getImage(){
 		if(!running){
 			return images.get(0);
