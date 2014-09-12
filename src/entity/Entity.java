@@ -5,13 +5,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import objects.Tile;
 import main.Constants;
 
 /**
  * Will contain things like collision detection, drawing etc.
  * @author Mary
  */
-public abstract class Entity {
+public abstract class Entity{
+
 	private Image image;
 	private int x;
 	private int y;
@@ -25,7 +27,7 @@ public abstract class Entity {
 
 
 	public void draw(Graphics g) {
-		g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+		g.drawImage(image , x, y, image.getWidth(null), image.getHeight(null), null);
 	}
 
 	public int getX(){
@@ -35,4 +37,13 @@ public abstract class Entity {
 	public int getY(){
 		return y;
 	}
+
+	public int getWidth(){
+		return image.getWidth(null);
+	}
+
+	public int getHeight(){
+		return image.getHeight(null);
+	}
+
 }
