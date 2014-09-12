@@ -1,6 +1,6 @@
 package Objects;
 
 
-public class Points extends PickupObject {
+public class Points extends PickUpObject {
 
 }

@@ -1,5 +1,5 @@
 package Objects;
 
-public abstract class PickupObject {
+public abstract class PickUpObject {
 
 }

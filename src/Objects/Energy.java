@@ -1,6 +1,6 @@
 package Objects;
 
 
-public class Energy extends PickupObject {
+public class Energy extends PickUpObject {
 
 }
