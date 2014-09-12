@@ -1,6 +1,7 @@
 package objects;
 
-import java.awt.Image;
+import tools.Animation;
+import entity.Player;
 
 import tools.Animation;
 import tools.ImageLibrary;
@@ -8,9 +9,14 @@ import tools.ImageLibrary;
 
 public class Points extends PickUpObject {
 
-	protected Points(Animation animation, int x, int y, int amount) {
-		super(animation, x, y, amount);
-		// TODO Auto-generated constructor stub
+	public Points(Animation image, int x, int y, int amount) {
+		super(image, x, y, amount);
+	}
+
+	@Override
+	public void onCollision(Player player) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public static Points newPoints(int x, int y, int amount){

@@ -1,17 +1,19 @@
 package objects;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import tools.Animation;
 import main.Constants;
+import tools.Animation;
+import entity.Player;
 
 public abstract class PickUpObject{
 	private int amount;
+
 	private Animation animation;
 	private int x;
 	private int y;
+
 
 
 	protected PickUpObject(Animation animation, int x, int y, int amount){
@@ -33,6 +35,8 @@ public abstract class PickUpObject{
 	public int getY(){
 		return y;
 	}
+
+	public abstract void onCollision(Player player);
 
 
 	/**

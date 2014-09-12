@@ -1,16 +1,18 @@
 package entity;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 
+import tools.Animation;
 import tools.Vector2D;
 
 public class Player extends Entity {
 
 	private Vector2D movement;
 	private static final int STEP_SIZE = 1;
+	public int points = 0;
+	public int energy = 0;
 
-	public Player(Image image, int x, int y) {
+	public Player(Animation image, int x, int y) {
 		super(image, x, y);
 		movement = new Vector2D(0,0);
 	}
