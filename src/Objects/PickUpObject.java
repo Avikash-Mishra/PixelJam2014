@@ -1,18 +1,19 @@
 package Objects;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import Main.Constants;
 
 public abstract class PickUpObject {
-	private BufferedImage image;
+	private Image image;
 	private int x;
 	private int y;
 	private int amount;
 
 
-	public PickUpObject(BufferedImage image, int x, int y, int amount){
+	public PickUpObject(Image image, int x, int y, int amount){
 		this.image = image;
 		this.x = x;
 		this.y = y;
