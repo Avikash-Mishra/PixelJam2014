@@ -5,17 +5,20 @@ C = CLOUDS
 * = BACKGROUND
 
 ##########This stuff will be the same but will be represented by different images
-I = TILES
+T = TILES
 W = WALL
 
 ##########kills u
 U = SPIKE UP
+V = RIVER
 L = SPIKE LEFT
+R = SPIKE RIGHT
 D = SPIKE DOWN
-R = SPIKE LEFT
-
+F = FIRE
+S = SPRITE
 ##########pick ups
 E = ENERGY
 
 ##########other tile stuff
-V = River
+R = RIVER
+H = LEVERS
