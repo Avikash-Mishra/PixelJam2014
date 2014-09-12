@@ -40,5 +40,8 @@ public class Player extends Entity {
 		System.out.println("transform");
 	}
 
+	public void update(){
+		this.position = position.add(movement);
+	}
 
 }
