@@ -13,7 +13,7 @@ public abstract class PickUpObject{
 	private int y;
 
 
-	public PickUpObject(Image image, int x, int y, int amount){
+	protected PickUpObject(Image image, int x, int y, int amount){
 		this.image = image;
 		this.x = x;
 		this.y = y;
