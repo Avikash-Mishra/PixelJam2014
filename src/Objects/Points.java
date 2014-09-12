@@ -1,7 +1,6 @@
 package Objects;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 
 public class Points extends PickUpObject {
@@ -10,6 +9,7 @@ public class Points extends PickUpObject {
 		super(image, x, y, amount);
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 }

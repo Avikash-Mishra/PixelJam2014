@@ -6,33 +6,17 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import Main.Constants;
+import Objects.Tile;
 
 /**
  * Will contain things like collision detection, drawing etc.
  * @author Mary
  */
-public abstract class Entity {
-	private Image image;
-	private int x;
-	private int y;
+public abstract class Entity extends Tile{
 
-
-	public Entity(Image image, int x, int y){
-		this.image = image;
-		this.x = x;
-		this.y = y;
+	public Entity(Image image, int x, int y) {
+		super(image, x, y);
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public void draw(Graphics g) {
-		g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
-	}
-
-	public int getX(){
-		return x;
-	}
-
-	public int getY(){
-		return y;
-	}
 }
