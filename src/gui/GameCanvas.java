@@ -32,6 +32,7 @@ public class GameCanvas extends Canvas {
 		this.parent = parent;
 		parent.setBackground(Color.BLUE);
 		this.world = world;
+		player = new Player(null,0,0);
 		this.addKeyListener(new Listener());
 	}
 
@@ -58,26 +59,24 @@ public class GameCanvas extends Canvas {
 
 			int code = e.getKeyCode();
 
-			if (code == KeyEvent.VK_UP){
-
+			if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A || code == KeyEvent.VK_D){
+				player.move(code);
 			}
-			else if (code == KeyEvent.VK_RIGHT){
-
+			else if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
+				player.jump();
 			}
-			else if (code == KeyEvent.VK_DOWN){
-
+			else if (code == KeyEvent.VK_SPACE){
+				player.transform();
 			}
-			else if (code == KeyEvent.VK_LEFT){
-
-			}
-
 
 		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-
+		public void keyReleased(KeyEvent e){
+			int code = e.getKeyCode();
+			if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A || code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){
+				player.stop(code);
+			}
 		}
 
 	}
