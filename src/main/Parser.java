@@ -97,7 +97,7 @@ public class Parser {
 					tiles.insert(wall);
 					break;
 				case SPIKE_UP:
-					Spikes upSpikes = Spikes.newUpSpikes();
+					Spikes upSpikes = Spikes.newUpSpikes(col, row);
 					tiles.insert(upSpikes);
 					break;
 				case SPIKE_DOWN:
