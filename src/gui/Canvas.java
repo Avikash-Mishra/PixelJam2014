@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 /**
  * Drawing canvas extending JPanel
- * @author Avikash Mishra
+ * @author Preet Nijjar
  *
  */
 public class Canvas extends JPanel {

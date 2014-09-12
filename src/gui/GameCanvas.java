@@ -8,7 +8,7 @@ import main.World;
 
 /**
  * The display for the game
- * @author Avikash Mishra
+ * @author Preet Nijjar
  *
  */
 public class GameCanvas extends Canvas {

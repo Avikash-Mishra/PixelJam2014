@@ -19,7 +19,7 @@ import main.World;
  * Main class for game, starts the game and contains the main GUI for displaying
  * the game
  *
- * @author Avikash Mishra
+ * @author Preet Nijjar
  *
  */
 public class GameFrame extends JFrame {
