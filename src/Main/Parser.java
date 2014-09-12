@@ -9,6 +9,7 @@ import java.util.Set;
 
 import Entity.Entity;
 import Objects.Tile;
+import Objects.Wall;
 
 public class Parser {
 
@@ -55,6 +56,7 @@ public class Parser {
 		row = 0;
 		col = 0;
 
+		try{
 		// Parsing
 		while (scan.hasNextLine()){
 
@@ -69,9 +71,12 @@ public class Parser {
 					System.out.println("BACKGROUND LOADING NOT YET IMPLEMENTED");
 					break;
 				case TILE:
-
+					Wall floor = Wall.newFloor();
+					tiles.add(floor);
 					break;
 				case WALL:
+					Wall wall = Wall.newWall();
+					tiles.add(wall);
 					break;
 				case RIVER:
 					break;
@@ -82,6 +87,10 @@ public class Parser {
 				}
 			}
 			row++;
+		}
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			throw new ArrayIndexOutOfBoundsException("Out of bounds while parsing at " + getPosition());
 		}
 
 		//finished
