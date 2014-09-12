@@ -11,6 +11,9 @@ public class Energy extends PickUpObject {
 		// TODO Auto-generated constructor stub
 	}
 
+	public static Energy newEnergy(){
+		return null;
+	}
 
 
 }

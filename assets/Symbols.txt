@@ -10,12 +10,12 @@ W = WALL
 
 ##########kills u
 U = SPIKE UP
-R = RIVER
 L = SPIKE LEFT
-D = SPIKE RIGHT
+D = SPIKE DOWN
+R = SPIKE LEFT
 
 ##########pick ups
 E = ENERGY
 
 ##########other tile stuff
-R = RIVER
+V = River

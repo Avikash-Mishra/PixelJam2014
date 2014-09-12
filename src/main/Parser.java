@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import objects.Energy;
+import objects.PickUpObject;
 import objects.River;
 import objects.Spikes;
 import objects.Tile;
@@ -25,9 +27,13 @@ public class Parser {
 	private static final char BACKGROUND = 'B';
 	private static final char TILE = 'T';
 	private static final char WALL = 'W';
-	private static final char RIVER = 'R';
-
+	private static final char RIVER = 'V';
+	private static final char ENERGY = 'E';
 	private static final char SPIKE_UP = 'U';
+	private static final char SPIKE_LEFT = 'L';
+	private static final char SPIKE_DOWN = 'D';
+	private static final char SPIKE_RIGHT = 'R';
+
 
 	private static int col = 0;
 	private static int row = 0;
@@ -56,6 +62,7 @@ public class Parser {
 		// Initialise variables
 		Set<Entity> entities = new HashSet<>();
 		Set<Tile> tiles = new HashSet<>();
+		Set<PickUpObject> pickups = new HashSet<>();
 		row = 0;
 		col = 0;
 
@@ -81,13 +88,29 @@ public class Parser {
 					Wall wall = Wall.newWall();
 					tiles.add(wall);
 					break;
+				case SPIKE_UP:
+					Spikes upSpikes = Spikes.newUpSpikes();
+					tiles.add(upSpikes);
+					break;
+				case SPIKE_DOWN:
+					Spikes downSpikes = Spikes.newDownSpikes();
+					tiles.add(downSpikes);
+					break;
+				case SPIKE_RIGHT:
+					Spikes rightSpikes = Spikes.newRightSpikes();
+					tiles.add(rightSpikes);
+					break;
+				case SPIKE_LEFT:
+					Spikes leftSpikes = Spikes.newLeftSpikes();
+					tiles.add(leftSpikes);
+					break;
 				case RIVER:
 					River river = River.newRiver();
 					tiles.add(river);
 					break;
-				case SPIKE_UP:
-					Spikes upSpikes = Spikes.newUpSpikes();
-					tiles.add(upSpikes);
+				case ENERGY:
+					Energy energy = Energy.newEnergy();
+					pickups.add(energy);
 					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
@@ -101,7 +124,7 @@ public class Parser {
 		}
 
 		//finished
-		return new Set[]{ entities, tiles };
+		return new Set[]{ entities, tiles, pickups };
 
 	}
 
