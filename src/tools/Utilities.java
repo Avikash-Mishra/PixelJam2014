@@ -1,11 +1,11 @@
-package main;
+package tools;
 
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 import objects.GameObject;
-import tools.Vector2D;
 
 public class Utilities {
 
@@ -73,6 +73,14 @@ public class Utilities {
 			}
 		}
 		return neighbours;
+	}
+
+	/**
+	 * Given a point on an image, return true if the pixel at this point is transparent.
+	 */
+	public static boolean isPixelTransparent(int x, int y, BufferedImage bi){
+		int pixel = bi.getRGB(x,y);
+		return pixel>>24 == 0x00;
 	}
 
 }
