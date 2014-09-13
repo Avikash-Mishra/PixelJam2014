@@ -2,12 +2,13 @@ package objects;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import main.Constants;
-import main.Utilities;
 import tools.Animation;
 import tools.ImageLibrary;
+import tools.Utilities;
 import tools.Vector2D;
 
 public class Player extends Entity {
@@ -15,7 +16,6 @@ public class Player extends Entity {
 	private static final long ANIMATION_DELAY = 100;
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
-	private boolean onGround = true;
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
@@ -48,43 +48,19 @@ public class Player extends Entity {
 	}
 
 	public void jump(){
-		if (!onGround) return;
+		if (!grounded) return;
 		movement = movement.add(JUMP_VECTOR);
+		// TODO what is wrong here? movement doesn't get updated
 	}
 
-	private boolean atTerminalVelocity(){
+	public boolean atTerminalVelocity(){
 		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
 	}
-
-	/**
-	 * Set true/false whether the player is touching a solid ground on which they may stand.
-	 * @param bool
-	 * @return
-	 */
-	public void setIsOnGround(boolean bool){
-		onGround = bool;
-	}
-
-	public void applyGravity(){
-
-
-		if (!onGround){
-
-			if (!atTerminalVelocity()){
-				movement = movement.add(Constants.GRAVITY_VECTOR);
-			}
-
-		}
-
-	}
-
-
-
 
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-		this.animation = type.getAnimationMoving(animation);
+		this.animation = type.checkAnimationState(animation);
 	}
 
 	private enum Type{
@@ -173,23 +149,36 @@ public class Player extends Entity {
 			}
 		}
 
-		public Animation getAnimationMoving(Animation animation){
+		public Animation checkAnimationState(Animation animation){
 			if (type == Type.CAT){
 				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
-				} else {
+				} else if (animation == dogAnimRightWalking){
 					return catAnimRightWalking;
+				} else if (animation == dogAnimLeftStatic){
+					return catAnimLeftStatic;
+				} else {
+					return catAnimRightStatic;
 				}
 			} else {
 				if (animation == catAnimLeftWalking){
 					return dogAnimLeftWalking;
-				} else {
+				} else if (animation == catAnimRightWalking){
 					return dogAnimRightWalking;
+				} else if (animation == catAnimLeftStatic){
+					return dogAnimLeftStatic;
+				} else {
+					return dogAnimRightStatic;
 				}
 			}
 		}
 
 
+	}
+
+	public void die() {
+		// TODO Auto-generated method stub
+		System.out.println("Dead");
 	}
 
 }

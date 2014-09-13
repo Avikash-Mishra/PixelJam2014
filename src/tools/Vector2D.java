@@ -1,9 +1,11 @@
 package tools;
 
+import main.Constants;
+
 public class Vector2D {
 
-	private float x;
-	private float y;
+	public float x;
+	public float y;
 
 	public Vector2D(float x_, float y_){
 		x = x_;
@@ -11,7 +13,9 @@ public class Vector2D {
 	}
 
 	public Vector2D add(Vector2D other){
-		return new Vector2D(x+other.x,y+other.y);
+		float x2 = x+other.x;
+		float y2 = y+other.y;
+		return new Vector2D(x2,y2);
 	}
 
 	public Vector2D sub(Vector2D other){
@@ -38,7 +42,9 @@ public class Vector2D {
 		return x == 0 && y == 0;
 	}
 
-
+	public boolean atTerminalVelocity(){
+		return y >= Constants.TERMINAL_VELOCITY.y;
+	}
 
 	/**
 	 * Return the vector with the same direction, but magnitude 1.

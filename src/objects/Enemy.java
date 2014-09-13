@@ -1,13 +1,16 @@
 package objects;
 
+
 import java.awt.Rectangle;
 import java.util.List;
 
 import main.Constants;
-import main.Utilities;
+import tools.Utilities;
 import tools.Vector2D;
 
-public class Enemy extends Entity{
+
+
+public class Enemy extends Entity implements Danger{
 	protected  int STEP_SIZE;
 	protected  static long ANIMATION_DELAY;
 	protected int initX;
