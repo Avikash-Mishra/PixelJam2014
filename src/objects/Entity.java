@@ -16,9 +16,14 @@ import tools.Vector2D;
 public abstract class Entity extends GameObject{
 
 	protected Rectangle ground; // the ground below player, or null if they're in the air
+	protected Vector2D movement = new Vector2D(0,0);
 
 	public Entity(int x, int y){
 		super(x,y);
+	}
+
+	public Vector2D getMovementVector(){
+		return new Vector2D(movement.x(),movement.y());
 	}
 
 }
