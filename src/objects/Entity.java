@@ -32,6 +32,7 @@ public abstract class Entity extends GameObject{
 	}
 
 	public void jump(){
+		if (!grounded) return;
 		movement = movement.add(JUMP_VECTOR);
 	}
 
@@ -49,29 +50,34 @@ public abstract class Entity extends GameObject{
 
 		// move
 		if (movement.isZeroVector()) return;
+		Vector2D start = getPosition();
 		Vector2D goal = position.add(movement);
 		float distBetween = Utilities.distance(position,goal);
 		float distTravelled = 0;
-		float distTravelledY = 0;
 		Vector2D pos = getPosition();
 		Vector2D unit = movement.unitVector();
 
+		// repeatedly add the unit vector onto the position until you either
+		// move down the entire length of the movement vector or you collide
+		// wit something
 		while (
 			distTravelled < distBetween // check you haven't travelled too far
 			&&
 			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
-		{
+		{			
 			pos=pos.add(unit);
 			distTravelled++;
-			distTravelledY+=unit.y();
 		}
 		position = pos;
-
-		if (distTravelledY == 0){
-			movement.setY(0);
+	
+		// if you didn't move vertically, then you must have either
+		// hit the ground or you're at the maximum of the jumping parabola
+		// if you hit the ground, set velocity_y <-- 0
+		if ((int)position.y() == (int)start.y()){
+			if (grounded){
+				movement.setY(0);
+			}
 		}
-
-		System.out.println(movement);
 		
 	}
 

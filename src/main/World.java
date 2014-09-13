@@ -91,7 +91,6 @@ public class World extends Thread{
 
 				synchronized (key) {
 					// check if the player should move
-					player.applyGravity(map);
 					player.step(map);
 
 					for(Tile t : getTileCollisions(player)){
