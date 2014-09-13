@@ -5,10 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Set;
+import java.awt.image.BufferedImage;
 
-import objects.Player;
 import main.World;
+import objects.Player;
+import tools.ImageLibrary;
 
 
 /**
@@ -30,6 +31,7 @@ public class GameCanvas extends Canvas {
 	 * Constructs a new GameCanvas with the given width and height
 	 * @param width The Width of the canvas
 	 * @param height The Height of the canvas
+
 	 */
 	public GameCanvas(int width, int height, GameFrame parent, World world, Player player) {
 		super(parent.getWidth(), parent.getHeight());
