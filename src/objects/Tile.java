@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import tools.Animation;
 import main.Constants;
 
-public abstract class Tile {
+public abstract class Tile extends GameObject{
 	private Animation animation;
 	private int x;
 	private int y;

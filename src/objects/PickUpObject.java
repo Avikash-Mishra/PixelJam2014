@@ -7,7 +7,7 @@ import main.Constants;
 import tools.Animation;
 import entity.Player;
 
-public abstract class PickUpObject{
+public abstract class PickUpObject extends GameObject{
 	protected int amount;
 
 	private Animation animation;
