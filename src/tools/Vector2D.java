@@ -26,6 +26,10 @@ public class Vector2D {
 		y = y_;
 	}
 
+	public Vector2D unitVector(){
+		return new Vector2D(x/x,y/y);
+	}
+
 	public int x(){
 		return x;
 	}

@@ -1,5 +1,6 @@
 package objects;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import main.Constants;
@@ -15,8 +16,10 @@ public class Player extends Entity {
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
 	private Vector2D movement;
-	public int points = 0;
-	public int energy = 0;
+	private boolean onGround = true;
+
+	public int points = Constants.STARTING_POINTS;
+	public int energy = Constants.STARTING_ENERGY;
 
 	private static Animation animLeftWalking;
 	private static Animation animLeftStatic;
@@ -68,45 +71,40 @@ public class Player extends Entity {
 	}
 
 	public void jump(){
-		if (inAir()) return;
-		System.out.println("yallah");
+		if (!onGround) return;
 		movement = movement.add(JUMP_VECTOR);
 	}
 
-	/**
-	 * Return true if player is in the air (i.e.: movement vector's y component =/= 0)
-	 * @return boolean
-	 */
-	private boolean inAir(){
-		return movement.y() != 0;
-	}
-
-	/**
-	 * Return true if player is falling (i.e.: movement vector has -ve y component)
-	 * @return boolean
-	 */
-	private boolean falling(){
-		return movement.y() > 0;
-	}
-
 	private boolean atTerminalVelocity(){
-		return movement.y() <= Constants.TERMINAL_VELOCITY.y();
+		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
+	}
+
+	/**
+	 * Set true/false whether the player is touching a solid ground on which they may stand.
+	 * @param bool
+	 * @return
+	 */
+	public void setIsOnGround(boolean bool){
+		onGround = bool;
 	}
 
 	public void applyGravity(){
-		if (falling() && !atTerminalVelocity()){
-			movement = movement.add(Constants.GRAVITY_VECTOR);
+
+
+		if (!onGround){
+
+			if (!atTerminalVelocity()){
+				movement = movement.add(Constants.GRAVITY_VECTOR);
+			}
+
 		}
-		else if (inAir()){
-			System.out.println("in air");
-			movement = movement.add(Constants.GRAVITY_VECTOR);
-		}
-		System.out.println(movement);
+
 	}
 
 	public void transform(){
 		System.out.println("transform");
 	}
+
 	public void updatePosition(){
 		this.position = position.add(movement);
 	}

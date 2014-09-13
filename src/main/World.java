@@ -19,12 +19,15 @@ public class World extends Thread{
 	private List<Tile> map;
 	private List<Entity> entities;
 	private List<PickUpObject> pickups;
+
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/10l;
+	private static final long UPDATE_INTERVAL = SECOND/30l;
 
 	public int mapWidth=0, mapHeight=0;
+
+	public Object key = new Object();
 
 
 
@@ -77,22 +80,19 @@ public class World extends Thread{
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
 
-				// check if the player should move
-				player.applyGravity();
-				player.updatePosition();
-				List<Tile> tiles = getTileCollisions(player);
-				if (!tiles.isEmpty()){
-					player.revertPosition();
+				synchronized (key) {
+					// check if the player should move
+					boolean onGround = isOnGround(player);
+					player.setIsOnGround(onGround);
+					player.applyGravity();
+					player.updatePosition();
+					List<Tile> tiles = getTileCollisions(player);
+					if (!tiles.isEmpty()){
+						player.revertPosition();
+					}
+
+					previousUpdate = System.currentTimeMillis();
 				}
-
-				previousUpdate = System.currentTimeMillis();
-
-
-				//List<Tile> tiles = getTileCollisions(player);
-				//if (!tiles.isEmpty()){
-				//	player.revertPosition();
-				//}
-
 			}
 			else{
 				try {
@@ -107,6 +107,16 @@ public class World extends Thread{
 
 
 	}
+
+	private boolean isOnGround(Entity e){
+		Rectangle r = new Rectangle(e.getX(),e.getY()+1,Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
+		for (Tile tile : map){
+			if (r.intersects(tile.boundingBox())) return true;
+		}
+		return false;
+	}
+
+
 
 	private List<Tile> getTileCollisions(GameObject object){
 		List<Tile> collisions = new ArrayList<>();
