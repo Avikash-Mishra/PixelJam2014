@@ -1,13 +1,9 @@
 package objects;
 
-import gui.Camera;
-
-import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
 import main.Constants;
-import tools.Animation;
 import tools.Utilities;
 import tools.Vector2D;
 
@@ -17,6 +13,7 @@ import tools.Vector2D;
  * @author Mary
  */
 public abstract class Entity extends GameObject{
+
 
 	protected boolean grounded = true;
 	protected Vector2D movement = new Vector2D(0,0);
