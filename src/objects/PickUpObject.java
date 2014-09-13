@@ -11,8 +11,6 @@ public abstract class PickUpObject extends GameObject{
 	protected int amount;
 
 	private Animation animation;
-	private int x;
-	private int y;
 	private boolean canPickUp = true;
 
 
@@ -26,7 +24,7 @@ public abstract class PickUpObject extends GameObject{
 	public void draw(Graphics g, Camera cam) {
 		BufferedImage image = animation.getImage();
 		if(canPickUp){
-			g.drawImage(image , x-cam.getX(), y-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+			g.drawImage(image , getX()-cam.getX(), getY()-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
 		}
 	}
 
