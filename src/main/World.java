@@ -88,8 +88,7 @@ public class World extends Thread{
 
 				synchronized (key) {
 					// check if the player should move
-
-
+					player.applyGravity();
 					player.step(map);
 
 					List<PickUpObject> pickupObjects = getPickUpCollisions(player);

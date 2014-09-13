@@ -52,7 +52,7 @@ public class Player extends Entity {
 		movement = movement.add(JUMP_VECTOR);
 	}
 
-	private boolean atTerminalVelocity(){
+	public boolean atTerminalVelocity(){
 		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
 	}
 
@@ -66,7 +66,6 @@ public class Player extends Entity {
 	}
 
 	public void applyGravity(){
-
 
 		if (!onGround){
 
@@ -177,14 +176,22 @@ public class Player extends Entity {
 			if (type == Type.CAT){
 				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
-				} else {
+				} else if (animation == dogAnimRightWalking){
 					return catAnimRightWalking;
+				} else if (animation == dogAnimLeftStatic){
+					return catAnimLeftStatic;
+				} else {
+					return catAnimRightStatic;
 				}
 			} else {
 				if (animation == catAnimLeftWalking){
 					return dogAnimLeftWalking;
-				} else {
+				} else if (animation == catAnimRightWalking){
 					return dogAnimRightWalking;
+				} else if (animation == catAnimLeftStatic){
+					return dogAnimLeftStatic;
+				} else {
+					return dogAnimRightStatic;
 				}
 			}
 		}
