@@ -61,7 +61,7 @@ public class World extends Thread{
 			}
 			else{
 				try {
-					Thread.sleep(4);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
