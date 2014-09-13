@@ -83,7 +83,7 @@ public class Player extends Entity {
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-		this.animation = type.getAnimationMoving(animation);
+		this.animation = type.checkAnimationState(animation);
 	}
 
 	private enum Type{
@@ -172,7 +172,7 @@ public class Player extends Entity {
 			}
 		}
 
-		public Animation getAnimationMoving(Animation animation){
+		public Animation checkAnimationState(Animation animation){
 			if (type == Type.CAT){
 				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
