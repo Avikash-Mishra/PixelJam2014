@@ -9,11 +9,15 @@ import entity.Player;
 import objects.PickUpObject;
 import objects.Tile;
 
-public class World {
+public class World extends Thread{
 	private List<Tile> map;
 	private List<Entity> entities;
 	private List<PickUpObject> pickups;
 	private Player player;
+
+	private static final long SECOND = 1000;
+	private static final long UPDATE_INTERVAL = SECOND/(long)(30);
+
 
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
 		this.map = map;
@@ -43,4 +47,29 @@ public class World {
 			//player.draw(g);
 		}
 	}
+
+	public void run(){
+
+		long previousUpdate = 0;
+		while (true){
+
+			long timeElapsed = System.currentTimeMillis() - previousUpdate;
+			if (timeElapsed > UPDATE_INTERVAL){
+				System.out.println("redraw");
+				player.update();
+				previousUpdate = System.currentTimeMillis();
+			}
+			else{
+				try {
+					Thread.sleep(4);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+	}
+
 }

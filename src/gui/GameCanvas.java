@@ -41,25 +41,8 @@ public class GameCanvas extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g){
-
-		long currentDraw = System.currentTimeMillis();
-
-		updateGameState();
-
 		world.draw(g);
-		player.draw(g);
-
-		lastRedraw = currentDraw;
-
 	}
-
-	/**
-	 * Updates the game state. Moves players, checks for collision, etc.
-	 */
-	private void updateGameState(){
-		player.update();
-	}
-
 
 	private class Listener implements KeyListener{
 
