@@ -19,7 +19,7 @@ import tools.Vector2D;
 public abstract class Entity extends GameObject{
 
 	private boolean grounded = true;
-	protected Vector2D movement = new Vector2D(0,0);
+	public Vector2D movement = new Vector2D(0,0);
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
 	public Entity(int x, int y){
@@ -69,36 +69,7 @@ public abstract class Entity extends GameObject{
 	public void jump(){
 		if (!grounded) return;
 		movement = movement.add(JUMP_VECTOR);
-		/**
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 * TODO what is wrong here? movement doesn't get updated
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 */
+		
 	}
 
 	public void applyGravity(List<Tile> nearby){
