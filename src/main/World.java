@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import objects.Danger;
 import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
@@ -94,6 +95,11 @@ public class World extends Thread{
 					player.updatePosition();
 					List<Tile> tiles = getTileCollisions(player);
 					if (!tiles.isEmpty()){
+						for(Tile t : tiles){
+							if(t instanceof Danger){
+								player.die();
+							}
+						}
 						player.revertPosition();
 					}
 

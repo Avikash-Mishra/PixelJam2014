@@ -193,4 +193,9 @@ public class Player extends Entity {
 		}
 	}
 
+	public void die() {
+		// TODO Auto-generated method stub
+		System.out.println("Dead");
+	}
+
 }

@@ -1,6 +1,6 @@
 package objects;
 
-public class Enemy extends Entity{
+public class Enemy extends Entity implements Danger{
 
 	public Enemy(int x, int y) {
 		super(x, y);
