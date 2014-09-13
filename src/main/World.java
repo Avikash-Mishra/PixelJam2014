@@ -10,11 +10,11 @@ import java.util.List;
 
 import objects.Enemy;
 import objects.Danger;
-
 import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
+import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
 import tools.Vector2D;
@@ -91,19 +91,21 @@ public class World extends Thread{
 
 				synchronized (key) {
 					// check if the player should move
-					player.applyGravity(map);
+					//player.applyGravity(map);
 					player.step(map);
 
 					for(Tile t : getTileCollisions(player)){
 						if(t instanceof Danger){
 							player.die();
 						}
+						
 					}
 
 					for(Entity e : getEntityCollisions(player)){
 						if(e instanceof Danger){
 							player.die();
 						}
+						
 					}
 
 

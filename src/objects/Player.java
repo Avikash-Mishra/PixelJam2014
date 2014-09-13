@@ -24,6 +24,7 @@ public class Player extends Entity {
 		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
 		transform.start();
 		this.animation = type.getAnimationStill(animation);
+		animation.start();
 		movement = new Vector2D(0,0);
 	}
 
