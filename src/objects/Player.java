@@ -17,10 +17,6 @@ public class Player extends Entity {
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 
-	private static Animation animLeftWalking;
-	private static Animation animLeftStatic;
-	private static Animation animRightStatic;
-	private static Animation animRightWalking;
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -55,9 +51,11 @@ public class Player extends Entity {
 		if (energy >= 0){
 			if (type == Type.CAT){
 				type = Type.DOG;
+
 			} else {
 				type = Type.CAT;
 			}
+
 		}
 		System.out.println("transform");
 	}
@@ -82,6 +80,7 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
+
 		static {
 			//Cat
 			catAnimLeftWalking = new Animation();
@@ -156,12 +155,6 @@ public class Player extends Entity {
 			}
 		}
 
-		public boolean rightWalking(Animation animation){
-			if (animation == catAnimRightWalking || animation == dogAnimRightWalking){
-				return true;
-			}
-			return false;
-		}
 	}
 
 }
