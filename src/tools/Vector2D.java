@@ -26,16 +26,16 @@ public class Vector2D {
 		y = y_;
 	}
 
+	public Vector2D unitVector(){
+		return new Vector2D(x/x,y/y);
+	}
+
 	public int x(){
 		return x;
 	}
 
 	public int y(){
 		return y;
-	}
-
-	public boolean isZeroVector(){
-		return x==0 && y==0;
 	}
 
 	public String toString(){

@@ -19,10 +19,11 @@ public class World extends Thread{
 	private List<Tile> map;
 	private List<Entity> entities;
 	private List<PickUpObject> pickups;
+
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/10l;
+	private static final long UPDATE_INTERVAL = SECOND/30l;
 
 	public int mapWidth=0, mapHeight=0;
 
@@ -75,25 +76,33 @@ public class World extends Thread{
 		long previousUpdate = 0;
 		while (true){
 
+
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
 
 				synchronized (key) {
 					// check if the player should move
+					boolean onGround = isOnGround(player);
+					player.setIsOnGround(onGround);
+					player.applyGravity();
 					player.updatePosition();
 					List<Tile> tiles = getTileCollisions(player);
 					if (!tiles.isEmpty()){
-						System.out.println("collided");
 						player.revertPosition();
 					}
 
-					previousUpdate = System.currentTimeMillis();
-					//List<Tile> tiles = getTileCollisions(player);
-					//if (!tiles.isEmpty()){
-					//	player.revertPosition();
-					//}
-				}
+					List<PickUpObject> pickupObjects = getPickUpCollisions(player);
+					if(!pickupObjects.isEmpty()){
+						for(PickUpObject p : pickupObjects){
+							System.out.println("Picked up object");
+							p.onCollision(player);
+							pickups.remove(p);
+						}
+					}
 
+
+					previousUpdate = System.currentTimeMillis();
+				}
 			}
 			else{
 				try {
@@ -108,6 +117,16 @@ public class World extends Thread{
 
 
 	}
+
+	private boolean isOnGround(Entity e){
+		Rectangle r = new Rectangle(e.getX(),e.getY()+1,Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
+		for (Tile tile : map){
+			if (r.intersects(tile.boundingBox())) return true;
+		}
+		return false;
+	}
+
+
 
 	private List<Tile> getTileCollisions(GameObject object){
 		List<Tile> collisions = new ArrayList<>();
@@ -133,7 +152,11 @@ public class World extends Thread{
 		return collisions;
 	}
 
-
+	private boolean isBelow(GameObject obj1, GameObject obj2){
+		Rectangle r1 = obj1.boundingBox();
+		Rectangle r2 = obj2.boundingBox();
+		return true;
+	}
 
 	/**
 	 * Returns true if the two given objects have overlapping bounding boxes.

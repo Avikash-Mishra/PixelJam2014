@@ -1,5 +1,6 @@
 package objects;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import main.Constants;
@@ -10,9 +11,10 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
+	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
 	private Vector2D movement;
-
+	private boolean onGround = true;
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
@@ -43,7 +45,34 @@ public class Player extends Entity {
 	}
 
 	public void jump(){
-		System.out.println("jumped");
+		if (!onGround) return;
+		movement = movement.add(JUMP_VECTOR);
+	}
+
+	private boolean atTerminalVelocity(){
+		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
+	}
+
+	/**
+	 * Set true/false whether the player is touching a solid ground on which they may stand.
+	 * @param bool
+	 * @return
+	 */
+	public void setIsOnGround(boolean bool){
+		onGround = bool;
+	}
+
+	public void applyGravity(){
+
+
+		if (!onGround){
+
+			if (!atTerminalVelocity()){
+				movement = movement.add(Constants.GRAVITY_VECTOR);
+			}
+
+		}
+
 	}
 
 	public void transform(){
