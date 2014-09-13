@@ -18,8 +18,8 @@ import tools.Vector2D;
  */
 public abstract class Entity extends GameObject{
 
-	public Vector2D movement = new Vector2D(0,0);
 	protected boolean grounded = true;
+	protected Vector2D movement = new Vector2D(0,0);
 
 	public Entity(int x, int y){
 		super(x,y);
@@ -29,7 +29,7 @@ public abstract class Entity extends GameObject{
 	 * Return a copy of this Entity's movement vector.
 	 * @return a Vector2D
 	 */
-	public Vector2D getMovementVector(){
+	public Vector2D getMovementVector(Vector2D movement){
 		return new Vector2D(movement.x(),movement.y());
 	}
 

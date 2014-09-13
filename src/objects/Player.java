@@ -24,7 +24,7 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		this.animation = type.getAnimationStill(animation);
-		//movement = new Vector2D(0,0);
+		movement = new Vector2D(0,0);
 	}
 
 	public void move(int keycode){
@@ -49,16 +49,18 @@ public class Player extends Entity {
 
 	public void jump(){
 		if (!grounded) return;
+		movement = movement.add(JUMP_VECTOR);
+		// TODO what is wrong here? movement doesn't get updated
+	}
 
-		// what the fuck is going on here?
-		movement.y = -10f;
-
+	public boolean atTerminalVelocity(){
+		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
 	}
 
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-		this.animation = type.getAnimationMoving(animation);
+		this.animation = type.checkAnimationState(animation);
 	}
 
 	private enum Type{
@@ -147,23 +149,36 @@ public class Player extends Entity {
 			}
 		}
 
-		public Animation getAnimationMoving(Animation animation){
+		public Animation checkAnimationState(Animation animation){
 			if (type == Type.CAT){
 				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
-				} else {
+				} else if (animation == dogAnimRightWalking){
 					return catAnimRightWalking;
+				} else if (animation == dogAnimLeftStatic){
+					return catAnimLeftStatic;
+				} else {
+					return catAnimRightStatic;
 				}
 			} else {
 				if (animation == catAnimLeftWalking){
 					return dogAnimLeftWalking;
-				} else {
+				} else if (animation == catAnimRightWalking){
 					return dogAnimRightWalking;
+				} else if (animation == catAnimLeftStatic){
+					return dogAnimLeftStatic;
+				} else {
+					return dogAnimRightStatic;
 				}
 			}
 		}
 
 
+	}
+
+	public void die() {
+		// TODO Auto-generated method stub
+		System.out.println("Dead");
 	}
 
 }
