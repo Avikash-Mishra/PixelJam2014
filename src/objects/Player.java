@@ -2,6 +2,7 @@ package objects;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import main.Constants;
@@ -15,7 +16,6 @@ public class Player extends Entity {
 	private static final long ANIMATION_DELAY = 100;
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
-	private boolean onGround = true;
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
@@ -24,7 +24,7 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		this.animation = type.getAnimationStill(animation);
-		movement = new Vector2D(0,0);
+		//movement = new Vector2D(0,0);
 	}
 
 	public void move(int keycode){
@@ -48,38 +48,12 @@ public class Player extends Entity {
 	}
 
 	public void jump(){
-		if (!onGround) return;
-		movement = movement.add(JUMP_VECTOR);
-	}
+		if (!grounded) return;
 
-	private boolean atTerminalVelocity(){
-		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
-	}
-
-	/**
-	 * Set true/false whether the player is touching a solid ground on which they may stand.
-	 * @param bool
-	 * @return
-	 */
-	public void setIsOnGround(boolean bool){
-		onGround = bool;
-	}
-
-	public void applyGravity(){
-
-
-		if (!onGround){
-
-			if (!atTerminalVelocity()){
-				movement = movement.add(Constants.GRAVITY_VECTOR);
-			}
-
-		}
+		// what the fuck is going on here?
+		movement.y = -10f;
 
 	}
-
-
-
 
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;

@@ -18,8 +18,8 @@ import tools.Vector2D;
  */
 public abstract class Entity extends GameObject{
 
-	protected Rectangle ground; // the ground below player, or null if they're in the air
-	protected Vector2D movement = new Vector2D(0,0);
+	public Vector2D movement = new Vector2D(0,0);
+	protected boolean grounded = true;
 
 	public Entity(int x, int y){
 		super(x,y);
@@ -39,12 +39,18 @@ public abstract class Entity extends GameObject{
 	 */
 	public void step(List<Tile> tiles){
 
+		// get nearby tiles
+		List<Tile> nearby = Utilities.getNearby(position, tiles);
+
+		// apply gravity
+		applyGravity(nearby);
+
+		// move
 		if (movement.isZeroVector()) return;
 		Vector2D goal = position.add(movement);
 		float distBetween = Utilities.distance(position,goal);
 		float distTravelled = 0;
 		Vector2D pos = getPosition();
-		List<Tile> nearby = Utilities.getNearby(pos, tiles);
 		Vector2D unit = movement.unitVector();
 
 		while (
@@ -56,6 +62,33 @@ public abstract class Entity extends GameObject{
 			distTravelled++;
 		}
 		position = pos;
+
+	}
+
+	public void applyGravity(List<Tile> nearby){
+
+		// check the rectangle below your position that is PLAYER_WIDTH wide and 1 pixel high
+		Rectangle r = new Rectangle(getX(),getY()+Constants.PLAYER_HEIGHT+1,Constants.PLAYER_WIDTH,1);
+		boolean onGround = false;
+		for (Tile tile : nearby){
+			Rectangle bounding = tile.boundingBox();
+			if (r.intersects(bounding)){
+				onGround = true;
+				break;
+			}
+		}
+
+		if (onGround != grounded){
+			grounded = onGround;
+			System.out.println ( (grounded) ? "on ground" : "in air" );
+		}
+
+		if (onGround){
+			movement.setY(0);
+		}
+		else if (!movement.atTerminalVelocity()){
+			movement = movement.add(Constants.GRAVITY_VECTOR);
+		}
 
 	}
 

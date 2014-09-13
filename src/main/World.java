@@ -89,7 +89,7 @@ public class World extends Thread{
 				synchronized (key) {
 					// check if the player should move
 
-
+					player.applyGravity(map);
 					player.step(map);
 
 					List<PickUpObject> pickupObjects = getPickUpCollisions(player);
@@ -115,14 +115,6 @@ public class World extends Thread{
 		}
 
 
-	}
-
-	private boolean isOnGround(Entity e){
-		Rectangle r = new Rectangle(e.getX(),e.getY()+1,Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
-		for (Tile tile : map){
-			if (r.intersects(tile.boundingBox())) return true;
-		}
-		return false;
 	}
 
 	private List<PickUpObject> getPickUpCollisions(GameObject object){
