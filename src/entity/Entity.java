@@ -4,17 +4,17 @@ import gui.Camera;
 
 import java.awt.Graphics;
 
-import objects.Tile;
-import tools.Vector2D;
 import main.Constants;
+import objects.GameObject;
 import tools.Animation;
+import tools.Vector2D;
 
 /**
  * Will contain things like collision detection, drawing etc.
  * @author Mary
  */
-public abstract class Entity{
-	protected Animation image;
+public abstract class Entity extends GameObject{
+	protected Animation animation;
 	protected Vector2D position;
 
 	public Entity(int x, int y){
@@ -24,7 +24,8 @@ public abstract class Entity{
 
 	public void draw(Graphics g, Camera cam) {
 		System.out.println(getX() + "," + getY());
-		g.drawImage(image.getImage() , getX() - cam.getX(), getY() - cam.getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
+		g.drawImage(animation.getImage() , getX() - cam.getX(), getY() - cam.getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
+
 	}
 
 	public int getX(){

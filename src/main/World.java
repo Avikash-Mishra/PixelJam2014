@@ -18,9 +18,10 @@ public class World extends Thread{
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/(long)(30);
+	private static final long UPDATE_INTERVAL = SECOND/(long)(10);
 
 	public int mapWidth=0, mapHeight=0;
+
 
 
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
