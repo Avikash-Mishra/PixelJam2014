@@ -117,7 +117,6 @@ public class World extends Thread{
 
 	}
 
-
 	private boolean isOnGround(Entity e){
 		Rectangle r = new Rectangle(e.getX(),e.getY()+1,Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
 		for (Tile tile : map){
@@ -126,34 +125,12 @@ public class World extends Thread{
 		return false;
 	}
 
-	private List<Tile> getTileCollisions(GameObject object){
-		List<Tile> collisions = new ArrayList<>();
-		for (Tile tile : map){
-			if (overlappingBoundingBox(object,tile)) collisions.add(tile);
-		}
-		return collisions;
-	}
-
-	private List<Entity> getEntityCollisions(GameObject object){
-		List<Entity> collisions = new ArrayList<>();
-		for (Entity entity : entities){
-			if (overlappingBoundingBox(object,entity)) collisions.add(entity);
-		}
-		return collisions;
-	}
-
 	private List<PickUpObject> getPickUpCollisions(GameObject object){
 		List<PickUpObject> collisions = new ArrayList<>();
 		for (PickUpObject pickup : pickups){
 			if (overlappingBoundingBox(object,pickup)) collisions.add(pickup);
 		}
 		return collisions;
-	}
-
-	private boolean isBelow(GameObject obj1, GameObject obj2){
-		Rectangle r1 = obj1.boundingBox();
-		Rectangle r2 = obj2.boundingBox();
-		return true;
 	}
 
 	/**
