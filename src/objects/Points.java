@@ -22,7 +22,11 @@ public class Points extends PickUpObject {
 
 	public static Points newPoints(int x, int y, int amount){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("pointBubble1Sprite.png"), 0);
+		anim.addFrame(ImageLibrary.get("pointBubble1Sprite.png"), 250);
+		anim.addFrame(ImageLibrary.get("pointBubble2Sprite.png"), 250);
+		anim.addFrame(ImageLibrary.get("pointBubble3Sprite.png"), 250);
+		anim.addFrame(ImageLibrary.get("pointBubble4Sprite.png"), 250);
+		anim.start();
 		return new Points(anim,x,y, amount);
 	}
 

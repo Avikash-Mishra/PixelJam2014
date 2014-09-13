@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objects.GameObject;
+import objects.River;
 
 public class Utilities {
 
@@ -51,7 +52,10 @@ public class Utilities {
 	 */
 	public static boolean colliding(Rectangle rect, List<? extends GameObject> list){
 		for (GameObject thing : list){
-			if (rect.intersects(thing.boundingBox())) return true;
+			//Touching object check - Fall through water
+			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){ 
+				return true; 
+			}
 		}
 		return false;
 	}

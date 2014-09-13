@@ -18,7 +18,7 @@ public abstract class Entity extends GameObject{
 	protected boolean grounded = true;
 	protected Vector2D movement = new Vector2D(0,0);
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
-	
+
 	public Entity(int x, int y){
 		super(x,y);
 	}
@@ -61,6 +61,7 @@ public abstract class Entity extends GameObject{
 		// move down the entire length of the movement vector or you collide
 		// wit something
 		while (
+				
 			distTravelled < distBetween // check you haven't travelled too far
 			&&
 			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
@@ -88,8 +89,15 @@ public abstract class Entity extends GameObject{
 		boolean onGround = false;
 		for (Tile tile : nearby){
 			Rectangle bounding = tile.boundingBox();
+			
 			if (r.intersects(bounding)){
+				//Fall through water?
+				if (tile instanceof River){
+					onGround = false;
+					break;
+				}
 				onGround = true;
+				
 				break;
 			}
 		}
@@ -99,8 +107,7 @@ public abstract class Entity extends GameObject{
 		if (!grounded && !movement.atTerminalVelocity()){
 			movement = movement.add(Constants.GRAVITY_VECTOR);
 		}
-		
-		
+
 	}
 
 	public boolean on(int x, int y){
