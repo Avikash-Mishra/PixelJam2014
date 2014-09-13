@@ -31,6 +31,7 @@ public class GameCanvas extends Canvas {
 	 * Constructs a new GameCanvas with the given width and height
 	 * @param width The Width of the canvas
 	 * @param height The Height of the canvas
+
 	 */
 	public GameCanvas(int width, int height, GameFrame parent, World world, Player player) {
 		super(parent.getWidth(), parent.getHeight());
