@@ -50,7 +50,7 @@ public class GameCanvas extends Canvas {
 			Dimension d = new Dimension(this.getWidth(),this.getHeight());
 			cam.updateCameraPos(player, world, d);
 			world.draw(g,d,cam);
-			hud.draw(g, d.getWidth(), d.getHeight());
+			hud.draw(g, player, d.getWidth(), d.getHeight());
 		}
 		this.repaint();
 	}

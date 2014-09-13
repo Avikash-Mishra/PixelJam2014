@@ -13,6 +13,7 @@ public class Constants {
 	public static final String ASSETS = "assets"+ File.separatorChar;
 	public static final String LEVEL_FILENAME = ASSETS + "map_Test.txt";
 	public static final int STARTING_ENERGY = 0;
+	public static final int MAX_ENERGY = 100;
 	public static final int STARTING_POINTS = 0;
 	public static final int PLAYER_WIDTH = 32;
 	public static final int PLAYER_HEIGHT = 32;
