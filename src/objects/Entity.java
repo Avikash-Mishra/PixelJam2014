@@ -55,6 +55,7 @@ public abstract class Entity extends GameObject{
 		Vector2D goal = position.add(movement);
 		float distBetween = Utilities.distance(position,goal);
 		float distTravelled = 0;
+		float distTravelledY = 0;
 		Vector2D pos = getPosition();
 		Vector2D unit = movement.unitVector();
 
@@ -65,9 +66,16 @@ public abstract class Entity extends GameObject{
 		{
 			pos=pos.add(unit);
 			distTravelled++;
+			distTravelledY+=unit.y();
 		}
 		position = pos;
 
+		if (distTravelledY == 0){
+			movement.setY(0);
+		}
+
+		System.out.println(movement);
+		
 	}
 
 	public void applyGravity(List<Tile> nearby){
@@ -84,9 +92,11 @@ public abstract class Entity extends GameObject{
 		}
 
 		grounded = onGround;
+
 		if (!grounded && !movement.atTerminalVelocity()){
 			movement = movement.add(Constants.GRAVITY_VECTOR);
 		}
+		
 		
 	}
 
