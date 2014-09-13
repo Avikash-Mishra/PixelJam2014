@@ -32,8 +32,11 @@ public abstract class GameObject {
 
 	public void draw(Graphics g, Camera cam) {
 		g.drawImage(animation.getImage() , getX() - cam.getX(), getY() - cam.getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
+
+		/* draws bounding boxes
 		g.setColor(Color.RED);
 		g.drawRect(getX()-cam.getX(),getY()-cam.getY(),Constants.TILE_WIDTH,Constants.TILE_HEIGHT);
+		*/
 	}
 
 	public int getX(){
