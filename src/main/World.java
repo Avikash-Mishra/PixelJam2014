@@ -26,6 +26,8 @@ public class World extends Thread{
 
 	public int mapWidth=0, mapHeight=0;
 
+	public Object key = new Object();
+
 
 
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
@@ -76,20 +78,21 @@ public class World extends Thread{
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
 
-				// check if the player should move
-				player.updatePosition();
-				List<Tile> tiles = getTileCollisions(player);
-				if (!tiles.isEmpty()){
-					System.out.println("collided");
-					player.revertPosition();
+				synchronized (key) {
+					// check if the player should move
+					player.updatePosition();
+					List<Tile> tiles = getTileCollisions(player);
+					if (!tiles.isEmpty()){
+						System.out.println("collided");
+						player.revertPosition();
+					}
+
+					previousUpdate = System.currentTimeMillis();
+					//List<Tile> tiles = getTileCollisions(player);
+					//if (!tiles.isEmpty()){
+					//	player.revertPosition();
+					//}
 				}
-
-
-				previousUpdate = System.currentTimeMillis();
-				//List<Tile> tiles = getTileCollisions(player);
-				//if (!tiles.isEmpty()){
-				//	player.revertPosition();
-				//}
 
 			}
 			else{
