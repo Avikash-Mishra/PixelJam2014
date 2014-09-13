@@ -10,7 +10,8 @@ import tools.ImageLibrary;
 public class River extends Tile{
 
 	protected River(Animation anim, int x, int y) {
-		super(anim, x, y);
+		super(x,y);
+		this.animation = anim;
 	}
 
 	public static River newRiver(int x, int y){

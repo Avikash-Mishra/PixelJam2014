@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.List;
 
+import objects.Entity;
 import objects.PickUpObject;
+import objects.Player;
 import objects.Tile;
-import entity.Entity;
-import entity.Player;
 import gui.Camera;
 
 public class World extends Thread{

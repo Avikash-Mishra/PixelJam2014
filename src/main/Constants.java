@@ -14,7 +14,8 @@ public class Constants {
 	public static final String LEVEL_FILENAME = ASSETS + "map_Test.txt";
 	public static final int STARTING_ENERGY = 0;
 	public static final int STARTING_POINTS = 0;
-
+	public static final int PLAYER_WIDTH = 32;
+	public static final int PLAYER_HEIGHT = 32;
 
 	public static final Vector2D GRAVITY_VECTOR = new Vector2D(0,-2);
 

@@ -1,13 +1,13 @@
 package main;
 
-import entity.Entity;
-import entity.Player;
 import gui.GameFrame;
 
 import java.io.IOException;
 import java.util.List;
 
+import objects.Entity;
 import objects.PickUpObject;
+import objects.Player;
 import objects.Tile;
 
 public class Main {
