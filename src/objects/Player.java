@@ -14,7 +14,6 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
@@ -47,11 +46,6 @@ public class Player extends Entity {
 		}
 	}
 
-	public void jump(){
-		if (!grounded) return;
-		movement = movement.add(JUMP_VECTOR);
-		// TODO what is wrong here? movement doesn't get updated
-	}
 
 	public boolean atTerminalVelocity(){
 		return movement.y() >= Constants.TERMINAL_VELOCITY.y();
