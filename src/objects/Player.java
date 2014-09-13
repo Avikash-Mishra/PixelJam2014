@@ -49,12 +49,10 @@ public class Player extends Entity {
 
 	public void move(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
-			System.out.println("left");
 			movement.setX(-STEP_SIZE);
 			this.animation = animLeftWalking;
 		}
 		else if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
-			System.out.println("right");
 			movement.setX(STEP_SIZE);
 			this.animation = animRightWalking;
 		}
@@ -75,8 +73,12 @@ public class Player extends Entity {
 		System.out.println("transform");
 	}
 
-	public void update(){
+	public void updatePosition(){
 		this.position = position.add(movement);
+	}
+
+	public void revertPosition(){
+		this.position = position.sub(movement);
 	}
 
 }

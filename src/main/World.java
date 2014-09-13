@@ -3,12 +3,16 @@ package main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import objects.Entity;
+import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
 import objects.Tile;
+import tools.Vector2D;
 import gui.Camera;
 
 public class World extends Thread{
@@ -18,7 +22,7 @@ public class World extends Thread{
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/(long)(10);
+	private static final long UPDATE_INTERVAL = SECOND/10l;
 
 	public int mapWidth=0, mapHeight=0;
 
@@ -62,7 +66,6 @@ public class World extends Thread{
 
 	private void drawBackground(Graphics g, Dimension d){
 		g.setColor(Color.blue);
-		System.out.println(d);
 		g.fillRect(0,0,d.width,d.height);
 	}
 
@@ -72,8 +75,22 @@ public class World extends Thread{
 
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
-				player.update();
+
+				// check if the player should move
+				player.updatePosition();
+				List<Tile> tiles = getTileCollisions(player);
+				if (!tiles.isEmpty()){
+					System.out.println("collided");
+					player.revertPosition();
+				}
+
+
 				previousUpdate = System.currentTimeMillis();
+				//List<Tile> tiles = getTileCollisions(player);
+				//if (!tiles.isEmpty()){
+				//	player.revertPosition();
+				//}
+
 			}
 			else{
 				try {
@@ -89,4 +106,39 @@ public class World extends Thread{
 
 	}
 
+	private List<Tile> getTileCollisions(GameObject object){
+		List<Tile> collisions = new ArrayList<>();
+		for (Tile tile : map){
+			if (overlappingBoundingBox(object,tile)) collisions.add(tile);
+		}
+		return collisions;
+	}
+
+	private List<Entity> getEntityCollisions(GameObject object){
+		List<Entity> collisions = new ArrayList<>();
+		for (Entity entity : entities){
+			if (overlappingBoundingBox(object,entity)) collisions.add(entity);
+		}
+		return collisions;
+	}
+
+	private List<PickUpObject> getPickUpCollisions(GameObject object){
+		List<PickUpObject> collisions = new ArrayList<>();
+		for (PickUpObject pickup : pickups){
+			if (overlappingBoundingBox(object,pickup)) collisions.add(pickup);
+		}
+		return collisions;
+	}
+
+
+
+	/**
+	 * Returns true if the two given objects have overlapping bounding boxes.
+	 * @return boolean
+	 */
+	public static boolean overlappingBoundingBox(GameObject obj1, GameObject obj2){
+		Rectangle r1 = obj1.boundingBox();
+		Rectangle r2 = obj2.boundingBox();
+		return r1.intersects(r2);
+	}
 }
