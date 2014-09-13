@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
+import objects.CatEnemy;
+import objects.DogEnemy;
 import objects.Energy;
 import objects.Entity;
 import objects.Lever;
@@ -39,6 +41,8 @@ public class Parser {
 	private static final char LEVER = 'H';
 	private static final char PLAYER = 'P';
 	private static final char POINTS = 'N';
+	private static final char CATENEMY = 'A';
+	private static final char DOGENEMY = 'B';
 
 
 	private static int col = 0;
@@ -131,6 +135,14 @@ public class Parser {
 					Points points = Points.newPoints(col, row, 10);
 					pickups.add(points);
 					break;
+				case CATENEMY:
+						CatEnemy catEnemy = new CatEnemy(col, row);
+						entities.add(catEnemy);
+						break;
+				case DOGENEMY:
+						DogEnemy dogEnemy = new DogEnemy(col, row);
+						entities.add(dogEnemy);
+						break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
 				}

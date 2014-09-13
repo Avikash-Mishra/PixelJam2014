@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import objects.Enemy;
 import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
@@ -97,6 +98,12 @@ public class World extends Thread{
 						for(PickUpObject p : pickupObjects){
 							p.onCollision(player);
 							pickups.remove(p);
+						}
+					}
+
+					for(Entity e : this.entities){
+						if(e instanceof Enemy){
+							e.step(map);
 						}
 					}
 
