@@ -130,6 +130,7 @@ public class Parser {
 				case POINTS:
 					Points points = Points.newPoints(col, row, 10);
 					pickups.add(points);
+					break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());
 				}
