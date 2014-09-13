@@ -40,7 +40,7 @@ public class World {
 
 		//Draw Player
 		if (player != null){
-			//player.draw(g);
+			player.draw(g);
 		}
 	}
 }
