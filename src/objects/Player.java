@@ -1,14 +1,10 @@
 package objects;
 
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.Field;
-import java.util.List;
 
 import main.Constants;
 import tools.Animation;
 import tools.ImageLibrary;
-import tools.Utilities;
 import tools.Vector2D;
 
 public class Player extends Entity {
@@ -18,9 +14,15 @@ public class Player extends Entity {
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
+	
+	public static Animation transform = new Animation();
+	public static boolean transforming = false;
+	public static long transTime;
 
 	public Player(int x, int y) {
 		super(x, y);
+		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
+		transform.start();
 		this.animation = type.getAnimationStill(animation);
 		animation.start();
 		movement = new Vector2D(0,0);
@@ -52,7 +54,19 @@ public class Player extends Entity {
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-		this.animation = type.checkAnimationState(animation);
+		this.animation = transform;
+		((Thread) new Transform()).start();
+	}
+	
+	private class Transform extends Thread{
+
+		@Override
+		public void run() {
+			long time = System.currentTimeMillis();
+			while(System.currentTimeMillis()-time<250){}
+			animation = type.checkAnimationState(animation);
+		}
+		
 	}
 
 	private enum Type{
@@ -109,6 +123,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationLeft(){
+			
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
@@ -117,6 +132,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationRight(){
+			
 			if (type == Type.CAT){
 				return catAnimRightWalking;
 			} else {
@@ -125,6 +141,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationStill(Animation animation){
+			
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
