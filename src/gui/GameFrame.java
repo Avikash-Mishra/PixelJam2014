@@ -33,9 +33,7 @@ public class GameFrame extends JFrame {
 
 	public GameFrame(List<Entity> entities, List<Tile> tiles,
 			List<PickUpObject> pickups, Player player) {
-		super();
-
-		
+		super();		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// Set JFrame size to screen width and height
@@ -43,49 +41,14 @@ public class GameFrame extends JFrame {
 		this.setSize(tk.getScreenSize());
 		this.setResizable(true);
 
-		World world = new World(entities, tiles, pickups, player);
+		final World world = new World(entities, tiles, pickups, player);
 		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(), this,
 				world, player);
-
-		// Add Canvas objects to JFrame
-		this.add(gameCanvas);
-		
-
-		// Setup canvas defaults
 		gameCanvas.setBackground(Color.WHITE);
-
-		
-		changeToMenu();
-		this.setVisible(true);
-		
-		
-			menu.getPlayButton().addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					// if pressed
-					changeToGame();
-
-				}
-			});
-
-			
-		
+		this.add(gameCanvas);
 		gameCanvas.setFocusable(true);
-
+		this.setVisible(true);
 		world.start();
-
 	}
 
-	public void changeToMenu() {
-		menu = new Menu();
-		this.add(menu);
-		gameCanvas.setVisible(false);
-	}
-
-	public void changeToGame() {
-		
-		gameCanvas.setVisible(true);
-		menu.setVisible(false);
-	}
 }
