@@ -1,11 +1,14 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.Set;
 
 import entity.Entity;
 import entity.Player;
+import gui.GameCanvas;
 import objects.PickUpObject;
 import objects.Tile;
 
@@ -26,9 +29,9 @@ public class World extends Thread{
 		this.player = player;
 	}
 
-
-	public void draw(Graphics g){
-
+	public void draw(Graphics g, Dimension d){
+		//Draw background
+		drawBackground(g, d);
 		//Draw the world
 		for (Tile items: map){
 			items.draw(g);
@@ -48,14 +51,18 @@ public class World extends Thread{
 		}
 	}
 
-	public void run(){
+	private void drawBackground(Graphics g, Dimension d){
+		g.setColor(Color.blue);
+		System.out.println(d);
+		g.fillRect(0,0,d.width,d.height);
+	}
 
+	public void run(){
 		long previousUpdate = 0;
 		while (true){
 
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
-				System.out.println("redraw");
 				player.update();
 				previousUpdate = System.currentTimeMillis();
 			}
@@ -69,6 +76,7 @@ public class World extends Thread{
 			}
 
 		}
+
 
 	}
 

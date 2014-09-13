@@ -14,19 +14,16 @@ import tools.Animation;
  */
 public abstract class Entity{
 	protected Animation image;
-	private int x;
-	private int y;
 	protected Vector2D position;
 
 	public Entity(int x, int y){
 		position = new Vector2D(x*Constants.TILE_WIDTH,y*Constants.TILE_WIDTH);
-		this.x = x * Constants.TILE_WIDTH;
-		this.y = y * Constants.TILE_HEIGHT;
 	}
 
 
 	public void draw(Graphics g) {
-		g.drawImage(image.getImage() , x, y, Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
+		System.out.println(getX() + "," + getY());
+		g.drawImage(image.getImage() , getX(), getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
 	}
 
 	public int getX(){
@@ -44,5 +41,6 @@ public abstract class Entity{
 	public int getHeight(){
 		return Constants.TILE_HEIGHT;
 	}
+
 
 }

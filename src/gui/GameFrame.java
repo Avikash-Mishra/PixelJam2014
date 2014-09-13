@@ -48,7 +48,7 @@ public class GameFrame extends JFrame {
 		//
 		World world = new World(entities,tiles,pickups,player);
 
-		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this, world);
+		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(),this, world, player);
 
 		// Setup canvas defaults
 		gameCanvas.setBackground(Color.WHITE);
@@ -62,5 +62,6 @@ public class GameFrame extends JFrame {
 
 		world.start();
 	}
+
 
 }

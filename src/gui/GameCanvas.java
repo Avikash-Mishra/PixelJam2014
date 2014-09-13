@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,11 +29,12 @@ public class GameCanvas extends Canvas {
 	 * @param width The Width of the canvas
 	 * @param height The Height of the canvas
 	 */
-	public GameCanvas(int width, int height, GameFrame parent, World world) {
+	public GameCanvas(int width, int height, GameFrame parent, World world, Player player) {
 		super(parent.getWidth(), parent.getHeight());
 		this.parent = parent;
 		parent.setBackground(Color.BLUE);
 		this.world = world;
+		this.player = player;
 		this.addKeyListener(new Listener());
 	}
 
@@ -41,7 +43,9 @@ public class GameCanvas extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g){
-		world.draw(g);
+		Dimension d = new Dimension(this.getWidth(),this.getHeight());
+		world.draw(g,d);
+		this.repaint();
 	}
 
 	private class Listener implements KeyListener{
