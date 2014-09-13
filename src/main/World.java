@@ -22,6 +22,8 @@ public class World extends Thread{
 
 	public int mapWidth=0, mapHeight=0;
 
+	public Object key = new Object();
+
 
 
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
@@ -72,8 +74,10 @@ public class World extends Thread{
 
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
-				player.update();
-				previousUpdate = System.currentTimeMillis();
+				synchronized (key) {
+					player.update();
+					previousUpdate = System.currentTimeMillis();
+				}
 			}
 			else{
 				try {

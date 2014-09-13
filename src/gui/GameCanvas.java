@@ -24,6 +24,7 @@ public class GameCanvas extends Canvas {
 	private Player player;
 	private long lastRedraw = 0;
 	private Camera cam = new Camera();
+	private HUD hud = new HUD();
 
 	/**
 	 * Constructs a new GameCanvas with the given width and height
@@ -45,9 +46,12 @@ public class GameCanvas extends Canvas {
 
 	@Override
 	public void paint(Graphics g){
-		Dimension d = new Dimension(this.getWidth(),this.getHeight());
-		cam.updateCameraPos(player, world, d);
-		world.draw(g,d,cam);
+		synchronized (world.key) {
+			Dimension d = new Dimension(this.getWidth(),this.getHeight());
+			cam.updateCameraPos(player, world, d);
+			world.draw(g,d,cam);
+			hud.draw(g, d.getWidth(), d.getHeight());
+		}
 		this.repaint();
 	}
 
