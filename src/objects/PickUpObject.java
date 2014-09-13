@@ -9,10 +9,6 @@ import gui.Camera;
 
 public abstract class PickUpObject extends GameObject{
 	protected int amount;
-
-	private Animation animation;
-	private int x;
-	private int y;
 	private boolean canPickUp = true;
 
 
@@ -24,10 +20,7 @@ public abstract class PickUpObject extends GameObject{
 
 	@Override
 	public void draw(Graphics g, Camera cam) {
-		BufferedImage image = animation.getImage();
-		if(canPickUp){
-			g.drawImage(image , x-cam.getX(), y-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
-		}
+		if (canPickUp) super.draw(g, cam);
 	}
 
 	public abstract void onCollision(Player player);

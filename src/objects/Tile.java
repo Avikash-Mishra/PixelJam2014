@@ -15,10 +15,4 @@ public abstract class Tile extends GameObject{
 		super(x,y);
 	}
 
-	@Override
-	public void draw(Graphics g, Camera cam) {
-		BufferedImage image = animation.getImage();
-		g.drawImage(image , getX()-cam.getX(), getY()-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
-	}
-
 }
