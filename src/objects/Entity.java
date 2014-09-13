@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import java.util.List;
 
 import main.Constants;
-import main.Utilities;
 import tools.Animation;
+import tools.Utilities;
 import tools.Vector2D;
 
 /**
