@@ -22,6 +22,7 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		this.animation = type.getAnimationStill(animation);
+		animation.start();
 		movement = new Vector2D(0,0);
 	}
 
