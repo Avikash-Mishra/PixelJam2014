@@ -41,6 +41,7 @@ public class GameCanvas extends Canvas {
 	/**
 	 * Draws everything.
 	 */
+
 	@Override
 	public void paint(Graphics g){
 		Dimension d = new Dimension(this.getWidth(),this.getHeight());
