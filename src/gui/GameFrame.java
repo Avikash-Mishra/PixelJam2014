@@ -59,6 +59,8 @@ public class GameFrame extends JFrame {
 		gameCanvas.setFocusable(true);
 
 		this.setVisible(true);
+
+		world.start();
 	}
 
 }

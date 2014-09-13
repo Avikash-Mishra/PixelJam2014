@@ -21,6 +21,7 @@ public class GameCanvas extends Canvas {
 	private GameFrame parent;
 	private World world;
 	private Player player;
+	private long lastRedraw = 0;
 
 	/**
 	 * Constructs a new GameCanvas with the given width and height
@@ -41,9 +42,7 @@ public class GameCanvas extends Canvas {
 	@Override
 	public void paint(Graphics g){
 		world.draw(g);
-
 	}
-
 
 	private class Listener implements KeyListener{
 
