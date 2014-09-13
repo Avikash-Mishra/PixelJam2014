@@ -68,7 +68,7 @@ public class GameCanvas extends Canvas {
 
 			int code = e.getKeyCode();
 
-			if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A || code == KeyEvent.VK_D){
+		    if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A || code == KeyEvent.VK_D){
 				player.move(code);
 			}
 			else if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
@@ -77,7 +77,6 @@ public class GameCanvas extends Canvas {
 			else if (code == KeyEvent.VK_SPACE){
 				player.transform();
 			}
-
 		}
 
 		@Override

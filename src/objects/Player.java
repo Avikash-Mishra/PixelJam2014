@@ -80,11 +80,10 @@ public class Player extends Entity {
 		if (energy >= 0){
 			if (type == Type.CAT){
 				type = Type.DOG;
-
 			} else {
 				type = Type.CAT;
 			}
-
+			//this.animation = type.getAnimationMoving(animation);
 		}
 		System.out.println("transform");
 	}
@@ -150,39 +149,55 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationLeft(){
+			System.out.println("pressed left");
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
-			}
-			else {
+			} else {
 				return dogAnimLeftWalking;
 			}
 		}
+
 		public Animation getAnimationRight(){
 			if (type == Type.CAT){
 				return catAnimRightWalking;
-			}
-			else {
+			} else {
 				return dogAnimRightWalking;
 			}
 		}
+
 		public Animation getAnimationStill(Animation animation){
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
-				}
-				else {
+				} else {
 					return catAnimRightStatic;
 				}
 			}
 			else {
 				if (animation == dogAnimLeftWalking){
 					return dogAnimLeftStatic;
-				}
-				else {
+				} else {
 					return dogAnimRightStatic;
 				}
 			}
 		}
+
+		public Animation getAnimationMoving(Animation animation){
+			if (type == Type.CAT){
+				if (animation == catAnimLeftWalking){
+					return catAnimLeftWalking;
+				} else {
+					return catAnimRightWalking;
+				}
+			} else {
+				if (animation == dogAnimLeftWalking){
+					return dogAnimLeftWalking;
+				} else {
+					return dogAnimRightWalking;
+				}
+			}
+		}
+
 
 	}
 
