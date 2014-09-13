@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import java.util.List;
 
 import main.Constants;
-import main.Utilities;
 import tools.Animation;
+import tools.Utilities;
 import tools.Vector2D;
 
 /**
@@ -59,5 +59,8 @@ public abstract class Entity extends GameObject{
 
 	}
 
+	public boolean on(int x, int y){
+		return Utilities.isPixelTransparent(x, y, animation.getImage());
+	}
 
 }

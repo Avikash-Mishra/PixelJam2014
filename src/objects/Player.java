@@ -5,9 +5,9 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import main.Constants;
-import main.Utilities;
 import tools.Animation;
 import tools.ImageLibrary;
+import tools.Utilities;
 import tools.Vector2D;
 
 public class Player extends Entity {
