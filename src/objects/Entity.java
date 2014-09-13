@@ -1,13 +1,9 @@
 package objects;
 
-import gui.Camera;
-
-import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
 import main.Constants;
-import tools.Animation;
 import tools.Utilities;
 import tools.Vector2D;
 
@@ -18,10 +14,11 @@ import tools.Vector2D;
  */
 public abstract class Entity extends GameObject{
 
-	private boolean grounded = true;
-	public Vector2D movement = new Vector2D(0,0);
-	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
+	protected boolean grounded = true;
+	protected Vector2D movement = new Vector2D(0,0);
+	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
+	
 	public Entity(int x, int y){
 		super(x,y);
 	}
@@ -32,6 +29,10 @@ public abstract class Entity extends GameObject{
 	 */
 	public Vector2D getMovementVector(Vector2D movement){
 		return new Vector2D(movement.x(),movement.y());
+	}
+
+	public void jump(){
+		movement = movement.add(JUMP_VECTOR);
 	}
 
 	/**
@@ -66,12 +67,6 @@ public abstract class Entity extends GameObject{
 
 	}
 
-	public void jump(){
-		if (!grounded) return;
-		movement = movement.add(JUMP_VECTOR);
-		
-	}
-
 	public void applyGravity(List<Tile> nearby){
 
 		// check the rectangle below your position that is PLAYER_WIDTH wide and 1 pixel high
@@ -85,18 +80,11 @@ public abstract class Entity extends GameObject{
 			}
 		}
 
-		if (onGround != grounded){
-			grounded = onGround;
-			System.out.println ( (grounded) ? "on ground" : "in air" );
-		}
-
-		if (onGround){
-			movement.setY(0);
-		}
-		else if (!movement.atTerminalVelocity()){
+		grounded = onGround;
+		if (!grounded && !movement.atTerminalVelocity()){
 			movement = movement.add(Constants.GRAVITY_VECTOR);
 		}
-
+		
 	}
 
 	public boolean on(int x, int y){

@@ -26,7 +26,6 @@ public class Menu extends JPanel{
 	private JButton playButton;
 	private Image img;
 	
-	
 	//screen dimensions
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	public static final int screenWidth = (int) tk.getScreenSize().getWidth();
@@ -36,7 +35,7 @@ public class Menu extends JPanel{
 	public Menu() {
 		title = new JLabel();
 		playButton = new JButton();		
-		
+
 		setLayout(null);
 		
 		img = ImageLibrary.get("sugoi_tran.png");
@@ -44,13 +43,11 @@ public class Menu extends JPanel{
 		ImageIcon icon = new ImageIcon(resize);
 		title.setIcon(icon);
 		
-		
 		playButton.setIcon(new ImageIcon(ImageLibrary.get("play button.png")));
 		
 		//setting the size of te title label
 		title.setPreferredSize(new Dimension(600,100));
 		Dimension size = title.getPreferredSize();	
-		
 		
 		//set the boundaries of the button and title
 		title.setBounds(screenWidth/2-(size.width/2), 100, size.width, size.height);
@@ -58,9 +55,9 @@ public class Menu extends JPanel{
 		
 		playButton.setBounds(screenWidth/2-(size.width/2), screenHeight/2, size.width, size.height);
 		
+		
 		this.add(title);
 		this.add(playButton);
-		//this.repaint();
 		this.setVisible(true);
 	}
 	
