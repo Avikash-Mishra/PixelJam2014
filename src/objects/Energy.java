@@ -15,7 +15,9 @@ public class Energy extends PickUpObject {
 
 	public static Energy newEnergy(int x, int y, int amount){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("energy1Sprite.png"), 0);
+		anim.addFrame(ImageLibrary.get("energy1Sprite.png"), 1000);
+		anim.addFrame(ImageLibrary.get("energy2Sprite.png"), 1000);
+		anim.start();
 		return new Energy(anim,x,y, amount);
 	}
 
