@@ -20,10 +20,6 @@ public class Player extends Entity {
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 
-	private static Animation animLeftWalking;
-	private static Animation animLeftStatic;
-	private static Animation animRightStatic;
-	private static Animation animRightWalking;
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -34,10 +30,12 @@ public class Player extends Entity {
 	public void move(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
 			movement.setX(-STEP_SIZE);
+			System.out.println("facing left");
 			this.animation = type.getAnimationLeft();
 		}
 		else if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(STEP_SIZE);
+			System.out.println("facing right");
 			this.animation = type.getAnimationRight();
 		}
 	}
@@ -88,13 +86,25 @@ public class Player extends Entity {
 
 	public void transform(){
 		//Need enough energy
-		if (energy >= 0){
+		//if (energy >= 0){
 			if (type == Type.CAT){
 				type = Type.DOG;
+				//facing left
+				if (animation == Type.catAnimLeftWalking){
+					this.animation = type.getAnimationLeft();
+					System.out.println("WORKING");
+				}
+
+
 			} else {
 				type = Type.CAT;
+				if (animation == Type.dogAnimLeftWalking){
+					this.animation = type.getAnimationRight();
+				}
+
 			}
-		}
+			this.animation = type.getAnimationMoving(animation);
+		//}
 		System.out.println("transform");
 	}
 
@@ -110,6 +120,7 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
+
 		static {
 			//Cat
 			catAnimLeftWalking = new Animation();
@@ -152,44 +163,53 @@ public class Player extends Entity {
 		public Animation getAnimationLeft(){
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
-			}
-			else {
+			} else {
 				return dogAnimLeftWalking;
 			}
 		}
+
 		public Animation getAnimationRight(){
 			if (type == Type.CAT){
 				return catAnimRightWalking;
-			}
-			else {
+			} else {
 				return dogAnimRightWalking;
 			}
 		}
+
 		public Animation getAnimationStill(Animation animation){
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
-				}
-				else {
+				} else {
 					return catAnimRightStatic;
 				}
 			}
 			else {
 				if (animation == dogAnimLeftWalking){
 					return dogAnimLeftStatic;
-				}
-				else {
+				} else {
 					return dogAnimRightStatic;
 				}
 			}
 		}
 
-		public boolean rightWalking(Animation animation){
-			if (animation == catAnimRightWalking || animation == dogAnimRightWalking){
-				return true;
+		public Animation getAnimationMoving(Animation animation){
+			if (type == Type.CAT){
+				if (animation == catAnimLeftWalking){
+					return catAnimLeftWalking;
+				} else {
+					return catAnimRightWalking;
+				}
+			} else {
+				if (animation == dogAnimLeftWalking){
+					return dogAnimLeftWalking;
+				} else {
+					return dogAnimRightWalking;
+				}
 			}
-			return false;
 		}
+
+
 	}
 
 }
