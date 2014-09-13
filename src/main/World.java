@@ -49,7 +49,7 @@ public class World extends Thread{
 
 	public void draw(Graphics g, Dimension d, Camera cam){
 		//Draw background
-		drawBackground(g, d);
+		drawBackground(g, d, cam);
 		//Draw the world
 		for (Tile items: map){
 			items.draw(g,cam);
@@ -69,11 +69,13 @@ public class World extends Thread{
 		}
 	}
 
-	private void drawBackground(Graphics g, Dimension d){
+	private void drawBackground(Graphics g, Dimension d , Camera cam){
 		g.setColor(Color.blue);
 		g.fillRect(0,0,d.width,d.height);
 		BufferedImage bgimg = ImageLibrary.get("backgroundRear.png");
 		g.drawImage(bgimg, (int)d.getWidth()/2-bgimg.getWidth()/2, (int)d.getHeight()/2-bgimg.getHeight()/2, null);
+		BufferedImage fgimg = ImageLibrary.get("backgroundForeground.png");
+		g.drawImage(fgimg, (int)d.getWidth()/2-bgimg.getWidth()/2-cam.getX()/2, (int)d.getHeight()/2-bgimg.getHeight()/2-cam.getY()/2, null);
 	}
 
 	public void run(){

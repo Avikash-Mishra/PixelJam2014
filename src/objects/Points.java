@@ -17,7 +17,6 @@ public class Points extends PickUpObject {
 		if(canPickUp()){
 			pickup();
 			player.points += amount;
-			player.points = Math.min(player.points, Constants.MAX_ENERGY);
 		}
 	}
 
