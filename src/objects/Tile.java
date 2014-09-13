@@ -1,5 +1,7 @@
 package objects;
 
+import gui.Camera;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -7,7 +9,7 @@ import java.awt.image.BufferedImage;
 import tools.Animation;
 import main.Constants;
 
-public abstract class Tile {
+public abstract class Tile extends GameObject{
 	private Animation animation;
 	private int x;
 	private int y;
@@ -20,9 +22,9 @@ public abstract class Tile {
 	}
 
 
-	public void draw(Graphics g) {
+	public void draw(Graphics g, Camera cam) {
 		BufferedImage image = animation.getImage();
-		g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+		g.drawImage(image , x-cam.getX(), y-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
 	}
 
 	public int getX(){

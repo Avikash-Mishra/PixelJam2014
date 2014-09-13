@@ -9,6 +9,7 @@ public class Animation {
 	private List<BufferedImage> images = new ArrayList<BufferedImage>();
 	private List<Long> times = new ArrayList<Long>();
 	private boolean running = false;
+	private long totalTime = 0;
 
 	public Animation(){}
 
@@ -16,6 +17,7 @@ public class Animation {
 		if(img!=null && !running){
 			images.add(img);
 			times.add(stepTime);
+			totalTime += stepTime;
 		}else if(running){
 			System.err.println("Animations cannot be edited once started");
 		}
@@ -43,7 +45,7 @@ public class Animation {
 		if(!running){
 			return images.get(0);
 		}else{
-			long curTime = System.currentTimeMillis() - startTime;
+			long curTime = (System.currentTimeMillis() - startTime) % totalTime ;
 			for(int i=0; i<times.size(); i++){
 				if(curTime - times.get(i) <= 0){
 					return images.get(i);
