@@ -43,28 +43,6 @@ public class Player extends Entity {
 	}
 
 
-	public void step(List<Tile> tiles){
-
-		if (movement.isZeroVector()) return;
-		Vector2D goal = position.add(movement);
-		float distBetween = Utilities.distance(position,goal);
-		float distTravelled = 0;
-		Vector2D pos = getPosition();
-		List<Tile> nearby = Utilities.getNearby(pos, tiles);
-		Vector2D unit = movement.unitVector();
-
-		while (
-			distTravelled < distBetween // check you haven't travelled too far
-			&&
-			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
-		{
-			pos=pos.add(unit);
-			distTravelled++;
-		}
-		position = pos;
-
-	}
-
 
 	public void stop(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
