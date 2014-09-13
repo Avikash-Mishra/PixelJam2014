@@ -29,10 +29,12 @@ public class Player extends Entity {
 	public void move(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
 			movement.setX(-STEP_SIZE);
+			System.out.println("facing left");
 			this.animation = type.getAnimationLeft();
 		}
 		else if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(STEP_SIZE);
+			System.out.println("facing right");
 			this.animation = type.getAnimationRight();
 		}
 	}
@@ -77,14 +79,25 @@ public class Player extends Entity {
 
 	public void transform(){
 		//Need enough energy
-		if (energy >= 0){
+		//if (energy >= 0){
 			if (type == Type.CAT){
 				type = Type.DOG;
+				//facing left
+				if (animation == Type.catAnimLeftWalking){
+					this.animation = type.getAnimationLeft();
+					System.out.println("WORKING");
+				}
+
+
 			} else {
 				type = Type.CAT;
+				if (animation == Type.dogAnimLeftWalking){
+					this.animation = type.getAnimationRight();
+				}
+
 			}
-			//this.animation = type.getAnimationMoving(animation);
-		}
+			this.animation = type.getAnimationMoving(animation);
+		//}
 		System.out.println("transform");
 	}
 
@@ -149,7 +162,6 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationLeft(){
-			System.out.println("pressed left");
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
