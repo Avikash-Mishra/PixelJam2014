@@ -40,16 +40,20 @@ public abstract class GameObject {
 	}
 
 	public int getX(){
-		return position.x();
+		return (int)(position.x());
 	}
 
 	public int getY(){
-		return position.y();
+		return (int)(position.y());
+	}
+
+	public Vector2D getPosition(){
+		return new Vector2D(getX(),getY());
 	}
 
 	public Rectangle boundingBox(){
 		BufferedImage bi = animation.getImage();
-		return new Rectangle(position.x(),position.y(),bi.getWidth(),bi.getHeight());
+		return new Rectangle(getX(),getY(),bi.getWidth(),bi.getHeight());
 	}
 
 }

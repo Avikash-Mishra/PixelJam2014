@@ -2,8 +2,10 @@ package objects;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import main.Constants;
+import main.Utilities;
 import tools.Animation;
 import tools.ImageLibrary;
 import tools.Vector2D;
@@ -13,7 +15,6 @@ public class Player extends Entity {
 	private static final long ANIMATION_DELAY = 100;
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
-	private Vector2D movement;
 	private boolean onGround = true;
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
@@ -41,6 +42,30 @@ public class Player extends Entity {
 		}
 	}
 
+
+	public void step(List<Tile> tiles){
+
+		if (movement.isZeroVector()) return;
+		Vector2D goal = position.add(movement);
+		float distBetween = Utilities.distance(position,goal);
+		float distTravelled = 0;
+		Vector2D pos = getPosition();
+		List<Tile> nearby = Utilities.getNearby(pos, tiles);
+		Vector2D unit = movement.unitVector();
+
+		while (
+			distTravelled < distBetween // check you haven't travelled too far
+			&&
+			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
+		{
+			pos=pos.add(unit);
+			distTravelled++;
+		}
+		position = pos;
+
+	}
+
+
 	public void stop(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(0);
@@ -63,6 +88,7 @@ public class Player extends Entity {
 	 * @return
 	 */
 	public void setIsOnGround(boolean bool){
+		if (bool != onGround) System.out.println( ( bool ? "on ground" : "in air" ) );
 		onGround = bool;
 	}
 
@@ -79,6 +105,9 @@ public class Player extends Entity {
 
 	}
 
+
+
+
 	public void transform(){
 		//Need enough energy
 		if (energy >= 0){
@@ -89,14 +118,6 @@ public class Player extends Entity {
 			}
 		}
 		System.out.println("transform");
-	}
-
-	public void updatePosition(){
-		this.position = position.add(movement);
-	}
-
-	public void revertPosition(){
-		this.position = position.sub(movement);
 	}
 
 	private enum Type{

@@ -86,14 +86,9 @@ public class World extends Thread{
 
 				synchronized (key) {
 					// check if the player should move
-					boolean onGround = isOnGround(player);
-					player.setIsOnGround(onGround);
-					player.applyGravity();
-					player.updatePosition();
-					List<Tile> tiles = getTileCollisions(player);
-					if (!tiles.isEmpty()){
-						player.revertPosition();
-					}
+
+
+					player.step(map);
 
 					List<PickUpObject> pickupObjects = getPickUpCollisions(player);
 					if(!pickupObjects.isEmpty()){
@@ -103,7 +98,6 @@ public class World extends Thread{
 							pickups.remove(p);
 						}
 					}
-
 
 					previousUpdate = System.currentTimeMillis();
 				}
@@ -122,6 +116,7 @@ public class World extends Thread{
 
 	}
 
+
 	private boolean isOnGround(Entity e){
 		Rectangle r = new Rectangle(e.getX(),e.getY()+1,Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
 		for (Tile tile : map){
@@ -129,8 +124,6 @@ public class World extends Thread{
 		}
 		return false;
 	}
-
-
 
 	private List<Tile> getTileCollisions(GameObject object){
 		List<Tile> collisions = new ArrayList<>();
