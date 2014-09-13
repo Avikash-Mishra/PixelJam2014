@@ -14,11 +14,10 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-
+	
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
-
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -36,8 +35,6 @@ public class Player extends Entity {
 			this.animation = type.getAnimationRight();
 		}
 	}
-
-
 
 	public void stop(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
