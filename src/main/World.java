@@ -73,19 +73,21 @@ public class World extends Thread{
 		long previousUpdate = 0;
 		while (true){
 
+
 			long timeElapsed = System.currentTimeMillis() - previousUpdate;
 			if (timeElapsed > UPDATE_INTERVAL){
 
 				// check if the player should move
+				player.applyGravity();
 				player.updatePosition();
 				List<Tile> tiles = getTileCollisions(player);
 				if (!tiles.isEmpty()){
-					System.out.println("collided");
 					player.revertPosition();
 				}
 
-
 				previousUpdate = System.currentTimeMillis();
+
+
 				//List<Tile> tiles = getTileCollisions(player);
 				//if (!tiles.isEmpty()){
 				//	player.revertPosition();
@@ -130,7 +132,11 @@ public class World extends Thread{
 		return collisions;
 	}
 
-
+	private boolean isBelow(GameObject obj1, GameObject obj2){
+		Rectangle r1 = obj1.boundingBox();
+		Rectangle r2 = obj2.boundingBox();
+		return true;
+	}
 
 	/**
 	 * Returns true if the two given objects have overlapping bounding boxes.

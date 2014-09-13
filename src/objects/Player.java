@@ -2,6 +2,7 @@ package objects;
 
 import java.awt.event.KeyEvent;
 
+import main.Constants;
 import tools.Animation;
 import tools.ImageLibrary;
 import tools.Vector2D;
@@ -11,6 +12,7 @@ public class Player extends Entity {
 
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
+	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
 	private Vector2D movement;
 	public int points = 0;
@@ -66,13 +68,45 @@ public class Player extends Entity {
 	}
 
 	public void jump(){
-		System.out.println("jumped");
+		if (inAir()) return;
+		System.out.println("yallah");
+		movement = movement.add(JUMP_VECTOR);
+	}
+
+	/**
+	 * Return true if player is in the air (i.e.: movement vector's y component =/= 0)
+	 * @return boolean
+	 */
+	private boolean inAir(){
+		return movement.y() != 0;
+	}
+
+	/**
+	 * Return true if player is falling (i.e.: movement vector has -ve y component)
+	 * @return boolean
+	 */
+	private boolean falling(){
+		return movement.y() > 0;
+	}
+
+	private boolean atTerminalVelocity(){
+		return movement.y() <= Constants.TERMINAL_VELOCITY.y();
+	}
+
+	public void applyGravity(){
+		if (falling() && !atTerminalVelocity()){
+			movement = movement.add(Constants.GRAVITY_VECTOR);
+		}
+		else if (inAir()){
+			System.out.println("in air");
+			movement = movement.add(Constants.GRAVITY_VECTOR);
+		}
+		System.out.println(movement);
 	}
 
 	public void transform(){
 		System.out.println("transform");
 	}
-
 	public void updatePosition(){
 		this.position = position.add(movement);
 	}

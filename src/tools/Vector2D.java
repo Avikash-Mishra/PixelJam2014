@@ -34,10 +34,6 @@ public class Vector2D {
 		return y;
 	}
 
-	public boolean isZeroVector(){
-		return x==0 && y==0;
-	}
-
 	public String toString(){
 		return "("+x+","+y+")";
 	}

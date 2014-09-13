@@ -17,6 +17,7 @@ public class Constants {
 	public static final int PLAYER_WIDTH = 32;
 	public static final int PLAYER_HEIGHT = 32;
 
-	public static final Vector2D GRAVITY_VECTOR = new Vector2D(0,-2);
+	public static final Vector2D GRAVITY_VECTOR = new Vector2D(0,1);
+	public static final Vector2D TERMINAL_VELOCITY = new Vector2D(0,15);
 
 }
