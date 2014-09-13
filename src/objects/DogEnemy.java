@@ -1,13 +1,13 @@
-package entity;
+package objects;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import tools.Animation;
 
-public class CatEnemy extends Entity {
+public class DogEnemy extends Entity {
 
-	public CatEnemy(int x, int y) {
+	public DogEnemy(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}

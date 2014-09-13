@@ -10,8 +10,8 @@ import tools.ImageLibrary;
 public class Lever extends Tile{
 
 	protected Lever(Animation anim, int x, int y) {
-		super(anim, x, y);
-		// TODO Auto-generated constructor stub
+		super(x,y);
+		this.animation = anim;
 	}
 
 	public static Lever newLever(int x, int y){

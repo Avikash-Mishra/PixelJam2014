@@ -1,8 +1,6 @@
 package objects;
 
 import tools.Animation;
-import entity.Player;
-
 import tools.Animation;
 import tools.ImageLibrary;
 

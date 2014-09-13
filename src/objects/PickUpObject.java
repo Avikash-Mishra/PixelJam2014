@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import main.Constants;
 import tools.Animation;
-import entity.Player;
 import gui.Camera;
 
 public abstract class PickUpObject extends GameObject{
@@ -17,27 +16,18 @@ public abstract class PickUpObject extends GameObject{
 	private boolean canPickUp = true;
 
 
-
-	protected PickUpObject(Animation animation, int x, int y, int amount){
+	public PickUpObject(Animation animation, int x, int y, int amount){
+		super(x,y);
 		this.animation = animation;
-		this.x = x * Constants.TILE_WIDTH;
-		this.y = y * Constants.TILE_HEIGHT;
 		this.amount = amount;
 	}
 
+	@Override
 	public void draw(Graphics g, Camera cam) {
 		BufferedImage image = animation.getImage();
 		if(canPickUp){
 			g.drawImage(image , x-cam.getX(), y-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
 		}
-	}
-
-	public int getX(){
-		return x;
-	}
-
-	public int getY(){
-		return y;
 	}
 
 	public abstract void onCollision(Player player);

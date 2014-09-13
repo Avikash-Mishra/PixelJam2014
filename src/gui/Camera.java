@@ -2,9 +2,10 @@ package gui;
 
 import java.awt.Dimension;
 
+import objects.Player;
+import main.Constants;
 import main.World;
 import tools.Vector2D;
-import entity.Player;
 
 public class Camera {
 
@@ -13,8 +14,8 @@ public class Camera {
 	public void updateCameraPos(Player p, World w, Dimension screenSize){
 		int screenCenterX = screenSize.width/2;
 		int screenCenterY = screenSize.height/2;
-		int playerCenterX = p.getX()+(p.getWidth()/2);
-		int playerCenterY = p.getY()+(p.getHeight()/2);
+		int playerCenterX = p.getX()+(Constants.PLAYER_WIDTH/2);
+		int playerCenterY = p.getY()+(Constants.PLAYER_HEIGHT/2);
 
 		if(playerCenterX - screenCenterX < 0){
 			cameraPos.setX(0);

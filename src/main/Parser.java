@@ -7,15 +7,15 @@ import java.util.Scanner;
 import java.util.List;
 
 import objects.Energy;
+import objects.Entity;
 import objects.Lever;
 import objects.PickUpObject;
+import objects.Player;
 import objects.Points;
 import objects.River;
 import objects.Spikes;
 import objects.Tile;
 import objects.Wall;
-import entity.Entity;
-import entity.Player;
 
 /**
  * Parses game levels and returns Lists of the things in it. Should not be instantiated. Use its public static methods.

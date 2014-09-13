@@ -14,7 +14,8 @@ import main.Constants;
 public class Wall extends Tile {
 
 	protected Wall(Animation anim, int x, int y) {
-		super(anim, x, y);
+		super(x, y);
+		this.animation = anim;
 	}
 
 	public static Wall newWall(int x, int y){

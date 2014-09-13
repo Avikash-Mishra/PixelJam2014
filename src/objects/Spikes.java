@@ -14,7 +14,8 @@ import tools.ImageLibrary;
 public class Spikes extends Tile{
 
 	protected Spikes(Animation anim, int x, int y) {
-		super(anim, x, y);
+		super(x, y);
+		this.animation = anim;
 	}
 
 	public static Spikes newUpSpikes(int x, int y){
