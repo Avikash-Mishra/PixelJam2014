@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import main.Constants;
 import tools.Animation;
 import entity.Player;
+import gui.Camera;
 
 public abstract class PickUpObject{
 	protected int amount;
@@ -24,10 +25,10 @@ public abstract class PickUpObject{
 		this.amount = amount;
 	}
 
-	public void draw(Graphics g) {
+	public void draw(Graphics g, Camera cam) {
 		BufferedImage image = animation.getImage();
 		if(canPickUp){
-			g.drawImage(image , x, y, Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
+			g.drawImage(image , x-cam.getX(), y-cam.getY(), Constants.TILE_WIDTH, Constants.TILE_WIDTH, null);
 		}
 	}
 
