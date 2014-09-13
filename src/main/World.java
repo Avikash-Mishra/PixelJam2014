@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
 import objects.Tile;
+import tools.ImageLibrary;
 import tools.Vector2D;
 import gui.Camera;
 
@@ -70,6 +72,8 @@ public class World extends Thread{
 	private void drawBackground(Graphics g, Dimension d){
 		g.setColor(Color.blue);
 		g.fillRect(0,0,d.width,d.height);
+		BufferedImage bgimg = ImageLibrary.get("backgroundRear.png");
+		g.drawImage(bgimg, (int)d.getWidth()/2-bgimg.getWidth()/2, (int)d.getHeight()/2-bgimg.getHeight()/2, null);
 	}
 
 	public void run(){
