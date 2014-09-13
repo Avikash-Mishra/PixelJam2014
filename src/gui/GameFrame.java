@@ -13,10 +13,10 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
-import entity.Player;
+import objects.Entity;
 import objects.PickUpObject;
+import objects.Player;
 import objects.Tile;
-import entity.Entity;
 import main.Main;
 import main.World;
 

@@ -79,5 +79,4 @@ public class Menu extends JPanel{
 		frame.setVisible(true);
 	}
 	
-	
 }
