@@ -59,5 +59,8 @@ public abstract class Entity extends GameObject{
 
 	}
 
+	public boolean on(int x, int y){
+		return Utilities.isPixelTransparent(x, y, animation.getImage());
+	}
 
 }
