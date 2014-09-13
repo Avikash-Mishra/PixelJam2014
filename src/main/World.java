@@ -21,7 +21,6 @@ public class World extends Thread{
 	private static final long SECOND = 1000;
 	private static final long UPDATE_INTERVAL = SECOND/(long)(10);
 
-
 	public World(List<Entity> entities, List<Tile> map, List<PickUpObject> pickUps, Player player){
 		this.map = map;
 		this.entities = entities;

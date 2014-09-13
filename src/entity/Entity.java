@@ -2,7 +2,7 @@ package entity;
 
 import java.awt.Graphics;
 
-
+import objects.GameObject;
 import objects.Tile;
 import tools.Vector2D;
 import main.Constants;
@@ -12,7 +12,7 @@ import tools.Animation;
  * Will contain things like collision detection, drawing etc.
  * @author Mary
  */
-public abstract class Entity{
+public abstract class Entity extends GameObject{
 	protected Animation animation;
 	protected Vector2D position;
 
