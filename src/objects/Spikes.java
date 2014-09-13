@@ -53,32 +53,32 @@ public class Spikes extends Tile implements Danger{
 		Rectangle rect = new Rectangle();
 		switch(spikeDir){
 		case top:
-			rect.x = position.x();
-			rect.y = position.y();
+			rect.x = (int) position.x();
+			rect.y = (int) position.y();
 			rect.width = bi.getWidth();
 			rect.height = 10;
 			break;
 		case bottom:
-			rect.x = position.x();
-			rect.y = position.y()+bi.getHeight()-10;
+			rect.x = (int) position.x();
+			rect.y = (int) (position.y()+bi.getHeight()-10);
 			rect.width = bi.getWidth();
 			rect.height = 10;
 			break;
 		case left:
-			rect.x = position.x();
-			rect.y = position.y();
+			rect.x = (int) position.x();
+			rect.y = (int) position.y();
 			rect.width = 10;
 			rect.height = bi.getHeight();
 			break;
 		case right:
-			rect.x = position.x()+bi.getWidth()-10;
-			rect.y = position.y();
+			rect.x = (int) (position.x()+bi.getWidth()-10);
+			rect.y = (int) position.y();
 			rect.width = 10;
 			rect.height = bi.getHeight();
 			break;
 		default:
-			rect.x = position.x();
-			rect.y = position.y();
+			rect.x = (int) position.x();
+			rect.y = (int) position.y();
 			rect.width = bi.getWidth();
 			rect.height = bi.getHeight();
 			break;

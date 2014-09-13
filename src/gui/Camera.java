@@ -35,11 +35,11 @@ public class Camera {
 	}
 
 	public int getX(){
-		return cameraPos.x();
+		return (int)cameraPos.x();
 	}
 
 	public int getY(){
-		return cameraPos.y();
+		return (int)cameraPos.y();
 	}
 
 }

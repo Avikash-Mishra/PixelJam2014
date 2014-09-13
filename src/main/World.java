@@ -89,29 +89,25 @@ public class World extends Thread{
 
 				synchronized (key) {
 					// check if the player should move
-					boolean onGround = isOnGround(player);
-					player.setIsOnGround(onGround);
-					player.applyGravity();
-					player.updatePosition();
-					List<Tile> tiles = getTileCollisions(player);
-					if (!tiles.isEmpty()){
-						for(Tile t : tiles){
-							if(t instanceof Danger){
-								player.die();
-							}
-						}
-						player.revertPosition();
-					}
+					player.step(map);
 
-					List<PickUpObject> pickupObjects = getPickUpCollisions(player);
-					if(!pickupObjects.isEmpty()){
-						for(PickUpObject p : pickupObjects){
-							System.out.println("Picked up object");
-							p.onCollision(player);
-							pickups.remove(p);
+					for(Tile t : getTileCollisions(player)){
+						if(t instanceof Danger){
+							player.die();
 						}
 					}
 
+					for(Entity e : getEntityCollisions(player)){
+						if(e instanceof Danger){
+							player.die();
+						}
+					}
+
+
+					for(PickUpObject p : getPickUpCollisions(player)){
+						p.onCollision(player);
+						pickups.remove(p);
+					}
 
 					previousUpdate = System.currentTimeMillis();
 				}
@@ -120,7 +116,6 @@ public class World extends Thread{
 				try {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -138,36 +133,28 @@ public class World extends Thread{
 		return false;
 	}
 
-
-
-	private List<Tile> getTileCollisions(GameObject object){
-		List<Tile> collisions = new ArrayList<>();
-		for (Tile tile : map){
-			if (overlappingBoundingBox(object,tile)) collisions.add(tile);
-		}
-		return collisions;
-	}
-
-	private List<Entity> getEntityCollisions(GameObject object){
-		List<Entity> collisions = new ArrayList<>();
-		for (Entity entity : entities){
-			if (overlappingBoundingBox(object,entity)) collisions.add(entity);
-		}
-		return collisions;
-	}
-
 	private List<PickUpObject> getPickUpCollisions(GameObject object){
-		List<PickUpObject> collisions = new ArrayList<>();
+		List<PickUpObject> collisions = new ArrayList<PickUpObject>();
 		for (PickUpObject pickup : pickups){
 			if (overlappingBoundingBox(object,pickup)) collisions.add(pickup);
 		}
 		return collisions;
 	}
 
-	private boolean isBelow(GameObject obj1, GameObject obj2){
-		Rectangle r1 = obj1.boundingBox();
-		Rectangle r2 = obj2.boundingBox();
-		return true;
+	private List<Entity> getEntityCollisions(GameObject object){
+		List<Entity> collisions = new ArrayList<Entity>();
+		for (Entity entity : entities){
+			if (overlappingBoundingBox(object,entity)) collisions.add(entity);
+		}
+		return collisions;
+	}
+
+	private List<Tile> getTileCollisions(GameObject object){
+		List<Tile> collisions = new ArrayList<Tile>();
+		for (Tile tile : map){
+			if (overlappingBoundingBox(object,tile)) collisions.add(tile);
+		}
+		return collisions;
 	}
 
 	/**

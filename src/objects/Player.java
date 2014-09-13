@@ -2,8 +2,10 @@ package objects;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import main.Constants;
+import main.Utilities;
 import tools.Animation;
 import tools.ImageLibrary;
 import tools.Vector2D;
@@ -13,16 +15,11 @@ public class Player extends Entity {
 	private static final long ANIMATION_DELAY = 100;
 	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
 
-	private Vector2D movement;
 	private boolean onGround = true;
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 
-	private static Animation animLeftWalking;
-	private static Animation animLeftStatic;
-	private static Animation animRightStatic;
-	private static Animation animRightWalking;
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -40,6 +37,8 @@ public class Player extends Entity {
 			this.animation = type.getAnimationRight();
 		}
 	}
+
+
 
 	public void stop(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
@@ -79,24 +78,13 @@ public class Player extends Entity {
 
 	}
 
+
+
+
 	public void transform(){
-		//Need enough energy
-		if (energy >= 0){
-			if (type == Type.CAT){
-				type = Type.DOG;
-			} else {
-				type = Type.CAT;
-			}
-		}
-		System.out.println("transform");
-	}
-
-	public void updatePosition(){
-		this.position = position.add(movement);
-	}
-
-	public void revertPosition(){
-		this.position = position.sub(movement);
+		if (type == Type.CAT) type = Type.DOG;
+		else type = Type.CAT;
+		this.animation = type.getAnimationMoving(animation);
 	}
 
 	private enum Type{
@@ -111,7 +99,9 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
+
 		static {
+
 			//Cat
 			catAnimLeftWalking = new Animation();
 			catAnimLeftWalking.addFrame(ImageLibrary.get("LcatWalk1Sprite.png"), ANIMATION_DELAY);
@@ -153,44 +143,53 @@ public class Player extends Entity {
 		public Animation getAnimationLeft(){
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
-			}
-			else {
+			} else {
 				return dogAnimLeftWalking;
 			}
 		}
+
 		public Animation getAnimationRight(){
 			if (type == Type.CAT){
 				return catAnimRightWalking;
-			}
-			else {
+			} else {
 				return dogAnimRightWalking;
 			}
 		}
+
 		public Animation getAnimationStill(Animation animation){
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
-				}
-				else {
+				} else {
 					return catAnimRightStatic;
 				}
 			}
 			else {
 				if (animation == dogAnimLeftWalking){
 					return dogAnimLeftStatic;
-				}
-				else {
+				} else {
 					return dogAnimRightStatic;
 				}
 			}
 		}
 
-		public boolean rightWalking(Animation animation){
-			if (animation == catAnimRightWalking || animation == dogAnimRightWalking){
-				return true;
+		public Animation getAnimationMoving(Animation animation){
+			if (type == Type.CAT){
+				if (animation == dogAnimLeftWalking){
+					return catAnimLeftWalking;
+				} else {
+					return catAnimRightWalking;
+				}
+			} else {
+				if (animation == catAnimLeftWalking){
+					return dogAnimLeftWalking;
+				} else {
+					return dogAnimRightWalking;
+				}
 			}
-			return false;
 		}
+
+
 	}
 
 	public void die() {
