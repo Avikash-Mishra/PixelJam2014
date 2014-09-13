@@ -91,6 +91,16 @@ public class World extends Thread{
 						player.revertPosition();
 					}
 
+					List<PickUpObject> pickupObjects = getPickUpCollisions(player);
+					if(!pickupObjects.isEmpty()){
+						for(PickUpObject p : pickupObjects){
+							System.out.println("Picked up object");
+							p.onCollision(player);
+							pickups.remove(p);
+						}
+					}
+
+
 					previousUpdate = System.currentTimeMillis();
 				}
 			}

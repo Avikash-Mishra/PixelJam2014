@@ -1,5 +1,6 @@
 package objects;
 
+import main.Constants;
 import tools.Animation;
 import tools.Animation;
 import tools.ImageLibrary;
@@ -16,6 +17,7 @@ public class Points extends PickUpObject {
 		if(canPickUp()){
 			pickup();
 			player.points += amount;
+			player.points = Math.min(player.points, Constants.MAX_ENERGY);
 		}
 	}
 
