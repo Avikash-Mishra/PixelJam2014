@@ -14,14 +14,16 @@ import tools.Animation;
  */
 public abstract class Entity{
 
-	private Animation image;
+	protected Animation image;
 	private int x;
 	private int y;
 	protected Vector2D position;
 
-	public Entity(Animation image, int x, int y){
+	public Entity(int x, int y){
 		this.image = image;
 		position = new Vector2D(x*Constants.TILE_WIDTH,y*Constants.TILE_WIDTH);
+		this.x = x * Constants.TILE_WIDTH;
+		this.y = y * Constants.TILE_HEIGHT;
 	}
 
 

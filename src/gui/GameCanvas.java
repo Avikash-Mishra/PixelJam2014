@@ -32,7 +32,6 @@ public class GameCanvas extends Canvas {
 		this.parent = parent;
 		parent.setBackground(Color.BLUE);
 		this.world = world;
-		player = new Player(null,0,0);
 		this.addKeyListener(new Listener());
 	}
 
