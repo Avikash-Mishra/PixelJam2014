@@ -13,7 +13,7 @@ import tools.Animation;
  * @author Mary
  */
 public abstract class Entity{
-	protected Animation image;
+	protected Animation animation;
 	protected Vector2D position;
 
 	public Entity(int x, int y){
@@ -23,7 +23,7 @@ public abstract class Entity{
 
 	public void draw(Graphics g) {
 		System.out.println(getX() + "," + getY());
-		g.drawImage(image.getImage() , getX(), getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
+		g.drawImage(animation.getImage() , getX(), getY(), Constants.TILE_WIDTH, Constants.TILE_HEIGHT, null);
 	}
 
 	public int getX(){
