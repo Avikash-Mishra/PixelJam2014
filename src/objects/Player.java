@@ -30,12 +30,10 @@ public class Player extends Entity {
 	public void move(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
 			movement.setX(-STEP_SIZE);
-			System.out.println("facing left");
 			this.animation = type.getAnimationLeft();
 		}
 		else if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(STEP_SIZE);
-			System.out.println("facing right");
 			this.animation = type.getAnimationRight();
 		}
 	}
@@ -64,7 +62,6 @@ public class Player extends Entity {
 	 * @return
 	 */
 	public void setIsOnGround(boolean bool){
-		if (bool != onGround) System.out.println( ( bool ? "on ground" : "in air" ) );
 		onGround = bool;
 	}
 
@@ -85,27 +82,9 @@ public class Player extends Entity {
 
 
 	public void transform(){
-		//Need enough energy
-		//if (energy >= 0){
-			if (type == Type.CAT){
-				type = Type.DOG;
-				//facing left
-				if (animation == Type.catAnimLeftWalking){
-					this.animation = type.getAnimationLeft();
-					System.out.println("WORKING");
-				}
-
-
-			} else {
-				type = Type.CAT;
-				if (animation == Type.dogAnimLeftWalking){
-					this.animation = type.getAnimationRight();
-				}
-
-			}
-			this.animation = type.getAnimationMoving(animation);
-		//}
-		System.out.println("transform");
+		if (type == Type.CAT) type = Type.DOG;
+		else type = Type.CAT;
+		this.animation = type.getAnimationMoving(animation);
 	}
 
 	private enum Type{
@@ -122,6 +101,7 @@ public class Player extends Entity {
 		private static Animation dogAnimRightWalking;
 
 		static {
+
 			//Cat
 			catAnimLeftWalking = new Animation();
 			catAnimLeftWalking.addFrame(ImageLibrary.get("LcatWalk1Sprite.png"), ANIMATION_DELAY);
@@ -195,13 +175,13 @@ public class Player extends Entity {
 
 		public Animation getAnimationMoving(Animation animation){
 			if (type == Type.CAT){
-				if (animation == catAnimLeftWalking){
+				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
 				} else {
 					return catAnimRightWalking;
 				}
 			} else {
-				if (animation == dogAnimLeftWalking){
+				if (animation == catAnimLeftWalking){
 					return dogAnimLeftWalking;
 				} else {
 					return dogAnimRightWalking;

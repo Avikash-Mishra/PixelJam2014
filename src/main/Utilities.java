@@ -72,7 +72,6 @@ public class Utilities {
 				neighbours.add(thing);
 			}
 		}
-		System.out.println(neighbours.size());
 		return neighbours;
 	}
 
