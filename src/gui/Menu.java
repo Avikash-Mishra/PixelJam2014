@@ -3,11 +3,15 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import tools.ImageLibrary;
 
 
@@ -21,6 +25,7 @@ public class Menu extends JPanel{
 	private JLabel title;
 	private JButton playButton;
 	private Image img;
+	
 	
 	//screen dimensions
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
@@ -55,17 +60,13 @@ public class Menu extends JPanel{
 		
 		this.add(title);
 		this.add(playButton);
-		this.repaint();
+		//this.repaint();
+		this.setVisible(true);
 	}
 	
-
-	public static void main(String[] args){
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(new Menu());
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(screenWidth,screenHeight);
-		frame.setVisible(true);
+	public JButton getPlayButton(){
+		return playButton;
 	}
+	
 	
 }
