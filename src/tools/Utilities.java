@@ -53,8 +53,8 @@ public class Utilities {
 	public static boolean colliding(Rectangle rect, List<? extends GameObject> list){
 		for (GameObject thing : list){
 			//Touching object check - Fall through water
-			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){
-				return true;
+			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){ 
+				return true; 
 			}
 		}
 		return false;

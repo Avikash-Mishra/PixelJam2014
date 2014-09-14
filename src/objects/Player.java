@@ -10,18 +10,19 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-
-	public static Type type = Type.CAT;
+	
+	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
-
-
-	//Not used
-	//public static boolean transforming = false;
-	//public static long transTime;
+	
+	public static Animation transform = new Animation();
+	public static boolean transforming = false;
+	public static long transTime;
 
 	public Player(int x, int y) {
 		super(x, y);
+		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
+		transform.start();
 		this.animation = type.getAnimationStill(animation);
 		animation.start();
 		movement = new Vector2D(0,0);
@@ -53,24 +54,22 @@ public class Player extends Entity {
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-
-		animation = type.checkAnimationState(animation);
-		//this.animation = transform;
+		this.animation = transform;
 		((Thread) new Transform()).start();
 	}
-
+	
 	private class Transform extends Thread{
 
 		@Override
 		public void run() {
 			long time = System.currentTimeMillis();
 			while(System.currentTimeMillis()-time<250){}
-			//animation = type.checkAnimationState(animation);
+			animation = type.checkAnimationState(animation);
 		}
-
+		
 	}
 
-	public enum Type{
+	private enum Type{
 		DOG, CAT;
 		//Cat
 		private static Animation catAnimLeftWalking;
@@ -82,7 +81,6 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
-		public static Animation transform = new Animation();
 
 		static {
 
@@ -122,13 +120,10 @@ public class Player extends Entity {
 
 			dogAnimRightStatic = new Animation();
 			dogAnimRightStatic.addFrame(ImageLibrary.get("RdogStaticSprite.png"),ANIMATION_DELAY);
-			//Transform
-			transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
-			transform.start();
 		}
 
 		public Animation getAnimationLeft(){
-
+			
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
@@ -137,7 +132,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationRight(){
-
+			
 			if (type == Type.CAT){
 				return catAnimRightWalking;
 			} else {
@@ -146,7 +141,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationStill(Animation animation){
-
+			
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
@@ -186,6 +181,7 @@ public class Player extends Entity {
 				}
 			}
 		}
+
 
 	}
 
