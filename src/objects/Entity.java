@@ -59,18 +59,18 @@ public abstract class Entity extends GameObject{
 
 		// repeatedly add the unit vector onto the position until you either
 		// move down the entire length of the movement vector or you collide
-		// wit something
+		// with something
 		while (
-				
 			distTravelled < distBetween // check you haven't travelled too far
 			&&
-			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
-		{			
+			//check you haven't hit anything
+			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby)))
+		{
 			pos=pos.add(unit);
 			distTravelled++;
 		}
 		position = pos;
-	
+
 		// if you didn't move vertically, then you must have either
 		// hit the ground or you're at the maximum of the jumping parabola
 		// if you hit the ground, set velocity_y <-- 0
@@ -79,7 +79,7 @@ public abstract class Entity extends GameObject{
 				movement.setY(0);
 			}
 		}
-		
+
 	}
 
 	public void applyGravity(List<Tile> nearby){
@@ -89,15 +89,15 @@ public abstract class Entity extends GameObject{
 		boolean onGround = false;
 		for (Tile tile : nearby){
 			Rectangle bounding = tile.boundingBox();
-			
+
 			if (r.intersects(bounding)){
-				//Fall through water?
+				//Fall through water
 				if (tile instanceof River){
 					onGround = false;
 					break;
 				}
 				onGround = true;
-				
+
 				break;
 			}
 		}

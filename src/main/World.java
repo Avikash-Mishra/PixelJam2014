@@ -14,6 +14,7 @@ import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
+import objects.Player.Type;
 import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
@@ -90,21 +91,26 @@ public class World extends Thread{
 			if (timeElapsed > UPDATE_INTERVAL){
 
 				synchronized (key) {
-					
+
 					player.step(map);
 
 					for(Tile t : getTileCollisions(player)){
 						if(t instanceof Danger){
 							player.die();
 						}
-						
+						if (t instanceof River){
+							if (player.type == Type.CAT){
+								player.die();
+							}
+						}
+
 					}
 
 					for(Entity e : getEntityCollisions(player)){
 						if(e instanceof Danger){
 							player.die();
 						}
-						
+
 					}
 
 
@@ -170,4 +176,6 @@ public class World extends Thread{
 		Rectangle r2 = obj2.boundingBox();
 		return r1.intersects(r2);
 	}
+
+
 }

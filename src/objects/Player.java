@@ -10,14 +10,15 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-	
-	private static Type type = Type.CAT;
+
+	public static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
-	
+
 	public static Animation transform = new Animation();
-	public static boolean transforming = false;
-	public static long transTime;
+	//Not used
+	//public static boolean transforming = false;
+	//public static long transTime;
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -57,7 +58,7 @@ public class Player extends Entity {
 		this.animation = transform;
 		((Thread) new Transform()).start();
 	}
-	
+
 	private class Transform extends Thread{
 
 		@Override
@@ -66,10 +67,10 @@ public class Player extends Entity {
 			while(System.currentTimeMillis()-time<250){}
 			animation = type.checkAnimationState(animation);
 		}
-		
+
 	}
 
-	private enum Type{
+	public enum Type{
 		DOG, CAT;
 		//Cat
 		private static Animation catAnimLeftWalking;
@@ -123,7 +124,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationLeft(){
-			
+
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
@@ -132,7 +133,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationRight(){
-			
+
 			if (type == Type.CAT){
 				return catAnimRightWalking;
 			} else {
@@ -141,7 +142,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationStill(Animation animation){
-			
+
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
