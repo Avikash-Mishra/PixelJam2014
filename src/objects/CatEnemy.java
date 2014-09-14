@@ -17,8 +17,10 @@ public class CatEnemy extends Enemy {
 	public CatEnemy(int x, int y) {
 		super(x, y);
 		this.animation = catAnimRightStatic;
+		//this.animation.start();
 		this.ANIMATION_DELAY = 100;
 		this.STEP_SIZE = 10;
+
 	}
 
 	static {
