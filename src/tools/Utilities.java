@@ -5,8 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import objects.CatEnemy;
 import objects.Danger;
+import objects.Entity;
 import objects.GameObject;
+import objects.Player;
 import objects.River;
 
 public class Utilities {

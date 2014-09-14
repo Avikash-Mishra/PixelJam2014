@@ -6,9 +6,16 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
 
+import main.Constants;
+import main.Parser;
 import main.World;
+import objects.Entity;
+import objects.PickUpObject;
 import objects.Player;
+import objects.Tile;
 import tools.ImageLibrary;
 
 
@@ -26,6 +33,7 @@ public class GameCanvas extends Canvas {
 	private long lastRedraw = 0;
 	private Camera cam = new Camera();
 	private HUD hud = new HUD();
+	private Listener l;
 
 	/**
 	 * Constructs a new GameCanvas with the given width and height
@@ -39,7 +47,25 @@ public class GameCanvas extends Canvas {
 		parent.setBackground(Color.GRAY);
 		this.world = world;
 		this.player = player;
-		this.addKeyListener(new Listener());
+		l = new Listener();
+		this.addKeyListener(l);
+	}
+
+	public void reset(){
+		Object[] data;
+		try {
+			data = Parser.parse(Constants.LEVEL_FILENAME);
+			world = new World((List<Entity>)data[0], (List<Tile>)data[1], (List<PickUpObject>)data[2], (Player)data[3]);
+			player = (Player)data[3];
+			lastJump = 0;
+			lastRedraw = 0;
+			cam = new Camera();
+			hud = new HUD();
+			world.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -82,7 +108,11 @@ public class GameCanvas extends Canvas {
 		    	}
 			}
 			else if (code == KeyEvent.VK_SPACE){
-				player.transform();
+				if(player.dead){
+					reset();
+				}else{
+					player.transform();
+				}
 			}
 		}
 

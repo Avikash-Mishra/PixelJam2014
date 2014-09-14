@@ -20,6 +20,11 @@ public class Animation {
 			totalTime += stepTime;
 		}else if(running){
 			System.err.println("Animations cannot be edited once started");
+			try{
+			throw new Exception();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -35,6 +40,12 @@ public class Animation {
 		running = false;
 	}
 
+	public void empty(){
+		images = new ArrayList<BufferedImage>();
+		times = new ArrayList<Long>();
+		totalTime = 0;
+	}
+
 
 	/**
 	 * If this animation has been started, return the next image in the animation.
@@ -45,6 +56,7 @@ public class Animation {
 		if(!running){
 			return images.get(0);
 		}else{
+
 			long curTime = (System.currentTimeMillis() - startTime) % totalTime ;
 			for(int i=0; i<times.size(); i++){
 				if(curTime - times.get(i) <= 0){

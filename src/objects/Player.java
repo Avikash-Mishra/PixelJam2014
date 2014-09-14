@@ -27,9 +27,12 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		//Transform
+		dead = false;
 		transform = new Animation();
 		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
 		transform.start();
+		death.stop();
+		death.empty();
 		death.addFrame(ImageLibrary.get("death1Sprite.png"), 100);
 		death.addFrame(ImageLibrary.get("death2Sprite.png"), 100);
 		death.addFrame(ImageLibrary.get("death3Sprite.png"), 100);
@@ -78,13 +81,16 @@ public class Player extends Entity {
 			this.animation = death;
 			return;
 		}
+		if(energy >= 30){
+		energy -= 30;
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-
+		SoundLibrary.playSound("transform.wav");
 		//Transform and then face correct direction
 		this.prevAnimation = animation;
 		this.animation = transform;
 		((Thread) new Transform()).start();
+		}
 
 	}
 
@@ -103,6 +109,11 @@ public class Player extends Entity {
 			prevAnimation = animation;
 		}
 
+	}
+
+	@Deprecated
+	public void updateAnimation(){
+		// DO NOTHING, SHOULD NEVER BE CALLED
 	}
 
 	public enum Type{
@@ -235,7 +246,11 @@ public class Player extends Entity {
 	public void die() {
 		this.animation = death;
 		if(!dead){
-
+			if (isCat()){
+				SoundLibrary.playSound("catdead.wav");
+			} else {
+				SoundLibrary.playSound("dogdead.wav");
+			}
 			death.start();
 		}
 		dead = true;
