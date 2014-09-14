@@ -105,6 +105,11 @@ public class Player extends Entity {
 
 	}
 
+	@Deprecated
+	public void updateAnimation(){
+		// DO NOTHING, SHOULD NEVER BE CALLED
+	}
+
 	public enum Type{
 		DOG, CAT;
 		//Cat

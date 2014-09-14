@@ -12,4 +12,16 @@ public class DogEnemy extends Enemy {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void updateAnimation() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void kill() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

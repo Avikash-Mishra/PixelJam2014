@@ -4,6 +4,8 @@ import main.Constants;
 
 public class Vector2D {
 
+	public static final Vector2D ZERO_VECTOR = new Vector2D(0,0);
+
 	public float x;
 	public float y;
 

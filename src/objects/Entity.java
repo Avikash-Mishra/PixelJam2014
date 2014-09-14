@@ -39,16 +39,19 @@ public abstract class Entity extends GameObject {
 		movement = movement.add(JUMP_VECTOR);
 	}
 
+	public abstract void updateAnimation();
+
 	/**
 	 * Apply the movement vector to the position vector.
 	 *
 	 * @param tiles
 	 *            : list of all tiles in the map.
 	 */
-	public void step(List<Tile> tiles) {
+	public void step(List<GameObject> everything) {
 		// get nearby tiles
 
-		List<Tile> nearby = Utilities.getNearby(position, tiles);
+		List<GameObject> nearby = Utilities.getNearby(position, everything);
+		if (this instanceof Enemy) updateAnimation();
 
 		// apply gravity
 		applyGravity(nearby);
@@ -77,25 +80,46 @@ public abstract class Entity extends GameObject {
 			for (GameObject thing : nearby){
 				if (playerBounding.intersects(thing.boundingBox())){
 
-					if (thing instanceof River){
-						if (this instanceof Player){
-							Player p = (Player)this;
-							if (p.isCat()) p.die();
+					if (thing instanceof Tile){
+						if (thing instanceof River){
+							if (this instanceof Player){
+								Player p = (Player)this;
+								if (p.isCat()) p.die();
+							}
 						}
-					}
-					else if (thing instanceof Wall){
-						break moving;
-					}
-					else if (thing instanceof CheckPoint){
-						if(this instanceof Enemy){
-							this.movement = movement.horizontalFlip();
+						else if (thing instanceof Wall){
 							break moving;
 						}
+						else if (thing instanceof CheckPoint){
+							if(this instanceof Enemy){
+								this.movement = movement.horizontalFlip();
+								break moving;
+							}
+						}
+						else if (thing instanceof Danger){
+							if (this instanceof Player){
+								Player p = (Player)this;
+								p.die();
+							}
+						}
 					}
-					else if (thing instanceof Danger){
+					else if (thing instanceof Entity){
+
+						if (this instanceof Player && thing instanceof CatEnemy || this instanceof CatEnemy && thing instanceof Player){
+							Player player = (this instanceof Player) ? (Player)this : (Player)thing;
+							CatEnemy enemy = (player == this) ? (CatEnemy)thing : (CatEnemy)this;
+							if (player.isCat()) player.die();
+							else enemy.kill();
+						}
+
+					}
+					else if (thing instanceof PickUpObject){
+
 						if (this instanceof Player){
-							Player p = (Player)this;
-							p.die();
+							PickUpObject pickup = (PickUpObject)thing;
+							Player player = (Player)this;
+							pickup.onCollision(player);
+							everything.remove(pickup);
 						}
 					}
 
@@ -121,7 +145,7 @@ public abstract class Entity extends GameObject {
 
 	}
 
-	public void applyGravity(List<Tile> nearby) {
+	public void applyGravity(List<GameObject> nearby) {
 		boolean[] surroundings = checkSurroundings(nearby);
 		// array[0] = north, surroundings[1] = south, surroundings[2] = east, surroundings[3] = west
 		boolean north = surroundings[0];
@@ -158,14 +182,17 @@ public abstract class Entity extends GameObject {
 	 * Check if you are touching a tile in your surroundings. Return a 4-sized
 	 * array: north, south, east, west.
 	 */
-	private boolean[] checkSurroundings(List<Tile> nearby) {
+	private boolean[] checkSurroundings(List<GameObject> nearby) {
 		Rectangle above = new Rectangle(getX(), getY() - 1, Constants.PLAYER_WIDTH, 1);
 		Rectangle left = new Rectangle(getX() - 1, getY(), 1, Constants.PLAYER_HEIGHT);
 		Rectangle right = new Rectangle(getX() + Constants.PLAYER_WIDTH + 1, getY(), 1, Constants.PLAYER_HEIGHT);
 		Rectangle below = new Rectangle(getX(), getY() + Constants.PLAYER_HEIGHT + 1, Constants.PLAYER_WIDTH, 1);
 		boolean north, south, east, west;
 		north = south = east = west = false;
-		for (Tile tile : nearby) {
+		for (GameObject obj : nearby) {
+
+			if (!(obj instanceof Tile)) continue;
+			Tile tile = (Tile)obj;
 
 			if (tile instanceof Wall){
 				Rectangle bounding = tile.boundingBox();
