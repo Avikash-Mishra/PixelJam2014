@@ -16,6 +16,8 @@ public class Player extends Entity {
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 	private static Animation prevAnimation;
+	private static final Vector2D JUMP_VECTOR_DOG = new Vector2D(0,-9f);
+	private static final Vector2D JUMP_VECTOR_CAT = new Vector2D(0, -10f);
 	//transform
 	private static Animation transform ;
 	//Not used
@@ -42,6 +44,15 @@ public class Player extends Entity {
 		this.prevAnimation = animation;
 		animation.start();
 		movement = new Vector2D(0,0);
+	}
+
+	public void jump() {
+		if (!grounded || Player.dead)
+			return;
+		Vector2D jump = (type == Type.CAT) ? JUMP_VECTOR_CAT : JUMP_VECTOR_DOG;
+		movement = movement.add(jump);
+		//play sound
+		SoundLibrary.playSound("jump.wav");
 	}
 
 	public void move(int keycode){

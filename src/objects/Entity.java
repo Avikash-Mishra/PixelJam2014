@@ -19,7 +19,6 @@ import tools.Vector2D;
 public abstract class Entity extends GameObject {
 	protected boolean grounded = true;
 	protected Vector2D movement = new Vector2D(0, 0);
-	private static final Vector2D JUMP_VECTOR = new Vector2D(0, -10f);
 
 	public Entity(int x, int y) {
 		super(x, y);
@@ -32,14 +31,6 @@ public abstract class Entity extends GameObject {
 	 */
 	public Vector2D getMovementVector(Vector2D movement) {
 		return new Vector2D(movement.x(), movement.y());
-	}
-
-	public void jump() {
-		if (!grounded || Player.dead)
-			return;
-		movement = movement.add(JUMP_VECTOR);
-		//play sound
-		SoundLibrary.playSound("jump.wav");
 	}
 
 	public abstract void updateAnimation();
