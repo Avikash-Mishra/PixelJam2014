@@ -108,12 +108,21 @@ public abstract class Entity extends GameObject {
 					}
 					else if (thing instanceof Entity){
 
+						// player-cat collision
 						if (this instanceof Player && thing instanceof CatEnemy || this instanceof CatEnemy && thing instanceof Player){
 							Player player = (this instanceof Player) ? (Player)this : (Player)thing;
 							CatEnemy enemy = (player == this) ? (CatEnemy)thing : (CatEnemy)this;
 							if (player.isCat()) player.die();
 							else enemy.kill();
 						}
+
+						// player-dog collision
+						else if (this instanceof Player && thing instanceof DogEnemy || this instanceof DogEnemy && thing instanceof Player){
+							Player player = (this instanceof Player) ? (Player)this : (Player)thing;
+							DogEnemy enemy = (player == this) ? (DogEnemy)thing : (DogEnemy)this;
+							player.die();
+						}
+
 
 					}
 					else if (thing instanceof PickUpObject){

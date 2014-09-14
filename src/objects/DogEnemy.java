@@ -4,7 +4,9 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import tools.Animation;
+import tools.DeathAnimation;
 import tools.ImageLibrary;
+import tools.SoundLibrary;
 
 public class DogEnemy extends Enemy {
 	//Dog
@@ -12,6 +14,7 @@ public class DogEnemy extends Enemy {
 	private static Animation dogAnimLeftStatic;
 	private static Animation dogAnimRightStatic;
 	private static Animation dogAnimRightWalking;
+	private static DeathAnimation deathAnim;
 	private static final long ANIMATION_DELAY = 100;
 
 	public DogEnemy(int x, int y) {
@@ -39,17 +42,42 @@ public class DogEnemy extends Enemy {
 
 	dogAnimRightStatic = new Animation();
 	dogAnimRightStatic.addFrame(ImageLibrary.get("RdogStaticSprite.png"),ANIMATION_DELAY);
+
+	deathAnim = new DeathAnimation();
+	deathAnim.addFrame(ImageLibrary.get("death1Sprite.png"), 100);
+	deathAnim.addFrame(ImageLibrary.get("death2Sprite.png"), 100);
+	deathAnim.addFrame(ImageLibrary.get("death3Sprite.png"), 100);
+	deathAnim.addFrame(ImageLibrary.get("death4Sprite.png"), 100);
+	deathAnim.addFrame(ImageLibrary.get("death5Sprite.png"), 100);
 	}
 
 	@Override
 	public void updateAnimation() {
-		// TODO Auto-generated method stub
 
+		if (dead){
+			this.movement = movement.ZERO_VECTOR;
+		}
+
+		if (this.movement.x() == 0){
+			if (this.animation == dogAnimRightWalking) this.animation = dogAnimRightStatic;
+			else if (this.animation == dogAnimLeftWalking) this.animation = dogAnimLeftStatic;
+		}
+		else if (this.movement.x() > 0){
+			this.animation = dogAnimRightWalking;
+		}
+		else if (this.movement.x() < 0){
+			this.animation = dogAnimLeftWalking;
+		}
 	}
 
 	@Override
-	public void kill() {
-		// TODO Auto-generated method stub
-
+	public void kill(){
+		this.animation = deathAnim;
+		if(!dead){
+			dead = true;
+			SoundLibrary.playSound("dogdead.wav");
+			deathAnim.start();
+		}
+		dead = true;
 	}
 }

@@ -25,17 +25,6 @@ public class CatEnemy extends Enemy {
 
 	}
 
-	public void kill(){
-		this.animation = deathAnim;
-		if(!dead){
-			dead = true;
-			SoundLibrary.playSound("catdead.wav");
-			deathAnim.start();
-		}
-		dead = true;
-	}
-
-
 	static {
 		//Cat
 		catAnimLeftWalking = new Animation();
@@ -85,5 +74,15 @@ public class CatEnemy extends Enemy {
 		}
 		// TODO Auto-generated method stub
 
+	}
+
+	public void kill(){
+		this.animation = deathAnim;
+		if(!dead){
+			dead = true;
+			SoundLibrary.playSound("catdead.wav");
+			deathAnim.start();
+		}
+		dead = true;
 	}
 }
