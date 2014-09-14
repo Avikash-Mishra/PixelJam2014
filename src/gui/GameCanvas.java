@@ -114,6 +114,10 @@ public class GameCanvas extends Canvas {
 					player.transform();
 				}
 			}
+			else if (code == KeyEvent.VK_ESCAPE){
+				player.die();
+			}
+
 		}
 
 		@Override
