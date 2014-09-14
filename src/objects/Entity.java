@@ -1,6 +1,7 @@
 package objects;
 
 import java.awt.Rectangle;
+import java.util.LinkedList;
 import java.util.List;
 
 import main.Constants;
@@ -17,7 +18,7 @@ public abstract class Entity extends GameObject{
 
 	protected boolean grounded = true;
 	protected Vector2D movement = new Vector2D(0,0);
-	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10);
+	private static final Vector2D JUMP_VECTOR = new Vector2D(0,-10f);
 
 	public Entity(int x, int y){
 		super(x,y);
@@ -84,7 +85,9 @@ public abstract class Entity extends GameObject{
 
 	public void applyGravity(List<Tile> nearby){
 
-		grounded = checkBelow(nearby,Direction.BELOW);
+		boolean[] surroundings = checkSurroundings(nearby);
+		// array[0] = north, array[1] = south, array[2] = east, array[3] = west
+		grounded = surroundings[1];
 
 		if (!grounded && !movement.atTerminalVelocity()){
 			movement = movement.add(Constants.GRAVITY_VECTOR);
@@ -93,47 +96,37 @@ public abstract class Entity extends GameObject{
 	}
 
 	/**
-	 * Check a list of tiles and return true if something is below, left, right, or above this entity.
-	 * @param tilesToCheck: those tiles that should be checked. Get these by calling nearby method.
-	 * @param dir: direction to check
-	 * @return: list of tiles below, above, left, or right.
+	 * Check if you are touching a tile in your surroundings.
+	 * Return a 4-sized array: north, south, east, west.
 	 */
-	private boolean checkBelow(List<Tile> tilesToCheck, Direction dir){
+	private boolean[] checkSurroundings(List<Tile> nearby){
 
-		Rectangle r = null;
-		switch(dir){
+		Rectangle above = new Rectangle(getX(),getY()-1,Constants.PLAYER_WIDTH,1);
+		Rectangle left = new Rectangle(getX()-1,getY(),1,Constants.PLAYER_HEIGHT);
+		Rectangle right = new Rectangle(getX()+Constants.PLAYER_WIDTH+1,getY(),1,Constants.PLAYER_HEIGHT);
+		Rectangle below = new Rectangle(getX(),getY()+Constants.PLAYER_HEIGHT+1,Constants.PLAYER_WIDTH,1);
 
-		case ABOVE:
-			r = new Rectangle(getX(),getY()-1,Constants.PLAYER_WIDTH,1);
-			break;
-		case LEFT:
-			r = new Rectangle(getX()-1,getY(),1,Constants.PLAYER_HEIGHT);
-			break;
-		case RIGHT:
-			r = new Rectangle(getX()+Constants.PLAYER_WIDTH+1,getY(),1,Constants.PLAYER_HEIGHT);
-			break;
-		case BELOW:
-			r = new Rectangle(getX(),getY()+Constants.PLAYER_HEIGHT+1,Constants.PLAYER_WIDTH,1);
+		boolean north, south, east, west;
+		north = south = east = west = false;
 
-		}
-
-		for (Tile tile : tilesToCheck){
+		for (Tile tile : nearby){
 			Rectangle bounding = tile.boundingBox();
 
-			if (r.intersects(bounding)){
-				//Fall through water?
-				if (tile instanceof River){
-					return false;
-				}
-				return true;
+			if (below.intersects(bounding)){
+				if (!(tile instanceof River)) south = true;
 			}
+			else if (above.intersects(bounding)){
+				if (!(tile instanceof River)) north = true;
+			}
+			else if (right.intersects(bounding)){
+				if (!(tile instanceof River)) east = true;
+			}
+			else if (left.intersects(bounding)){
+				if (!(tile instanceof River)) west = true;
+			}
+
 		}
-		return false;
-
-	}
-
-	private enum Direction{
-		ABOVE,LEFT,RIGHT,BELOW;
+		return new boolean[]{ north, south, east, west };
 	}
 
 	/**
