@@ -34,7 +34,8 @@ public abstract class Entity extends GameObject {
 	}
 
 	public void jump() {
-		if (!grounded) return;
+		if (!grounded || Player.dead)
+			return;
 		movement = movement.add(JUMP_VECTOR);
 	}
 
