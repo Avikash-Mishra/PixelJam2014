@@ -12,28 +12,17 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-
-<<<<<<< HEAD
 	private static Type type = Type.CAT;
-=======
-
-	public static Type type = Type.CAT;
->>>>>>> 4c1ffbe9e83b6cc7345ba8fbd97c30ba0d382373
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 	private static Animation prevAnimation;
 	//transform
 	private static Animation transform ;
-
-<<<<<<< HEAD
-
 	//Not used
 	//public static boolean transforming = false;
 	//public static long transTime;
-=======
 	public static Animation death = new DeathAnimation();
 	public static boolean dead = false;
->>>>>>> 4c1ffbe9e83b6cc7345ba8fbd97c30ba0d382373
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -244,20 +233,12 @@ public class Player extends Entity {
 	}
 
 	public void die() {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-		System.out.println("Dead");
-		//Play sound when dead
-
-		//	SoundLibrary.playSound("yolo.wav");
-
-=======
 		this.animation = death;
 		if(!dead){
+
 			death.start();
 		}
 		dead = true;
->>>>>>> 4c1ffbe9e83b6cc7345ba8fbd97c30ba0d382373
 	}
 
 }

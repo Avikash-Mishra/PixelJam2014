@@ -14,10 +14,7 @@ import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
-<<<<<<< HEAD
 import objects.Player.Type;
-=======
->>>>>>> 4c1ffbe9e83b6cc7345ba8fbd97c30ba0d382373
 import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
