@@ -11,3 +11,7 @@ A,D,Left,Right: move
 W,Up: jump
 Spacebar: change form
 Escape: suicide
+
+(Requires Java 7. Run Sugoi Tran.jar as an executable Java program)
+
+http://www.github.com/Avikash-Mishra/PixelJam2014
