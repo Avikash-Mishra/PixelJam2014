@@ -85,7 +85,10 @@ public abstract class Entity extends GameObject {
 				if (playerBounding.intersects(thing.boundingBox())){
 
 					if (thing instanceof River){
-						// do nothing
+						if (this instanceof Player){
+							Player p = (Player)this;
+							if (p.isCat()) p.die();
+						}
 					}
 					else if (thing instanceof Wall){
 						break moving;

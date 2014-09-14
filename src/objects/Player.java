@@ -71,6 +71,10 @@ public class Player extends Entity {
 
 	}
 
+	public boolean isCat(){
+		return type == Type.CAT;
+	}
+
 	private class Transform extends Thread{
 
 		@Override
