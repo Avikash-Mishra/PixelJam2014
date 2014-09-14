@@ -16,6 +16,8 @@ import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
+import objects.Player.Type;
+import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
 

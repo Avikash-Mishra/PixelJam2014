@@ -9,6 +9,7 @@ import objects.Entity;
 import objects.PickUpObject;
 import objects.Player;
 import objects.Tile;
+import tools.SoundLibrary;
 
 public class Main {
 
@@ -25,6 +26,6 @@ public class Main {
 			System.exit(1);
 		}
 
-		
+
 	}
 }

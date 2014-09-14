@@ -5,18 +5,20 @@ import java.awt.event.KeyEvent;
 import main.Constants;
 import tools.Animation;
 import tools.ImageLibrary;
+import tools.SoundLibrary;
 import tools.Vector2D;
 
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
 
-	public static Type type = Type.CAT;
+	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 	private static Animation prevAnimation;
 	//transform
 	private static Animation transform ;
+
 
 	//Not used
 	//public static boolean transforming = false;
@@ -207,6 +209,10 @@ public class Player extends Entity {
 	public void die() {
 		// TODO Auto-generated method stub
 		System.out.println("Dead");
+		//Play sound when dead
+
+		//	SoundLibrary.playSound("yolo.wav");
+
 	}
 
 }
