@@ -4,31 +4,45 @@ import java.awt.event.KeyEvent;
 
 import main.Constants;
 import tools.Animation;
+import tools.DeathAnimation;
 import tools.ImageLibrary;
 import tools.Vector2D;
 
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-	
+
 	private static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
-	
+
 	public static Animation transform = new Animation();
 	public static boolean transforming = false;
 	public static long transTime;
+
+	public static Animation death = new DeathAnimation();
+	public static boolean dead = false;
 
 	public Player(int x, int y) {
 		super(x, y);
 		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
 		transform.start();
+		death.addFrame(ImageLibrary.get("death1Sprite.png"), 100);
+		death.addFrame(ImageLibrary.get("death2Sprite.png"), 100);
+		death.addFrame(ImageLibrary.get("death3Sprite.png"), 100);
+		death.addFrame(ImageLibrary.get("death4Sprite.png"), 100);
+		death.addFrame(ImageLibrary.get("death5Sprite.png"), 100);
 		this.animation = type.getAnimationStill(animation);
 		animation.start();
 		movement = new Vector2D(0,0);
 	}
 
 	public void move(int keycode){
+		if(dead){
+			movement.setX(0);
+			this.animation = death;
+			return;
+		}
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
 			movement.setX(-STEP_SIZE);
 			this.animation = type.getAnimationLeft();
@@ -52,12 +66,17 @@ public class Player extends Entity {
 	}
 
 	public void transform(){
+		if(dead){
+			movement.setX(0);
+			this.animation = death;
+			return;
+		}
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
 		this.animation = transform;
 		((Thread) new Transform()).start();
 	}
-	
+
 	private class Transform extends Thread{
 
 		@Override
@@ -66,7 +85,7 @@ public class Player extends Entity {
 			while(System.currentTimeMillis()-time<250){}
 			animation = type.checkAnimationState(animation);
 		}
-		
+
 	}
 
 	private enum Type{
@@ -123,7 +142,9 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationLeft(){
-			
+			if(dead){
+				return death;
+			}
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
@@ -132,7 +153,9 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationRight(){
-			
+			if(dead){
+				return death;
+			}
 			if (type == Type.CAT){
 				return catAnimRightWalking;
 			} else {
@@ -141,7 +164,9 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationStill(Animation animation){
-			
+			if(dead){
+				return death;
+			}
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
@@ -159,6 +184,9 @@ public class Player extends Entity {
 		}
 
 		public Animation checkAnimationState(Animation animation){
+			if(dead){
+				return death;
+			}
 			if (type == Type.CAT){
 				if (animation == dogAnimLeftWalking){
 					return catAnimLeftWalking;
@@ -186,8 +214,11 @@ public class Player extends Entity {
 	}
 
 	public void die() {
-		// TODO Auto-generated method stub
-		System.out.println("Dead");
+		this.animation = death;
+		if(!dead){
+			death.start();
+		}
+		dead = true;
 	}
 
 }

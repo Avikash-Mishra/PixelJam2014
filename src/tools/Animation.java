@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Animation {
 
-	private List<BufferedImage> images = new ArrayList<BufferedImage>();
-	private List<Long> times = new ArrayList<Long>();
-	private boolean running = false;
-	private long totalTime = 0;
+	protected List<BufferedImage> images = new ArrayList<BufferedImage>();
+	protected List<Long> times = new ArrayList<Long>();
+	protected boolean running = false;
+	protected long totalTime = 0;
 
 	public Animation(){}
 
@@ -24,7 +24,7 @@ public class Animation {
 	}
 
 
-	private long startTime = 0;
+	protected long startTime = 0;
 
 	public void start(){
 		running = true;
