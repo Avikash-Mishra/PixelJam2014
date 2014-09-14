@@ -112,16 +112,16 @@ public class World extends Thread{
 						if(e instanceof Enemy){
 							e.step(map);
 						}
-
-
-						for(PickUpObject p : getPickUpCollisions(player)){
-							p.onCollision(player);
-							pickups.remove(p);
-
-						}
-
-						previousUpdate = System.currentTimeMillis();
 					}
+
+
+					for(PickUpObject p : getPickUpCollisions(player)){
+						p.onCollision(player);
+						pickups.remove(p);
+
+					}
+
+					previousUpdate = System.currentTimeMillis();
 				}
 			}
 			else{

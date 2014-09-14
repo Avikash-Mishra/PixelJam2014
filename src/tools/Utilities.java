@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import objects.Danger;
 import objects.GameObject;
 import objects.River;
 
@@ -38,7 +39,7 @@ public class Utilities {
 	 */
 	public static boolean colliding(Vector2D vector, List<? extends GameObject> list){
 		for (GameObject thing : list){
-			if (Utilities.intersecting(vector, thing.boundingBox())) return true;
+			if (Utilities.intersecting(vector, thing.boundingBox()) && !(thing instanceof Danger)) return true;
 		}
 		return false;
 	}
@@ -53,8 +54,8 @@ public class Utilities {
 	public static boolean colliding(Rectangle rect, List<? extends GameObject> list){
 		for (GameObject thing : list){
 			//Touching object check - Fall through water
-			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){ 
-				return true; 
+			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River) && !(thing instanceof Danger)){
+				return true;
 			}
 		}
 		return false;
