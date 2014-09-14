@@ -1,6 +1,7 @@
 package objects;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import main.Constants;
@@ -45,7 +46,16 @@ public abstract class Entity extends GameObject {
 	 */
 	public void step(List<Tile> tiles) {
 		// get nearby tiles
-		List<Tile> nearby = Utilities.getNearby(position, tiles);
+
+		List<Tile> test = Utilities.getNearby(position, tiles);
+		List<Tile> nearby = new ArrayList<Tile>();
+
+		for(Tile t : test){
+			if(!(t instanceof CheckPoint)){
+				nearby.add(t);
+			}
+		}
+
 		// apply gravity
 		applyGravity(nearby);
 		// move
@@ -60,6 +70,7 @@ public abstract class Entity extends GameObject {
 		// repeatedly add the unit vector onto the position until you either
 		// move down the entire length of the movement vector or you collide
 		// wit something
+
 		while (distTravelled < distBetween // check you haven't travelled too
 											// far
 				&& !(Utilities.colliding(new Rectangle((int) pos.add(unit).x(),
@@ -71,6 +82,7 @@ public abstract class Entity extends GameObject {
 			distTravelled++;
 		}
 		position = pos;
+
 		// if you didn't move vertically, then you must have either
 		// hit the ground or you're at the maximum of the jumping parabola
 		// if you hit the ground, set velocity_y <-- 0
@@ -79,6 +91,7 @@ public abstract class Entity extends GameObject {
 				movement.setY(0);
 			}
 		}
+
 	}
 
 	public void applyGravity(List<Tile> nearby) {
@@ -88,6 +101,7 @@ public abstract class Entity extends GameObject {
 		boolean south = surroundings[1];
 		boolean east = surroundings[2];
 		boolean west = surroundings[3];
+
 
 		grounded = south;
 		if (!grounded && !movement.atTerminalVelocity()) {
