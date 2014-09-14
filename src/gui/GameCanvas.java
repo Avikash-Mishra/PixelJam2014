@@ -19,7 +19,7 @@ import tools.ImageLibrary;
  */
 public class GameCanvas extends Canvas {
 
-
+	private long lastJump = 0;
 	private GameFrame parent;
 	private World world;
 	private Player player;
@@ -71,10 +71,15 @@ public class GameCanvas extends Canvas {
 			int code = e.getKeyCode();
 
 		    if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A || code == KeyEvent.VK_D){
-				player.move(code);
+
+					player.move(code);
+
 			}
 			else if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
-				player.jump();
+		    	if (System.currentTimeMillis() - lastJump > 200){
+		    		player.jump();
+		    		lastJump = System.currentTimeMillis();
+		    	}
 			}
 			else if (code == KeyEvent.VK_SPACE){
 				player.transform();
