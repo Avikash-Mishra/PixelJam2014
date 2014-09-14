@@ -28,7 +28,7 @@ public class World extends Thread{
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/30l;
+	private static final long UPDATE_INTERVAL = SECOND/60l;
 
 	public int mapWidth=0, mapHeight=0;
 

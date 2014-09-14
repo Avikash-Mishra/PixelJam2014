@@ -147,7 +147,9 @@ public abstract class Entity extends GameObject {
 				movement.setY(4);
 				movement.setX(0);
 			}
-			else if ( (movement.y() < 0)&&(north)) movement.setY(0);
+			else if ( (movement.y() < 0)&&(north)){
+				movement.setY(0);
+			}
 		}
 
 	}
