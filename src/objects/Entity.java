@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import main.Constants;
 import tools.Utilities;
 import tools.Vector2D;
@@ -33,7 +34,7 @@ public abstract class Entity extends GameObject {
 	}
 
 	public void jump() {
-		if (!grounded)
+		if (!grounded || Player.dead)
 			return;
 		movement = movement.add(JUMP_VECTOR);
 	}
@@ -58,6 +59,7 @@ public abstract class Entity extends GameObject {
 
 		// apply gravity
 		applyGravity(nearby);
+
 		// move
 		if (movement.isZeroVector())
 			return;
@@ -71,16 +73,39 @@ public abstract class Entity extends GameObject {
 		// move down the entire length of the movement vector or you collide
 		// wit something
 
-		while (distTravelled < distBetween // check you haven't travelled too
-											// far
-				&& !(Utilities.colliding(new Rectangle((int) pos.add(unit).x(),
-						(int) pos.add(unit).y(), Constants.PLAYER_WIDTH,
-						Constants.PLAYER_HEIGHT), nearby))) // check you haven't
-															// hit anything
-		{
+		// repeatedly add unit vector onto the position
+		// at each step, check if You've travelled the length of the movement vector
+		// or if you have collided with anything
+		moving: while (true){
+
+			if (distTravelled+1 >= distBetween) break moving; //travelled too far
+			Rectangle playerBounding = new Rectangle((int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
+
+			for (GameObject thing : nearby){
+				if (playerBounding.intersects(thing.boundingBox())){
+
+					if (thing instanceof River){
+						if (this instanceof Player){
+							Player p = (Player)this;
+							if (p.isCat()) p.die();
+						}
+					}
+					else if (thing instanceof Wall){
+						break moving;
+					}
+					else if (thing instanceof Danger){
+						System.out.println("Dead");
+					}
+
+				}
+
+			}
 			pos = pos.add(unit);
 			distTravelled++;
+
 		}
+
+		// update actual position
 		position = pos;
 
 		// if you didn't move vertically, then you must have either
@@ -109,8 +134,18 @@ public abstract class Entity extends GameObject {
 		}
 
 		if (!grounded){
-			//if ( (movement.x() > 0)&&(east) || (movement.x()<0)&&(west) ) movement.setY(0);
-			if ( (movement.y() < 0)&&(north)) movement.setY(0);
+
+			//System.out.println( "movement.x() > 0 " + (movement.x() > 0) + " ||| east " + east + " ||| movement.y() <= 0 " + (movement.y() <= 0));
+			//System.out.println(movement);
+			if (movement.x() > 0 && east){
+				movement.setY(4);
+				movement.setX(0);
+			}
+			else if (movement.x() < 0 && west){
+				movement.setY(4);
+				movement.setX(0);
+			}
+			else if ( (movement.y() < 0)&&(north)) movement.setY(0);
 		}
 
 	}
@@ -120,30 +155,22 @@ public abstract class Entity extends GameObject {
 	 * array: north, south, east, west.
 	 */
 	private boolean[] checkSurroundings(List<Tile> nearby) {
-		Rectangle above = new Rectangle(getX(), getY() - 1,
-				Constants.PLAYER_WIDTH, 1);
-		Rectangle left = new Rectangle(getX() - 1, getY(), 1,
-				Constants.PLAYER_HEIGHT);
-		Rectangle right = new Rectangle(getX() + Constants.PLAYER_WIDTH + 1,
-				getY(), 1, Constants.PLAYER_HEIGHT);
-		Rectangle below = new Rectangle(getX(), getY()
-				+ Constants.PLAYER_HEIGHT + 1, Constants.PLAYER_WIDTH, 1);
+		Rectangle above = new Rectangle(getX(), getY() - 1, Constants.PLAYER_WIDTH, 1);
+		Rectangle left = new Rectangle(getX() - 1, getY(), 1, Constants.PLAYER_HEIGHT);
+		Rectangle right = new Rectangle(getX() + Constants.PLAYER_WIDTH + 1, getY(), 1, Constants.PLAYER_HEIGHT);
+		Rectangle below = new Rectangle(getX(), getY() + Constants.PLAYER_HEIGHT + 1, Constants.PLAYER_WIDTH, 1);
 		boolean north, south, east, west;
 		north = south = east = west = false;
 		for (Tile tile : nearby) {
 			Rectangle bounding = tile.boundingBox();
 			if (below.intersects(bounding)) {
-				if (!(tile instanceof River))
-					south = true;
+				if (!(tile instanceof River)) south = true;
 			} else if (above.intersects(bounding)) {
-				if (!(tile instanceof River))
-					north = true;
+				if (!(tile instanceof River)) north = true;
 			} else if (right.intersects(bounding)) {
-				if (!(tile instanceof River))
-					east = true;
+				if (!(tile instanceof River)) east = true;
 			} else if (left.intersects(bounding)) {
-				if (!(tile instanceof River))
-					west = true;
+				if (!(tile instanceof River)) west = true;
 			}
 		}
 		return new boolean[] { north, south, east, west };
