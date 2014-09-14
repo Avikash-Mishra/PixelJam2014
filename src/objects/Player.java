@@ -10,20 +10,26 @@ import tools.Vector2D;
 public class Player extends Entity {
 	private static final int STEP_SIZE = 10;
 	private static final long ANIMATION_DELAY = 100;
-	
-	private static Type type = Type.CAT;
+
+	public static Type type = Type.CAT;
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
-	
-	public static Animation transform = new Animation();
-	public static boolean transforming = false;
-	public static long transTime;
+	private static Animation prevAnimation;
+	//transform
+	private static Animation transform ;
+
+	//Not used
+	//public static boolean transforming = false;
+	//public static long transTime;
 
 	public Player(int x, int y) {
 		super(x, y);
+		//Transform
+		transform = new Animation();
 		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
 		transform.start();
 		this.animation = type.getAnimationStill(animation);
+		this.prevAnimation = animation;
 		animation.start();
 		movement = new Vector2D(0,0);
 	}
@@ -32,17 +38,20 @@ public class Player extends Entity {
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A){
 			movement.setX(-STEP_SIZE);
 			this.animation = type.getAnimationLeft();
+			this.prevAnimation = animation;
 		}
 		else if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(STEP_SIZE);
 			this.animation = type.getAnimationRight();
+			this.prevAnimation = animation;
 		}
 	}
 
 	public void stop(int keycode){
 		if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D){
 			movement.setX(0);
-			this.animation = type.getAnimationStill(animation);
+			this.animation = type.getAnimationStill(prevAnimation);
+			this.prevAnimation = animation;
 		}
 	}
 
@@ -54,22 +63,27 @@ public class Player extends Entity {
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
+
+		//Transform and then face correct direction
+		this.prevAnimation = animation;
 		this.animation = transform;
 		((Thread) new Transform()).start();
+
 	}
-	
+
 	private class Transform extends Thread{
 
 		@Override
 		public void run() {
 			long time = System.currentTimeMillis();
-			while(System.currentTimeMillis()-time<250){}
-			animation = type.checkAnimationState(animation);
+			while(System.currentTimeMillis()-time<80){}
+			animation = type.checkAnimationState(prevAnimation);
+			prevAnimation = animation;
 		}
-		
+
 	}
 
-	private enum Type{
+	public enum Type{
 		DOG, CAT;
 		//Cat
 		private static Animation catAnimLeftWalking;
@@ -81,6 +95,7 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
+
 
 		static {
 
@@ -120,10 +135,11 @@ public class Player extends Entity {
 
 			dogAnimRightStatic = new Animation();
 			dogAnimRightStatic.addFrame(ImageLibrary.get("RdogStaticSprite.png"),ANIMATION_DELAY);
+
 		}
 
 		public Animation getAnimationLeft(){
-			
+
 			if (type == Type.CAT){
 				return catAnimLeftWalking;
 			} else {
@@ -132,7 +148,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationRight(){
-			
+
 			if (type == Type.CAT){
 				return catAnimRightWalking;
 			} else {
@@ -141,7 +157,7 @@ public class Player extends Entity {
 		}
 
 		public Animation getAnimationStill(Animation animation){
-			
+
 			if (type == Type.CAT){
 				if (animation == catAnimLeftWalking){
 					return catAnimLeftStatic;
@@ -181,7 +197,6 @@ public class Player extends Entity {
 				}
 			}
 		}
-
 
 	}
 
