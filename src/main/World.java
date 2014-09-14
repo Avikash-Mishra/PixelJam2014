@@ -1,5 +1,7 @@
 package main;
 
+import gui.Camera;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,18 +10,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import objects.Enemy;
 import objects.Danger;
+import objects.Enemy;
 import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
-import objects.Player.Type;
-import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
-import tools.Vector2D;
-import gui.Camera;
 
 public class World extends Thread{
 	private List<Tile> map;
@@ -52,30 +50,31 @@ public class World extends Thread{
 	}
 
 	public void draw(Graphics g, Dimension d, Camera cam){
+		BufferedImage canvas = new BufferedImage((int)d.getWidth(),(int)d.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics preG = canvas.getGraphics();
 		//Draw background
-		drawBackground(g, d, cam);
+		drawBackground(preG, d, cam);
+		//Draw Player
+		if (player != null){
+			player.draw(preG,cam);
+		}
 		//Draw the world
 		for (Tile items: map){
-			items.draw(g,cam);
+			items.draw(preG,cam);
 		}
 		//Draw the characters
 		for (Entity entity: entities){
-			entity.draw(g,cam);
+			entity.draw(preG,cam);
 		}
 		//Draw Pick Ups
 		for (PickUpObject items: pickups){
-			items.draw(g,cam);
+			items.draw(preG,cam);
 		}
 
-		//Draw Player
-		if (player != null){
-			player.draw(g,cam);
-		}
+		g.drawImage(canvas,0,0,null);
 	}
 
 	private void drawBackground(Graphics g, Dimension d , Camera cam){
-		g.setColor(Color.blue);
-		g.fillRect(0,0,d.width,d.height);
 		BufferedImage bgimg = ImageLibrary.get("backgroundRear.png");
 		g.drawImage(bgimg, (int)d.getWidth()/2-bgimg.getWidth()/2, (int)d.getHeight()/2-bgimg.getHeight()/2, null);
 		BufferedImage fgimg = ImageLibrary.get("backgroundForeground.png");
@@ -98,11 +97,6 @@ public class World extends Thread{
 						if(t instanceof Danger){
 							player.die();
 						}
-						if (t instanceof River){
-							if (player.type == Type.CAT){
-								player.die();
-							}
-						}
 
 					}
 
@@ -118,6 +112,7 @@ public class World extends Thread{
 						if(e instanceof Enemy){
 							e.step(map);
 						}
+					}
 
 
 					for(PickUpObject p : getPickUpCollisions(player)){
@@ -127,7 +122,6 @@ public class World extends Thread{
 					}
 
 					previousUpdate = System.currentTimeMillis();
-				}
 				}
 			}
 			else{
@@ -176,6 +170,4 @@ public class World extends Thread{
 		Rectangle r2 = obj2.boundingBox();
 		return r1.intersects(r2);
 	}
-
-
 }

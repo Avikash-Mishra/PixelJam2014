@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Checkbox;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 import java.util.List;
 
 import objects.CatEnemy;
+import objects.CheckPoint;
 import objects.DogEnemy;
 import objects.Energy;
 import objects.Entity;
@@ -43,6 +45,7 @@ public class Parser {
 	private static final char POINTS = 'N';
 	private static final char CATENEMY = 'A';
 	private static final char DOGENEMY = 'B';
+	private static final char CHECKPOINT = 'T';
 
 
 	private static int col = 0;
@@ -142,6 +145,10 @@ public class Parser {
 				case DOGENEMY:
 						DogEnemy dogEnemy = new DogEnemy(col, row);
 						entities.add(dogEnemy);
+						break;
+				case CHECKPOINT:
+						CheckPoint checkPoint = CheckPoint.newCheckpoint(col, row);
+						tiles.add(checkPoint);
 						break;
 				default:
 					throw new IOException("Invalid character " + c + " found when parsing " + getPosition());

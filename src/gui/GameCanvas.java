@@ -36,7 +36,7 @@ public class GameCanvas extends Canvas {
 	public GameCanvas(int width, int height, GameFrame parent, World world, Player player) {
 		super(parent.getWidth(), parent.getHeight());
 		this.parent = parent;
-		parent.setBackground(Color.BLUE);
+		parent.setBackground(Color.GRAY);
 		this.world = world;
 		this.player = player;
 		this.addKeyListener(new Listener());
