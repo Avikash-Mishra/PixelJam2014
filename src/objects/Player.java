@@ -80,7 +80,7 @@ public class Player extends Entity {
 		}
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-
+		SoundLibrary.playSound("transform.wav");
 		//Transform and then face correct direction
 		this.prevAnimation = animation;
 		this.animation = transform;
@@ -240,7 +240,11 @@ public class Player extends Entity {
 	public void die() {
 		this.animation = death;
 		if(!dead){
-			SoundLibrary.playSound("catdead.wav");
+			if (isCat()){
+				SoundLibrary.playSound("catdead.wav");
+			} else {
+				SoundLibrary.playSound("dogdead.wav");
+			}
 			death.start();
 		}
 		dead = true;

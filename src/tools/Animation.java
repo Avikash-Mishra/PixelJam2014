@@ -45,6 +45,7 @@ public class Animation {
 		if(!running){
 			return images.get(0);
 		}else{
+
 			long curTime = (System.currentTimeMillis() - startTime) % totalTime ;
 			for(int i=0; i<times.size(); i++){
 				if(curTime - times.get(i) <= 0){

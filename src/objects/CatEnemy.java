@@ -22,6 +22,7 @@ public class CatEnemy extends Enemy {
 		super(x, y);
 		this.animation = catAnimRightStatic;
 		this.STEP_SIZE = 10;
+
 	}
 
 	public void kill(){
