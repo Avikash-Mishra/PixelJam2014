@@ -1,5 +1,7 @@
 package main;
 
+import gui.Camera;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,17 +10,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import objects.Enemy;
 import objects.Danger;
+import objects.Enemy;
 import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
-import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
-import tools.Vector2D;
-import gui.Camera;
 
 public class World extends Thread{
 	private List<Tile> map;
@@ -28,7 +27,7 @@ public class World extends Thread{
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/30l;
+	private static final long UPDATE_INTERVAL = SECOND/60l;
 
 	public int mapWidth=0, mapHeight=0;
 
@@ -51,25 +50,29 @@ public class World extends Thread{
 	}
 
 	public void draw(Graphics g, Dimension d, Camera cam){
+		BufferedImage canvas = new BufferedImage((int)d.getWidth(),(int)d.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics preG = canvas.getGraphics();
 		//Draw background
-		drawBackground(g, d, cam);
+		drawBackground(preG, d, cam);
 		//Draw the world
 		for (Tile items: map){
-			items.draw(g,cam);
+			items.draw(preG,cam);
 		}
 		//Draw the characters
 		for (Entity entity: entities){
-			entity.draw(g,cam);
+			entity.draw(preG,cam);
 		}
 		//Draw Pick Ups
 		for (PickUpObject items: pickups){
-			items.draw(g,cam);
+			items.draw(preG,cam);
 		}
 
 		//Draw Player
 		if (player != null){
-			player.draw(g,cam);
+			player.draw(preG,cam);
 		}
+
+		g.drawImage(canvas,0,0,null);
 	}
 
 	private void drawBackground(Graphics g, Dimension d , Camera cam){
@@ -90,21 +93,21 @@ public class World extends Thread{
 			if (timeElapsed > UPDATE_INTERVAL){
 
 				synchronized (key) {
-					
+
 					player.step(map);
 
 					for(Tile t : getTileCollisions(player)){
 						if(t instanceof Danger){
 							player.die();
 						}
-						
+
 					}
 
 					for(Entity e : getEntityCollisions(player)){
 						if(e instanceof Danger){
 							player.die();
 						}
-						
+
 					}
 
 
