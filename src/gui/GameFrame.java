@@ -17,9 +17,9 @@ import objects.Tile;
 /**
  * Main class for game, starts the game and contains the main GUI for displaying
  * the game
- * 
+ *
  * @author Preet Nijjar
- * 
+ *
  */
 public class GameFrame extends JFrame {
 
@@ -33,7 +33,7 @@ public class GameFrame extends JFrame {
 
 	public GameFrame(List<Entity> entities, List<Tile> tiles,
 			List<PickUpObject> pickups, Player player) {
-		super();		
+		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// Set JFrame size to screen width and height
@@ -41,7 +41,7 @@ public class GameFrame extends JFrame {
 		this.setSize(tk.getScreenSize());
 		this.setResizable(true);
 
-		final World world = new World(entities, tiles, pickups, player);
+		World world = new World(entities, tiles, pickups, player);
 		gameCanvas = new GameCanvas(this.getWidth(), this.getHeight(), this,
 				world, player);
 		gameCanvas.setBackground(Color.WHITE);

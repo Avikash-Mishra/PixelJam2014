@@ -27,9 +27,12 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		//Transform
+		dead = false;
 		transform = new Animation();
 		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
 		transform.start();
+		death.stop();
+		death.empty();
 		death.addFrame(ImageLibrary.get("death1Sprite.png"), 100);
 		death.addFrame(ImageLibrary.get("death2Sprite.png"), 100);
 		death.addFrame(ImageLibrary.get("death3Sprite.png"), 100);

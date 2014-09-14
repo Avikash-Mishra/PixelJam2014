@@ -20,6 +20,11 @@ public class Animation {
 			totalTime += stepTime;
 		}else if(running){
 			System.err.println("Animations cannot be edited once started");
+			try{
+			throw new Exception();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -33,6 +38,12 @@ public class Animation {
 
 	public void stop(){
 		running = false;
+	}
+
+	public void empty(){
+		images = new ArrayList<BufferedImage>();
+		times = new ArrayList<Long>();
+		totalTime = 0;
 	}
 
 
