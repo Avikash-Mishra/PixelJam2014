@@ -85,7 +85,7 @@ public class Player extends Entity {
 		energy -= 30;
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-
+		SoundLibrary.playSound("transform.wav");
 		//Transform and then face correct direction
 		this.prevAnimation = animation;
 		this.animation = transform;
@@ -109,6 +109,11 @@ public class Player extends Entity {
 			prevAnimation = animation;
 		}
 
+	}
+
+	@Deprecated
+	public void updateAnimation(){
+		// DO NOTHING, SHOULD NEVER BE CALLED
 	}
 
 	public enum Type{

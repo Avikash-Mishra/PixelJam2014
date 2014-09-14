@@ -25,6 +25,7 @@ public class World extends Thread{
 	private List<Tile> map;
 	private List<Entity> entities;
 	private List<PickUpObject> pickups;
+	private List<GameObject> everything;
 
 	private Player player;
 
@@ -42,6 +43,10 @@ public class World extends Thread{
 		this.entities = entities;
 		this.pickups = pickUps;
 		this.player = player;
+		everything = new ArrayList<>();
+		everything.addAll(map);
+		everything.addAll(entities);
+		everything.addAll(pickUps);
 
 		for(Tile t : map){
 			mapWidth = Math.max(mapWidth, t.getX());
@@ -90,23 +95,15 @@ public class World extends Thread{
 
 				synchronized (key) {
 
-					player.step(map);
-
+					player.step(everything);
 
 					for(Entity e : this.entities){
 						if(e instanceof Enemy){
-							e.step(map);
+							e.step(everything);
 						}
-
-
-						for(PickUpObject p : getPickUpCollisions(player)){
-							p.onCollision(player);
-							pickups.remove(p);
-
-						}
-
 						previousUpdate = System.currentTimeMillis();
 					}
+
 				}
 			}
 			else{

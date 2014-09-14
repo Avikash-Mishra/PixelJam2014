@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import main.Constants;
 import tools.Animation;
+import tools.SoundLibrary;
 import gui.Camera;
 
 public abstract class PickUpObject extends GameObject{
@@ -30,6 +31,7 @@ public abstract class PickUpObject extends GameObject{
 	}
 
 	public void pickup(){
+		SoundLibrary.playSound("coin.wav");
 		canPickUp = false;
 	}
 

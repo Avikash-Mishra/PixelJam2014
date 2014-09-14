@@ -4,6 +4,7 @@ import main.Constants;
 import tools.Animation;
 import tools.Animation;
 import tools.ImageLibrary;
+import tools.SoundLibrary;
 
 
 public class Points extends PickUpObject {
