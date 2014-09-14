@@ -54,11 +54,6 @@ public class World extends Thread{
 		Graphics preG = canvas.getGraphics();
 		//Draw background
 		drawBackground(preG, d, cam);
-
-		//Draw Player
-		if (player != null){
-			player.draw(preG,cam);
-		}
 		//Draw the world
 		for (Tile items: map){
 			items.draw(preG,cam);
@@ -70,6 +65,11 @@ public class World extends Thread{
 		//Draw Pick Ups
 		for (PickUpObject items: pickups){
 			items.draw(preG,cam);
+		}
+
+		//Draw Player
+		if (player != null){
+			player.draw(preG,cam);
 		}
 
 		g.drawImage(canvas,0,0,null);
@@ -117,14 +117,14 @@ public class World extends Thread{
 						}
 
 
-						for(PickUpObject p : getPickUpCollisions(player)){
-							p.onCollision(player);
-							pickups.remove(p);
+					for(PickUpObject p : getPickUpCollisions(player)){
+						p.onCollision(player);
+						pickups.remove(p);
 
-						}
-
-						previousUpdate = System.currentTimeMillis();
 					}
+
+					previousUpdate = System.currentTimeMillis();
+				}
 				}
 			}
 			else{
