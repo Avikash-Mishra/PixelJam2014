@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.Constants;
+import tools.SoundLibrary;
 import tools.Utilities;
 import tools.Vector2D;
 
@@ -37,6 +38,8 @@ public abstract class Entity extends GameObject {
 		if (!grounded || Player.dead)
 			return;
 		movement = movement.add(JUMP_VECTOR);
+		//play sound
+		SoundLibrary.playSound("jump.wav");
 	}
 
 	/**
