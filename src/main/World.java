@@ -28,7 +28,7 @@ public class World extends Thread{
 	private Player player;
 
 	private static final long SECOND = 1000;
-	private static final long UPDATE_INTERVAL = SECOND/30l;
+	private static final long UPDATE_INTERVAL = SECOND/60l;
 
 	public int mapWidth=0, mapHeight=0;
 
@@ -90,21 +90,21 @@ public class World extends Thread{
 			if (timeElapsed > UPDATE_INTERVAL){
 
 				synchronized (key) {
-					
+
 					player.step(map);
 
 					for(Tile t : getTileCollisions(player)){
 						if(t instanceof Danger){
 							player.die();
 						}
-						
+
 					}
 
 					for(Entity e : getEntityCollisions(player)){
 						if(e instanceof Danger){
 							player.die();
 						}
-						
+
 					}
 
 
