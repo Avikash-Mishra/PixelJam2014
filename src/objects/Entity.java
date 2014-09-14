@@ -1,6 +1,7 @@
 package objects;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import main.Constants;
@@ -43,7 +44,14 @@ public abstract class Entity extends GameObject{
 	public void step(List<Tile> tiles){
 
 		// get nearby tiles
-		List<Tile> nearby = Utilities.getNearby(position, tiles);
+		List<Tile> test = Utilities.getNearby(position, tiles);
+		List<Tile> nearby = new ArrayList<Tile>();
+
+		for(Tile t : test){
+			if(!(t instanceof CheckPoint)){
+				nearby.add(t);
+			}
+		}
 
 		// apply gravity
 		applyGravity(nearby);
@@ -61,16 +69,16 @@ public abstract class Entity extends GameObject{
 		// move down the entire length of the movement vector or you collide
 		// wit something
 		while (
-				
+
 			distTravelled < distBetween // check you haven't travelled too far
 			&&
 			!(Utilities.colliding(new Rectangle( (int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT), nearby))) //check you haven't hit anything
-		{			
+		{
 			pos=pos.add(unit);
 			distTravelled++;
 		}
 		position = pos;
-	
+
 		// if you didn't move vertically, then you must have either
 		// hit the ground or you're at the maximum of the jumping parabola
 		// if you hit the ground, set velocity_y <-- 0
@@ -79,7 +87,7 @@ public abstract class Entity extends GameObject{
 				movement.setY(0);
 			}
 		}
-		
+
 	}
 
 	public void applyGravity(List<Tile> nearby){
@@ -89,7 +97,7 @@ public abstract class Entity extends GameObject{
 		boolean onGround = false;
 		for (Tile tile : nearby){
 			Rectangle bounding = tile.boundingBox();
-			
+
 			if (r.intersects(bounding)){
 				//Fall through water?
 				if (tile instanceof River){
@@ -97,7 +105,7 @@ public abstract class Entity extends GameObject{
 					break;
 				}
 				onGround = true;
-				
+
 				break;
 			}
 		}
