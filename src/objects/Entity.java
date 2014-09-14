@@ -48,14 +48,7 @@ public abstract class Entity extends GameObject {
 	public void step(List<Tile> tiles) {
 		// get nearby tiles
 
-		List<Tile> test = Utilities.getNearby(position, tiles);
-		List<Tile> nearby = new ArrayList<Tile>();
-
-		for(Tile t : test){
-			if(!(t instanceof CheckPoint)){
-				nearby.add(t);
-			}
-		}
+		List<Tile> nearby = Utilities.getNearby(position, tiles);
 
 		// apply gravity
 		applyGravity(nearby);
@@ -92,6 +85,12 @@ public abstract class Entity extends GameObject {
 					}
 					else if (thing instanceof Wall){
 						break moving;
+					}
+					else if (thing instanceof CheckPoint){
+						if(this instanceof Enemy){
+							this.movement = movement.horizontalFlip();
+							break moving;
+						}
 					}
 					else if (thing instanceof Danger){
 						System.out.println("Dead");
