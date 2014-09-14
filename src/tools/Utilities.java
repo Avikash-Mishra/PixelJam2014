@@ -53,8 +53,8 @@ public class Utilities {
 	public static boolean colliding(Rectangle rect, List<? extends GameObject> list){
 		for (GameObject thing : list){
 			//Touching object check - Fall through water
-			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){ 
-				return true; 
+			if (rect.intersects(thing.boundingBox()) && !(thing instanceof River)){
+				return true;
 			}
 		}
 		return false;
@@ -68,7 +68,7 @@ public class Utilities {
 	 * @return list of neighbours
 	 */
 	public static <E extends GameObject> List<E> getNearby(Vector2D position, List<E> list){
-		final int MAX_DISTANCE = 100;
+		final int MAX_DISTANCE = 50;
 		List<E> neighbours = new ArrayList<>();
 		for (E thing : list){
 			Vector2D other = thing.getPosition();

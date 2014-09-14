@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import main.Constants;
 import tools.Utilities;
 import tools.Vector2D;
@@ -58,6 +59,7 @@ public abstract class Entity extends GameObject {
 
 		// apply gravity
 		applyGravity(nearby);
+
 		// move
 		if (movement.isZeroVector())
 			return;
@@ -71,16 +73,36 @@ public abstract class Entity extends GameObject {
 		// move down the entire length of the movement vector or you collide
 		// wit something
 
-		while (distTravelled < distBetween // check you haven't travelled too
-											// far
-				&& !(Utilities.colliding(new Rectangle((int) pos.add(unit).x(),
-						(int) pos.add(unit).y(), Constants.PLAYER_WIDTH,
-						Constants.PLAYER_HEIGHT), nearby))) // check you haven't
-															// hit anything
-		{
+		// repeatedly add unit vector onto the position
+		// at each step, check if You've travelled the length of the movement vector
+		// or if you have collided with anything
+		moving: while (true){
+
+			if (distTravelled+1 >= distBetween) break moving; //travelled too far
+			Rectangle playerBounding = new Rectangle((int)pos.add(unit).x(),(int)pos.add(unit).y(),Constants.PLAYER_WIDTH,Constants.PLAYER_HEIGHT);
+
+			for (GameObject thing : nearby){
+				if (playerBounding.intersects(thing.boundingBox())){
+
+					if (thing instanceof River){
+						// do nothing
+					}
+					else if (thing instanceof Wall){
+						break moving;
+					}
+					else if (thing instanceof Danger){
+						System.out.println("Dead");
+					}
+
+				}
+
+			}
 			pos = pos.add(unit);
 			distTravelled++;
+
 		}
+
+		// update actual position
 		position = pos;
 
 		// if you didn't move vertically, then you must have either
