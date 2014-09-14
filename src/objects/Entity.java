@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.Constants;
+import tools.SoundLibrary;
 import tools.Utilities;
 import tools.Vector2D;
 
@@ -37,6 +38,8 @@ public abstract class Entity extends GameObject {
 		if (!grounded || Player.dead)
 			return;
 		movement = movement.add(JUMP_VECTOR);
+		//play sound
+		SoundLibrary.playSound("jump.wav");
 	}
 
 	/**
@@ -166,15 +169,18 @@ public abstract class Entity extends GameObject {
 		boolean north, south, east, west;
 		north = south = east = west = false;
 		for (Tile tile : nearby) {
-			Rectangle bounding = tile.boundingBox();
-			if (below.intersects(bounding)) {
-				if (!(tile instanceof River)) south = true;
-			} else if (above.intersects(bounding)) {
-				if (!(tile instanceof River)) north = true;
-			} else if (right.intersects(bounding)) {
-				if (!(tile instanceof River)) east = true;
-			} else if (left.intersects(bounding)) {
-				if (!(tile instanceof River)) west = true;
+
+			if (tile instanceof Wall){
+				Rectangle bounding = tile.boundingBox();
+				if (below.intersects(bounding)) {
+					if (!(tile instanceof River)) south = true;
+				} else if (above.intersects(bounding)) {
+					if (!(tile instanceof River)) north = true;
+				} else if (right.intersects(bounding)) {
+					if (!(tile instanceof River)) east = true;
+				} else if (left.intersects(bounding)) {
+					if (!(tile instanceof River)) west = true;
+				}
 			}
 		}
 		return new boolean[] { north, south, east, west };
