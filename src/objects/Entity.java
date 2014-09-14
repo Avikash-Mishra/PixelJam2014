@@ -166,15 +166,18 @@ public abstract class Entity extends GameObject {
 		boolean north, south, east, west;
 		north = south = east = west = false;
 		for (Tile tile : nearby) {
-			Rectangle bounding = tile.boundingBox();
-			if (below.intersects(bounding)) {
-				if (!(tile instanceof River)) south = true;
-			} else if (above.intersects(bounding)) {
-				if (!(tile instanceof River)) north = true;
-			} else if (right.intersects(bounding)) {
-				if (!(tile instanceof River)) east = true;
-			} else if (left.intersects(bounding)) {
-				if (!(tile instanceof River)) west = true;
+
+			if (tile instanceof Wall){
+				Rectangle bounding = tile.boundingBox();
+				if (below.intersects(bounding)) {
+					if (!(tile instanceof River)) south = true;
+				} else if (above.intersects(bounding)) {
+					if (!(tile instanceof River)) north = true;
+				} else if (right.intersects(bounding)) {
+					if (!(tile instanceof River)) east = true;
+				} else if (left.intersects(bounding)) {
+					if (!(tile instanceof River)) west = true;
+				}
 			}
 		}
 		return new boolean[] { north, south, east, west };
