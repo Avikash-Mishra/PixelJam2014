@@ -80,7 +80,7 @@ public class Player extends Entity {
 		}
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-
+		SoundLibrary.playSound("transform.wav");
 		//Transform and then face correct direction
 		this.prevAnimation = animation;
 		this.animation = transform;
