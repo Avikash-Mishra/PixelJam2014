@@ -34,8 +34,7 @@ public abstract class Entity extends GameObject {
 	}
 
 	public void jump() {
-		if (!grounded)
-			return;
+		if (!grounded) return;
 		movement = movement.add(JUMP_VECTOR);
 	}
 
@@ -144,7 +143,9 @@ public abstract class Entity extends GameObject {
 				movement.setY(4);
 				movement.setX(0);
 			}
-			else if ( (movement.y() < 0)&&(north)) movement.setY(0);
+			else if ( (movement.y() < 0)&&(north)){
+				movement.setY(0);
+			}
 		}
 
 	}
