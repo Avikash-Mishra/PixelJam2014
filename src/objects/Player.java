@@ -235,7 +235,7 @@ public class Player extends Entity {
 	public void die() {
 		this.animation = death;
 		if(!dead){
-
+			SoundLibrary.playSound("catdead.wav");
 			death.start();
 		}
 		dead = true;
