@@ -78,6 +78,8 @@ public class Player extends Entity {
 			this.animation = death;
 			return;
 		}
+		if(energy >= 30){
+		energy -= 30;
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
 
@@ -85,6 +87,7 @@ public class Player extends Entity {
 		this.prevAnimation = animation;
 		this.animation = transform;
 		((Thread) new Transform()).start();
+		}
 
 	}
 
