@@ -14,6 +14,7 @@ import objects.Entity;
 import objects.GameObject;
 import objects.PickUpObject;
 import objects.Player;
+import objects.Player.Type;
 import objects.River;
 import objects.Tile;
 import tools.ImageLibrary;
@@ -97,6 +98,11 @@ public class World extends Thread{
 						if(t instanceof Danger){
 							player.die();
 						}
+						if (t instanceof River){
+							if (player.type == Type.CAT){
+								player.die();
+							}
+						}
 
 					}
 
@@ -170,4 +176,6 @@ public class World extends Thread{
 		Rectangle r2 = obj2.boundingBox();
 		return r1.intersects(r2);
 	}
+
+
 }
