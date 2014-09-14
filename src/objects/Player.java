@@ -15,15 +15,13 @@ public class Player extends Entity {
 	public int points = Constants.STARTING_POINTS;
 	public int energy = Constants.STARTING_ENERGY;
 
-	public static Animation transform = new Animation();
+
 	//Not used
 	//public static boolean transforming = false;
 	//public static long transTime;
 
 	public Player(int x, int y) {
 		super(x, y);
-		transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
-		transform.start();
 		this.animation = type.getAnimationStill(animation);
 		animation.start();
 		movement = new Vector2D(0,0);
@@ -55,7 +53,9 @@ public class Player extends Entity {
 	public void transform(){
 		if (type == Type.CAT) type = Type.DOG;
 		else type = Type.CAT;
-		this.animation = transform;
+
+		animation = type.checkAnimationState(animation);
+		//this.animation = transform;
 		((Thread) new Transform()).start();
 	}
 
@@ -65,7 +65,7 @@ public class Player extends Entity {
 		public void run() {
 			long time = System.currentTimeMillis();
 			while(System.currentTimeMillis()-time<250){}
-			animation = type.checkAnimationState(animation);
+			//animation = type.checkAnimationState(animation);
 		}
 
 	}
@@ -82,6 +82,7 @@ public class Player extends Entity {
 		private static Animation dogAnimLeftStatic;
 		private static Animation dogAnimRightStatic;
 		private static Animation dogAnimRightWalking;
+		public static Animation transform = new Animation();
 
 		static {
 
@@ -121,6 +122,9 @@ public class Player extends Entity {
 
 			dogAnimRightStatic = new Animation();
 			dogAnimRightStatic.addFrame(ImageLibrary.get("RdogStaticSprite.png"),ANIMATION_DELAY);
+			//Transform
+			transform.addFrame(ImageLibrary.get("transformSprite.png"), 1000);
+			transform.start();
 		}
 
 		public Animation getAnimationLeft(){
@@ -182,7 +186,6 @@ public class Player extends Entity {
 				}
 			}
 		}
-
 
 	}
 
