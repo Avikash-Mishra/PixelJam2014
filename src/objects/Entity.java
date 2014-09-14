@@ -93,7 +93,10 @@ public abstract class Entity extends GameObject {
 						}
 					}
 					else if (thing instanceof Danger){
-						System.out.println("Dead");
+						if (this instanceof Player){
+							Player p = (Player)this;
+							p.die();
+						}
 					}
 
 				}

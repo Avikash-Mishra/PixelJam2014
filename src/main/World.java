@@ -54,6 +54,10 @@ public class World extends Thread{
 	public void draw(Graphics g, Dimension d, Camera cam){
 		//Draw background
 		drawBackground(g, d, cam);
+		//Draw Player
+		if (player != null){
+			player.draw(g,cam);
+		}
 		//Draw the world
 		for (Tile items: map){
 			items.draw(g,cam);
@@ -66,15 +70,9 @@ public class World extends Thread{
 		for (PickUpObject items: pickups){
 			items.draw(g,cam);
 		}
-
-		//Draw Player
-		if (player != null){
-			player.draw(g,cam);
-		}
 	}
 
 	private void drawBackground(Graphics g, Dimension d , Camera cam){
-		g.setColor(Color.blue);
 		g.fillRect(0,0,d.width,d.height);
 		BufferedImage bgimg = ImageLibrary.get("backgroundRear.png");
 		g.drawImage(bgimg, (int)d.getWidth()/2-bgimg.getWidth()/2, (int)d.getHeight()/2-bgimg.getHeight()/2, null);
@@ -94,20 +92,6 @@ public class World extends Thread{
 
 					player.step(map);
 
-					for(Tile t : getTileCollisions(player)){
-						if(t instanceof Danger){
-							player.die();
-						}
-
-					}
-
-					for(Entity e : getEntityCollisions(player)){
-						if(e instanceof Danger){
-							player.die();
-						}
-
-					}
-
 
 					for(Entity e : this.entities){
 						if(e instanceof Enemy){
@@ -115,14 +99,14 @@ public class World extends Thread{
 						}
 
 
-					for(PickUpObject p : getPickUpCollisions(player)){
-						p.onCollision(player);
-						pickups.remove(p);
+						for(PickUpObject p : getPickUpCollisions(player)){
+							p.onCollision(player);
+							pickups.remove(p);
 
+						}
+
+						previousUpdate = System.currentTimeMillis();
 					}
-
-					previousUpdate = System.currentTimeMillis();
-				}
 				}
 			}
 			else{
