@@ -26,6 +26,7 @@ public class Energy extends PickUpObject {
 		if(canPickUp()){
 			pickup();
 			player.energy += amount;
+			player.points += 5;
 			player.energy = Math.min(player.energy, Constants.MAX_ENERGY);
 		}
 	}
