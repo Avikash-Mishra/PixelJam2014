@@ -26,7 +26,7 @@ public class CheckPoint extends Tile {
 
 	public static CheckPoint newCheckpoint(int x, int y){
 		Animation anim = new Animation();
-		anim.addFrame(ImageLibrary.get("floorSprite.png"), 0);
+		anim.addFrame(ImageLibrary.get("invisibleSprite.png"), 0);
 		return new CheckPoint(anim,x,y);
 	}
 
