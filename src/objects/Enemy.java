@@ -13,16 +13,14 @@ import tools.Vector2D;
 public class Enemy extends Entity implements Danger{
 	protected  int STEP_SIZE;
 	protected  static long ANIMATION_DELAY;
-	protected int initX;
-	protected int moveLength;
 	public Enemy(int x, int y) {
 		super(x, y);
 		this.movement = new Vector2D(5,0);
-		this.initX = x;
-		this.moveLength = 50;
+
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
 	@Override
 	public void step(List<Tile> tiles){
 
@@ -44,6 +42,9 @@ public class Enemy extends Entity implements Danger{
 		}
 		position = pos;
 
+
+
 	}
+	*/
 
 }

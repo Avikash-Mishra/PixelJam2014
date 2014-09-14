@@ -70,4 +70,8 @@ public class Vector2D {
 		return "("+x+","+y+")";
 	}
 
+	public Vector2D horizontalFlip(){
+		return new Vector2D(-x, y);
+	}
+
 }
