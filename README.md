@@ -26,6 +26,7 @@ Soaring through the air, your cat-form jumps higher than your dog-form
 ![ScreenShot](http://i.imgur.com/nlDlFj4.png)
 
 The player transforms into dog-form
+
 ![ScreenShot](http://i.imgur.com/Z3lqRBg.png)
 
 The player pounces on a hapless cat
