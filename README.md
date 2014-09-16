@@ -29,6 +29,7 @@ The player transforms into dog-form
 ![ScreenShot](http://i.imgur.com/Z3lqRBg.png)
 
 The player pounces on a hapless cat
+
 ![ScreenShot](http://i.imgur.com/WNlTPjj.png%5C)
 
 Capable of eating cats and swimming, the dog-form leaves nothing in its path alive
